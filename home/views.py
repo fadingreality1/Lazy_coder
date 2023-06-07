@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from .forms import contactForm
 
 # Create your views here.
 
@@ -7,7 +8,15 @@ def home(req):
     return render(req, "base.html")
 
 def contact(req):
-    return render(req, "home/contact.html")
+    if req.method == 'POST':
+        form = contactForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog_home')
+        return render(req, "home/contact.html", {'form':form})
+        
+    form = contactForm()
+    return render(req, "home/contact.html", {'form':form})
 
 def about(req):
     return render(req, "home/about.html")

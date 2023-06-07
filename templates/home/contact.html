@@ -11,9 +11,9 @@
 
             <div class="media-wrap">
                 <div>
-                    <img src="images/thumbs/contact/contact-1000.jpg" srcset="images/thumbs/contact/contact-2000.jpg 2000w, 
-                              images/thumbs/contact/contact-1000.jpg 1000w, 
-                              images/thumbs/contact/contact-500.jpg 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                    <img src="{% static 'images/thumbs/contact/contact-1000.jpg' %}" srcset="{% static 'images/thumbs/contact/contact-2000.jpg' %} 2000w, 
+                              {% static 'images/thumbs/contact/contact-1000.jpg' %} 1000w, 
+                              {% static 'images/thumbs/contact/contact-500.jpg' %} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
                 </div>
             </div>
 
@@ -68,29 +68,17 @@
 
             <h3 class="h2">Say Hello</h3>
 
-            <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+            <form name="contactForm" id="contactForm" method="POST" action="" autocomplete="off">
+                {% csrf_token %}
                 <fieldset>
 
-                    <div class="form-field">
-                        <input name="cName" id="cName" class="full-width" placeholder="Your Name" value="" type="text">
-                    </div>
-
-                    <div class="form-field">
-                        <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email" value="" type="text">
-                    </div>
-
-                    <div class="form-field">
-                        <input name="cWebsite" id="cWebsite" class="full-width" placeholder="Website" value="" type="text">
-                    </div>
-
-                    <div class="message form-field">
-                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
-                    </div>
-
+                    {{form}}
+                    
                     <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Send Message" type="submit">
 
                 </fieldset>
             </form> <!-- end form -->
+            
 
         </section>
 
