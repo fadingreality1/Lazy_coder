@@ -17,13 +17,13 @@ def contact(req):
             
             mail_to_user = EmailMultiAlternatives(
                 "Mail From Lazy coder",
-                f"Thanks for contacting us, Our team will be contacting you soon on your given email address or phone number.<br>Your responses are :-{form}",
+                f"Thanks for Visiting our Blog and contacting us, Our team will approach you soon on your given email address or phone number.<br>Your responses are :-{form}",
                 "bablu123890kumar@gmail.com",
                 [f"{req.POST.get('email')}"],
             )
                                                   
             mail_to_lazycoder = EmailMultiAlternatives(
-                "Contact Us form is filled",
+                f"{form.cleaned_data.get('name')} has Contacted us.",
                 f"Some one wants to contact us<br>responses are<br>{form}",
                 "bablu123890kumar@gmail.com",
                 ["kunalverma.learn@gmail.com"],
@@ -44,7 +44,7 @@ def contact(req):
             
             return redirect('blog_home')
 
-        messages.warning(req, f"There are some errors in form that you have submitted. Please fill correct information")
+        messages.warning(req, "There are some errors in form that you have submitted. Please fill correct information")
         return render(req, "home/contact.html", {'form': form})
 
     form = contactForm()
