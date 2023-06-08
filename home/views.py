@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives, get_connection
 # Create your views here.
 
+# TODO: Redirect the user to login page if user is not authenticated after filling contact form
+
 def home(req):
     # return HttpResponse("this is home")
     return render(req, "base.html")
@@ -47,7 +49,10 @@ def contact(req):
         messages.warning(req, "There are some errors in form that you have submitted. Please fill correct information")
         return render(req, "home/contact.html", {'form': form})
 
-    form = contactForm()
+    if req.user.is_authenticated:
+        form = contactForm(initial={'name': f"{req.user.first_name} {req.user.last_name}", 'email': f"{req.user.email}",})
+    else:
+        form = contactForm()
     return render(req, "home/contact.html", {'form': form})
 
 
