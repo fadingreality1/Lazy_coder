@@ -1,9 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import contactForm
 from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives
-# ! implemented multithreading to make response faster
 
+# ! implemented multithreading to make response faster
 from . import thread
 # Create your views here.
 
