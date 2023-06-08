@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import contactForm
 from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives, get_connection
+from django.core.mail import EmailMultiAlternatives
+# ! implemented multithreading to make response faster
+
+from . import thread
 # Create your views here.
 
 # TODO: Redirect the user to login page if user is not authenticated after filling contact form
@@ -34,13 +37,10 @@ def contact(req):
             mail_to_user.content_subtype = 'html'
             mail_to_lazycoder.content_subtype = 'html'
             
-            connection = get_connection()
-            connection.open()
-            mail_to_user.send()
-            mail_to_lazycoder.send()
-            connection.close()
+            # ! implemented multithreading to make response faster
+            thread.sendMail(mail_to_user, mail_to_lazycoder).start()
             
-            form.save()  #! form is saved only when messages are sent successfully.
+            form.save()
 
             messages.info(req, f"Contact request recieved for{form.cleaned_data.get('name')}. Our team will contact to soon.")
             
