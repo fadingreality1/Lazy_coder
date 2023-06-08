@@ -13,6 +13,9 @@ class Contact(models.Model):
     website = models.URLField(max_length=200, null=True, default=None)
     message = models.TextField(max_length=500, null=False)
     phone = PhoneNumberField(blank = True)
-    date = models.DateField(default=timezone.now)
+    date = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self) -> str:
+        return f'{self.name}---{self.email}'
 
     
