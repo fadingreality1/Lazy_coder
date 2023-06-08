@@ -18,28 +18,8 @@ def contact(req):
     if req.method == 'POST':
         form = contactForm(req.POST)
         if form.is_valid():
-            # ! sending mails 
-            
-            mail_to_user = EmailMultiAlternatives(
-                "Mail From Lazy coder",
-                f"Thanks for Visiting our Blog and contacting us, Our team will approach you soon on your given email address or phone number.<br>Your responses are :-{form}",
-                "bablu123890kumar@gmail.com",
-                [f"{req.POST.get('email')}"],
-            )
-                                                  
-            mail_to_lazycoder = EmailMultiAlternatives(
-                f"{form.cleaned_data.get('name')} has Contacted us.",
-                f"Some one wants to contact us<br>responses are<br>{form}",
-                "bablu123890kumar@gmail.com",
-                ["kunalverma.learn@gmail.com"],
-            )
-            
-            mail_to_user.content_subtype = 'html'
-            mail_to_lazycoder.content_subtype = 'html'
-            
-            # ! implemented multithreading to make response faster
+            # ! implemented multithreading to send mail and make response faster
             thread.sendMail(form).start()
-            
             form.save()
 
             messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact to soon.")
