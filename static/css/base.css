@@ -133,6 +133,13 @@ sup {
   vertical-align: baseline;
 }
 
+.btn--stroke:hover,
+button.btn--stroke:hover {
+  background: #000000 !important;
+  border: 0.2rem solid #000000;
+  color: #ffffff;
+}
+
 sub {
   bottom: -0.25em;
 }

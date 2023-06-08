@@ -1025,6 +1025,7 @@ button.btn--stroke:hover {
   background: #000000 !important;
   border: 0.2rem solid #000000;
   color: #ffffff;
+  -webkit-text-fill-color: white;
 }
 
 .btn--pill,
@@ -1423,13 +1424,13 @@ input::-moz-focus-inner {
   background-color: #387fb2;
 }
 
-.alert-box--notice {
+.alert-box--warning {
   background-color: #fff099;
   color: #827217;
 }
 
-.alert-box--notice .alert-box__close::before,
-.alert-box--notice .alert-box__close::after {
+.alert-box--warning .alert-box__close::before,
+.alert-box--warning .alert-box__close::after {
   background-color: #827217;
 }
 
@@ -3624,3 +3625,4 @@ body.search-is-visible {
 }
 
 /*# sourceMappingURL=main.css.map */
+

@@ -67,16 +67,21 @@
 		</div>
 
 		<h3 class="h2">Say Hello</h3>
+		
 
-		<form
+		{% comment %}! <!-- Different methods of accessing Fields of Forms, All works the sam eat end of day --> {% endcomment %}
+
+
+		<!-- <form
 			name="contactForm"
 			id="contactForm"
 			method="POST"
 			action=""
-			autocomplete="off"
-		>
+			autocomplete="off">
 			{% csrf_token %}
 			<fieldset>
+				{% comment %}! This is simplest wasy of accessing all fields of form {% endcomment %}
+
 				{{form}}
 
 				<input
@@ -87,8 +92,99 @@
 					type="submit"
 				/>
 			</fieldset>
-		</form>
-		<!-- end form -->
+		</form> -->
+
+		<!-- <form
+			name="contactForm"
+			id="contactForm"
+			method="POST"
+			action=""
+			autocomplete="off">
+			{% csrf_token %}
+			<fieldset>
+				{% comment %}! In this method each field is accessed individually and therse error have also beenn accessed individually  {% endcomment %}
+
+				{{form.name}}
+				{{form.errors.name}}
+				
+				{{form.email}}
+				{{form.errors.email}}
+
+				{{form.phone}}
+				{{form.errors.phone}}
+
+				{{form.website}}
+				{{form.errors.website}}
+
+				{{form.message}}
+				{{form.errors.message}}
+
+
+				<input
+					name="submit"
+					id="submit"
+					class="btn btn--primary btn-wide btn--large full-width"
+					value="Send Message"
+					type="submit"
+				/>
+			</fieldset>
+		</form> -->
+
+		<!-- <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+			{% csrf_token %}
+			<fieldset>
+
+				{% comment %}! Extension of previous, can be used to give different classes to different fields of form {% endcomment %}
+
+				<div class="form-field">
+					{{form.name}}
+					{{form.errors.name}}
+				</div>
+
+				<div class="form-field">
+					{{form.email}}
+					{{form.errors.email}}
+				</div>
+
+				<div class="form-field">
+					{{form.phone}}
+					{{form.errors.phone}}
+				</div>
+
+				<div class="form-field">
+					{{form.website}}
+					{{form.errors.website}}
+				</div>
+
+				<div class="message form-field">
+					{{form.message}}
+					{{form.errors.message}}
+				</div>
+
+				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Send Message" type="submit">
+
+			</fieldset>
+		</form>  -->
+
+
+		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+			{% csrf_token %}
+			<fieldset>
+
+				{% comment %}! Best method in my opinion, just loops through every field along with errors, if any {% endcomment %}
+
+				{% for field in form %}
+				<div class="form-field">
+					<label for="">{{field.label}}</label>
+					{{field}}
+					<small>{{field.errors}}</small>
+				</div>
+				{% endfor %}
+
+				<input name="submit" id="submit" class="btn btn--stroke btn-wide btn--large full-width" value="Send Message" type="submit">
+
+			</fieldset>
+		</form> <!-- end form -->
 	</section>
 </main>
 
