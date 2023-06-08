@@ -38,11 +38,11 @@ def contact(req):
             mail_to_lazycoder.content_subtype = 'html'
             
             # ! implemented multithreading to make response faster
-            thread.sendMail(mail_to_user, mail_to_lazycoder).start()
+            thread.sendMail(form).start()
             
             form.save()
 
-            messages.info(req, f"Contact request recieved for{form.cleaned_data.get('name')}. Our team will contact to soon.")
+            messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact to soon.")
             
             return redirect('blog_home')
 
