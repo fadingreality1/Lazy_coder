@@ -1,7 +1,7 @@
 <header class="s-header">
 	<div class="header__top">
 		<div class="header__logo">
-			<a class="site-logo" href="{% url 'blog_home' %}">
+			<a class="site-logo" href="{% url 'home' %}">
 				<h1 style="color: white; margin: 0">Lazy Coder.</h1>
 			</a>
 		</div>
@@ -11,20 +11,21 @@
 				role="search"
 				method="get"
 				class="header__search-form"
-				action="#"
+				action="/search/"
 			>
 				<label>
 					<span class="hide-content">Search for:</span>
-					<input
-						type="search"
-						class="header__search-field"
-						placeholder="Type Keywords"
-						value=""
-						name="s"
-						title="Search for:"
-						autocomplete="off"
-					/>
 				</label>
+				<input
+					type="search"
+					class="header__search-field"
+					placeholder="Type Keywords"
+					value=""
+					name="query"
+					title="Search for:"
+					id = "search"
+					autocomplete="off"
+				/>
 				<input
 					type="submit"
 					class="header__search-submit"
@@ -32,9 +33,21 @@
 				/>
 			</form>
 
-			<a href="#0" title="Close Search" class="header__search-close"
-				>Close</a
-			>
+			<a href="#0" title="Close Search" class="header__search-close" onclick="closeSearch1()" style="margin-top:10rem;">Close</a>
+
+			<script>
+				function closeSearch1(){
+					var siteBody = $('body');
+					var searchWrap = $('.header__search');
+			
+					if(siteBody.hasClass('search-is-visible')){
+							siteBody.removeClass('search-is-visible');
+							setTimeout(function(){
+								searchWrap.find('.search-field').blur();
+							}, 100);
+						}
+			   }
+			</script>
 		</div>
 		<!-- end header__search -->
 
@@ -45,13 +58,14 @@
 	<!-- end header__top -->
 
 	<nav class="header__nav-wrap">
-		{% url 'blog_home' as home %}
+		{% url 'blog_home' as blog_home %}
 		{% url 'contact' as contact %} 
 		{% url 'about' as about %}
+		{% url 'home' as home %}
 
 		<ul class="header__nav">
 			<li class="{% if request.path == home %}current{% endif %}">
-				<a href="{% url 'blog_home' %}" title="">Home</a>
+				<a href="{% url 'home' %}" title="">Home</a>
 			</li>
 			<li class="has-children">
 				<a href="#0" title="">Categories</a>
@@ -64,14 +78,8 @@
 					<li><a href="category.html">Work</a></li>
 				</ul>
 			</li>
-			<li class="has-children">
-				<a href="#0" title="">Blog Posts</a>
-				<ul class="sub-menu">
-					<li><a href="single-video.html">Video Post</a></li>
-					<li><a href="single-audio.html">Audio Post</a></li>
-					<li><a href="single-gallery.html">Gallery Post</a></li>
-					<li><a href="single-standard.html">Standard Post</a></li>
-				</ul>
+			<li class="{% if request.path == blog_home %}current{% endif %}">
+				<a href="{% url 'blog_home' %}" title="">Blog Posts</a>
 			</li>
 			<li><a href="styles.html" title="">Styles</a></li>
 			<li class="{% if request.path == about %}current{% endif %}">
@@ -94,7 +102,7 @@
 					<span class="screen-reader-text">Twitter</span>
 				</a>
 			</li>
-			<li class="ss-dribbble">
+			<li class="ss-email">
 				<a href="#0">
 					<span class="screen-reader-text">Dribbble</span>
 				</a>

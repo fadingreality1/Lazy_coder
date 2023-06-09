@@ -63,22 +63,21 @@
         <!-- Content section
     ================================================== -->
 	<div class="s-content content">
-				{% if messages %}
-					{% for message in messages %}
-						<div class="alert-box alert-box--{{message.tags}} hideit">
-							<p>{{message}}</p>
-							<i
-								class="fa fa-times alert-box__close"
-								aria-hidden="true"
-							></i>
-						</div>
-					{% endfor %}
-				{% endif %}
-
-                {% block middle_section %}
-
-                {% endblock middle_section %}
-			</div>
+		{% if messages %}
+			{% for message in messages %}
+				<div class="alert-box alert-box--{{message.tags}} hideit">
+					<p>{{message}}</p>
+					<i
+						class="fa fa-times alert-box__close"
+						aria-hidden="true"
+					></i>
+				</div>
+			{% endfor %}
+		{% endif %}
+        {% block middle_section %}
+		
+        {% endblock middle_section %}
+	</div>
 			<!-- end s-content -->
 
 			<!-- footer

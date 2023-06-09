@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import contactForm
 from django.contrib import messages
+from blog.models import Post
+from django.db.models import Q
 
 # ! implemented multithreading to make response faster
 from . import thread
@@ -10,7 +12,7 @@ from . import thread
 
 def home(req):
     # return HttpResponse("this is home")
-    return render(req, "base.html")
+    return render(req, "home/home.html")
 
 
 def contact(req):
@@ -23,7 +25,7 @@ def contact(req):
             
             form.save()
 
-            messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact to soon.")
+            messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact you soon.")
             
             return redirect('blog_home')
 
@@ -41,5 +43,13 @@ def about(req):
     return render(req, "home/about.html")
 
 
-def handle(req, s):
-    return HttpResponse(f"This is {s} that you typed in url")
+def search(req):
+    q = req.GET.get('query')
+    # TODO: Modifications such as order by popularity needed, by likes or views
+    if len(q) > 100:
+        posts = Post.objects.none()
+        messages.error(req,"No results found.")
+    else:
+        posts = Post.objects.filter(Q(title__icontains = q) | Q(description__icontains = q) | Q(content__icontains = q) | Q(author__first_name__icontains = q)).order_by('-date_posted')
+    return render(req, "blog/home.html", {'s':q, 'posts':posts})
+    
