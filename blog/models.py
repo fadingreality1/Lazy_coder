@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from autoslug import AutoSlugField
 
+# TODO : Likes and views to be added in to model along with comments
 
 class Post(models.Model):
     title = models.CharField(max_length=100)

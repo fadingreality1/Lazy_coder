@@ -62,11 +62,29 @@
 		{% url 'contact' as contact %} 
 		{% url 'about' as about %}
 		{% url 'home' as home %}
+		{% url 'signin' as signin %}
+		{% url 'signup' as signup %}
+		{% url 'create_post' as create_post %}
 
 		<ul class="header__nav">
 			<li class="{% if request.path == home %}current{% endif %}">
 				<a href="{% url 'home' %}" title="">Home</a>
 			</li>
+			{% if request.user.is_authenticated %}
+				<li>
+					<a href="{% url 'signout' %}" title="">Signout</a>
+				</li>
+				<li>
+					<a href="{% url 'create_post' %}" title="" class="{% if request.path == create_post %}current{% endif %}">Create Post</a>
+				</li>
+			{% else %}
+				<li class="{% if request.path == signin %}current{% endif %}">
+					<a href="{% url 'signin' %}" title="">Signin</a>
+				</li>
+				<li class="{% if request.path == signup %}current{% endif %}">
+					<a href="{% url 'signup' %}" title="">Signup</a>
+				</li>
+			{% endif %}
 			<li class="has-children">
 				<a href="#0" title="">Categories</a>
 				<ul class="sub-menu">

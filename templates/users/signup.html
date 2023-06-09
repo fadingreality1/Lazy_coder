@@ -1,0 +1,28 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block middle_section %}
+
+<main class="row content__page">
+	<section class="column large-full entry format-standard">
+		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+			{% csrf_token %}
+			<fieldset>
+
+				{% comment %}! Best method in my opinion, just loops through every field along with errors, if any {% endcomment %}
+
+				{% for field in form %}
+				<div class="form-field">
+					<label for="">{{field.label}}</label>
+					{{field}}
+					<small>{{field.errors}}</small>
+				</div>
+				{% endfor %}
+
+				<input name="submit" id="submit" class="btn btn--stroke btn-wide btn--large full-width" value="Send Message" type="submit">
+
+			</fieldset>
+		</form> <!-- end form -->
+	</section>
+</main>
+
+{% endblock middle_section %}

@@ -1,7 +1,10 @@
-from django.urls import path, include
-from . import views as blog_views
+from django.urls import path
+from . import views 
+
+# TODO : update and delete post routes create krne h or unke lie template bhi
 
 urlpatterns = [
-    path('', blog_views.home, name="blog_home"),
-    path('post/<slug:slug>/', blog_views.post, name="post_detail")
+    path('', views.home, name="blog_home"),
+    path('post/<slug:slug>/', views.post, name="post_detail"),
+    path('create-post/', views.createPost, name="create_post"),
 ]   
