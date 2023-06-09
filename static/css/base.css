@@ -51,8 +51,26 @@ body {
   margin: 0;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
+} */
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  margin-block: 2rem;
+}
+
+::-webkit-scrollbar-track{
+  background-color: hsl(210, 12%, 97%);
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: hsla(0, 0%, 8%, 0.749);
+  border-radius: 100vh;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color: hsla(0, 0%, 8%, 0.936);
 }
 
 /* Render the `main` element consistently in IE. */

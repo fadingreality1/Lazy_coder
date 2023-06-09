@@ -45,8 +45,9 @@
 	<!-- end header__top -->
 
 	<nav class="header__nav-wrap">
-		{% url 'blog_home' as home %} {% url 'contact' as contact %} {% url
-		'about' as about %}
+		{% url 'blog_home' as home %}
+		{% url 'contact' as contact %} 
+		{% url 'about' as about %}
 
 		<ul class="header__nav">
 			<li class="{% if request.path == home %}current{% endif %}">

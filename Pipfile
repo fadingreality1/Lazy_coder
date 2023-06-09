@@ -9,6 +9,8 @@ django-phonenumber-field = "*"
 django-phonenumbers = "*"
 django-phone-field = "*"
 phonenumbers = "*"
+pillow = "*"
+django-autoslug = "*"
 
 [dev-packages]
 
