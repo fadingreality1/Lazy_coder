@@ -16,6 +16,81 @@
 				</div>
 				{% endfor %}
 
+{% comment %} ! Differeny methods to access form fields and slicing the form feilds {% endcomment %}
+
+				{% comment %} <div class="row block-large-1-2 block-tab-full">
+					<div class="column">
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.username.label}} :</strong>
+								{{form.username}}
+								{{form.username.errors}}
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.first_name.label}} :</strong>
+								{{form.first_name}}
+								{{form.first_name.errors}}
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.last_name.label}} :</strong>
+								{{form.last_name}}
+								{{form.last_name.errors}}
+							</div>
+						</fieldset>
+					</div>
+					<div class="column">
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.email.label}} :</strong>
+								{{form.email}}
+								{{form.email.errors}}
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.password1.label}} :</strong>
+								{{form.password1}}
+								{{form.password1.errors}}
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-field">
+								<strong>{{form.password2.label}} :</strong>
+								{{form.password2}}
+								{{form.password2.errors}}
+							</div>
+						</fieldset>
+					</div>
+				</div>
+				<div class="row block-large-1-2 block-tab-full">
+					<div class="column">
+						{% for field in form.visible_fields|slice:":3" %}
+							<fieldset>
+								<div class="form-field">
+									<strong>{{field.label}} :</strong>
+									{{field}}
+									{{field.errors}}
+								</div>	
+							</fieldset>
+						{% endfor %}
+					</div>
+					<div class="column">
+						{% for field in form.visible_fields|slice:"3:" %}
+							<fieldset>
+								<div class="form-field">
+									<strong>{{field.label}} :</strong>
+									{{field}}
+									{{field.errors}}
+								</div>
+							</fieldset>
+						{% endfor %}
+					</div>
+				</div> {% endcomment %}
+
 				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create Account" type="submit">
 
 			</fieldset>
