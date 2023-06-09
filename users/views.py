@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SigninForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import views as auth_views
 from Lazy_coder.settings import MEDIA_ROOT
 import os
+
+class Signin(auth_views.LoginView):
+    form_class = SigninForm
+    template_name = 'users/signin.html'
+    # ! to pass form with custom classes added to it
 
 
 def signup(req):

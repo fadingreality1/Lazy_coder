@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<h3 class="h2">Say Hello</h3>
+		<h3 class="h1">Say Hello</h3>
 		
 
 		{% comment %}! <!-- Different methods of accessing Fields of Forms, All works the sam eat end of day --> {% endcomment %}
@@ -173,7 +173,7 @@
 
 				{% for field in form %}
 				<div class="form-field">
-					<label for="">{{field.label}}</label>
+					{{field.label}} :
 					{{field}}
 					<small>{{field.errors}}</small>
 				</div>

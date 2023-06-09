@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('signup/', user_views.signup, name="signup"),
-    path('signin/', auth_views.LoginView.as_view(template_name='users/signin.html'), name="signin"),
+    path('signin/', user_views.Signin.as_view(), name="signin"),
     path('signout/', auth_views.logout_then_login, name="signout"),
     path('profile/', user_views.profile, name="profile"),
     path('user-profile/delete', user_views.deleteUser, name="delete_profile"),

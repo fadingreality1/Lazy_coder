@@ -4,21 +4,19 @@
 
 <main class="row content__page">
 	<section class="column large-full entry format-standard">
+		<h3 class="h1" style="margin-top:0;">Create Account</h3>
 		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
 			{% csrf_token %}
 			<fieldset>
-
-				{% comment %}! Best method in my opinion, just loops through every field along with errors, if any {% endcomment %}
-
 				{% for field in form %}
 				<div class="form-field">
-					<label for="">{{field.label}}</label>
+					<strong>{{field.label}} :</strong> 
 					{{field}}
-					<small>{{field.errors}}</small>
+					{{field.errors}}
 				</div>
 				{% endfor %}
 
-				<input name="submit" id="submit" class="btn btn--stroke btn-wide btn--large full-width" value="Send Message" type="submit">
+				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create Account" type="submit">
 
 			</fieldset>
 		</form> <!-- end form -->
