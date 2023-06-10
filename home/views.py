@@ -45,6 +45,7 @@ def about(req):
 
 def search(req):
     q = req.GET.get('query')
+    # TODO : to make search useless for string less than 5 characters
     # TODO: Modifications such as order by popularity needed, by likes or views
     if len(q) > 100:
         posts = Post.objects.none()
