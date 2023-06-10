@@ -50,45 +50,53 @@
     </article> <!-- end column large-full entry-->
     
 
-    <h3 class="h3">Add Comment.</span></h3>
-    <form action="{% url 'post_comment' post.slug %}" method="post" class="row large-full entry format-standard">
-        {% csrf_token %}
-        <div class="column">
-            <div class="form-field">
-                <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700">
+    {% if request.user.is_authenticated %}
+        <h3 class="h3">Add Comment.</h3>
+        <form action="{% url 'post_comment' post.slug %}" method="post" class="row large-full entry format-standard">
+            {% csrf_token %}
+            <div class="column">
+                <div class="form-field">
+                    <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700">
+                </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="form-field">
-                <input name="submit" id="submit" class="btn full-width" value="Add Comment" type="submit">
+            <div class="column">
+                <div class="form-field">
+                    <input name="submit" id="submit" class="btn full-width" value="Add Comment" type="submit">
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    
+    {% else %}
+        <h3 class="h3"><a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.</h3>
+    {% endif %}
     
     
-    <div class="comments-wrap">
-        
-        <div id="comments" class="column large-12">
+    {% if comments.count == 0 %}
 
-            <h3 class="h3">{{comments.count}} Comments.</h3>
+        <h3 class="h3">No comments yet. be the first person to comment</h3>
 
-            <!-- START commentlist -->
-            {% if comments.count == 0 %}
-                <h3 class="h3">{{comments.count}} be the first one to comment</h3>
-            {% else %}
+    {% else %}
+
+        <div class="column large-full entry format-standard">
+            
+            <div id="comments" class="column large-12">
+
+                <h3 class="h3">{{comments.count}} Comments.</h3>
+
+                <!-- START commentlist -->
                 <ol class="commentlist">
 
                     {% for comment in comments %}
                         <li class="depth-1 comment">
 
                             <div class="comment__avatar">
-                                <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="2000" height="200">
+                                <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50">
                             </div>
 
                             <div class="comment__content">
 
                                 <div class="comment__info">
-                                    <div class="comment__author">{{comment.user.first_name | title}} {{comment.user.last_name | title}}</div>
+                                    <div class="comment__author">{{comment.user.first_name|title}} {{comment.user.last_name|title}}</div>
 
                                     <div class="comment__meta">
                                         <div class="comment__time">{{comment.date_posted}}</div>
@@ -99,7 +107,9 @@
                                 </div>
 
                                 <div class="comment__text">
-                                <p>{{comment.content}}</p>
+                                    <p>
+                                        {{comment.content}}
+                                    </p>
                                 </div>
 
                             </div>
@@ -229,12 +239,13 @@
                     </li>  <!-- end comment level 1 --> {% endcomment %}
 
                 </ol>
-            {% endif %}
-            <!-- END commentlist -->
+                <!-- END commentlist -->
 
-        </div> <!-- end comments -->
+            </div> <!-- end comments -->
 
-    </div> <!-- end comments-wrap --> 
+        </div> <!-- end comments-wrap --> 
+
+    {% endif %}
 
 
     {% comment %} <div class="comments-wrap">
