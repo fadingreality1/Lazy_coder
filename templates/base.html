@@ -41,6 +41,16 @@
 			href="favicon-16x16.png"
 		/>
 		<link rel="manifest" href="site.webmanifest" />
+		<style>
+			.bg1{
+				background-size: cover;
+				background-position: center;
+				background-image : url({% static 'images/main.gif' url %});
+				padding : 5rem;
+				margin-bottom: 5rem;
+				background-repeat:no-repeat;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -65,7 +75,7 @@
 	<div class="s-content content">
 		{% if messages %}
 			{% for message in messages %}
-				<div class="alert-box alert-box--{{message.tags}} hideit">
+				<div class="alert-box alert-box--{{message.tags}} hideit st1">
 					<p>{{message}}</p>
 					<i
 						class="fa fa-times alert-box__close"

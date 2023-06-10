@@ -8,10 +8,28 @@ from django.contrib.auth import views as auth_views
 from Lazy_coder.settings import MEDIA_ROOT
 import os
 
-class Signin(auth_views.LoginView):
-    form_class = SigninForm
-    template_name = 'users/signin.html'
-    # ! to pass form with custom classes added to it
+
+def signin(req):
+    if req.method == "POST":
+        username = req.POST.get('username')
+        password = req.POST.get('password')
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(req, user)
+            messages.success(req, f"You have signed in successfully as {user.first_name} {user.last_name}")
+            return redirect('home')
+        messages.error(req,"Invalid Credentials. Kindly fill correct information.")
+        form = SigninForm(req.POST)
+    else:
+        form = SigninForm()
+        
+    return render(req, "users/signin.html", {'form':form})
+    
+# other way to signin but a longer method
+# class Signin(auth_views.LoginView):
+#     form_class = SigninForm
+#     template_name = 'users/signin.html'
+#     # ! to pass form with custom classes added to it
 
 
 def signup(req):

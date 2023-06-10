@@ -64,6 +64,7 @@
 		{% url 'home' as home %}
 		{% url 'signin' as signin %}
 		{% url 'signup' as signup %}
+		{% url 'profile' as profile %}
 		{% url 'create_post' as create_post %}
 
 		<ul class="header__nav">
@@ -71,8 +72,12 @@
 				<a href="{% url 'home' %}" title="">Home</a>
 			</li>
 			{% if request.user.is_authenticated %}
-				<li>
-					<a href="{% url 'signout' %}" title="">Signout</a>
+				<li class="has-children">
+					<a href="{% url 'profile' %}" title="" class="{% if request.path == profile %}current{% endif %}">Hello, {{request.user.first_name}}</a>
+					<ul class="sub-menu">
+						<li><a href="{% url 'profile' %} class="{% if request.path == profile %}current{% endif %}"">My Account</a></li>
+						<li><a href="{% url 'signout' %}">Signout</a></li>
+					</ul>
 				</li>
 				<li>
 					<a href="{% url 'create_post' %}" title="" class="{% if request.path == create_post %}current{% endif %}">Create Post</a>
@@ -97,9 +102,8 @@
 				</ul>
 			</li>
 			<li class="{% if request.path == blog_home %}current{% endif %}">
-				<a href="{% url 'blog_home' %}" title="">Blog Posts</a>
+				<a href="{% url 'blog_home' %}" title="">All Blog Posts</a>
 			</li>
-			<li><a href="styles.html" title="">Styles</a></li>
 			<li class="{% if request.path == about %}current{% endif %}">
 				<a href="{% url 'about' %}" title="">About</a>
 			</li>

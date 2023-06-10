@@ -2124,6 +2124,13 @@ input::-moz-focus-inner {
     margin: 0 auto;
   }
 
+  .st1{
+    width: 89%;
+    max-width: 900px;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+  }
+
 }
 
 @media screen and (max-width:800px) {
