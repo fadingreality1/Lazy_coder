@@ -5,17 +5,16 @@
 <main class="row content__page">
 	<section class="column large-full entry format-standard">
 		<h3 class="h1" style="margin-top:0;">Create Account</h3>
-		<p style="color:red;">Note: All fields are mandatory.</p>
 		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
 			{% csrf_token %}
 			<fieldset>
-				{% comment %} {% for field in form %}
+				{% for field in form %}
 				<div class="form-field">
 					<strong>{{field.label}} :</strong> 
 					{{field}}
 					{{field.errors}}
 				</div>
-				{% endfor %} {% endcomment %}
+				{% endfor %}
 
 				{% comment %} ! Different methods to access form fields and slicing the form feilds {% endcomment %}
 
@@ -93,7 +92,7 @@
 						</div>
 				</div> {% endcomment %}
 
-				<div class="row block-large-1-2 block-tab-full">
+				{% comment %} <div class="row block-large-1-2 block-tab-full">
 					{% for field in form %}
 						<div class="column">
 							<div class="form-field">
@@ -103,7 +102,7 @@
 							</div>
 						</div>
 					{% endfor %}
-				</div>
+				</div> {% endcomment %}
 
 				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create Account" type="submit">
 
