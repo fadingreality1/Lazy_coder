@@ -47,57 +47,201 @@
 
             </p>
         </div> <!-- end entry content -->
-
-        <div class="entry__pagenav">
-            <div class="entry__nav">
-                <div class="entry__prev">
-                    <a href="#0" rel="prev">
-                        <span>Previous Post</span>
-                        Tips on Minimalist Design 
-                    </a>
-                </div>
-                <div class="entry__next">
-                    <a href="#0" rel="next">
-                        <span>Next Post</span>
-                        Less Is More 
-                    </a>
-                </div>
-            </div>
-        </div> <!-- end entry__pagenav -->
-
-        <div class="entry__related">
-            <h3 class="h2">Related Articles</h3>
-
-            <ul class="related">
-                <li class="related__item">
-                    <a href="single-standard.html" class="related__link">
-                        <img src="images/thumbs/masonry/walk-600.jpg" alt="">
-                    </a>
-                    <h5 class="related__post-title">Using Repetition and Patterns in Photography.</h5>
-                </li>
-                <li class="related__item">
-                    <a href="single-standard.html" class="related__link">
-                        <img src="images/thumbs/masonry/dew-600.jpg" alt="">
-                    </a>
-                    <h5 class="related__post-title">Health Benefits Of Morning Dew.</h5>
-                </li>
-                <li class="related__item">
-                    <a href="single-standard.html" class="related__link">
-                        <img src="images/thumbs/masonry/rucksack-600.jpg" alt="">
-                    </a>
-                    <h5 class="related__post-title">The Art Of Visual Storytelling.</h5>
-                </li>
-            </ul>
-        </div> <!-- end entry related -->
-
     </article> <!-- end column large-full entry-->
+    
 
-
+    <h3 class="h3">Add Comment.</span></h3>
+    <form action="{% url 'post_comment' post.slug %}" method="post" class="row large-full entry format-standard">
+        {% csrf_token %}
+        <div class="column">
+            <div class="form-field">
+                <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700">
+            </div>
+        </div>
+        <div class="column">
+            <div class="form-field">
+                <input name="submit" id="submit" class="btn full-width" value="Add Comment" type="submit">
+            </div>
+        </div>
+    </form>
+    
+    
     <div class="comments-wrap">
-
+        
         <div id="comments" class="column large-12">
 
-            <h3 class="h2">5 Comments</h3>
+            <h3 class="h3">{{comments.count}} Comments.</h3>
+
+            <!-- START commentlist -->
+            {% if comments.count == 0 %}
+                <h3 class="h3">{{comments.count}} be the first one to comment</h3>
+            {% else %}
+                <ol class="commentlist">
+
+                    {% for comment in comments %}
+                        <li class="depth-1 comment">
+
+                            <div class="comment__avatar">
+                                <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="2000" height="200">
+                            </div>
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <div class="comment__author">{{comment.user.first_name | title}} {{comment.user.last_name | title}}</div>
+
+                                    <div class="comment__meta">
+                                        <div class="comment__time">{{comment.date_posted}}</div>
+                                        <div class="comment__reply">
+                                            <a class="comment-reply-link" href="#0">Reply</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p>{{comment.content}}</p>
+                                </div>
+
+                            </div>
+
+                        </li> <!-- end comment level 1 -->
+                    {% endfor %}
+
+                    {% comment %} <li class="thread-alt depth-1 comment">
+
+                        <div class="comment__avatar">
+                            <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                        </div>
+
+                        <div class="comment__content">
+
+                            <div class="comment__info">
+                                <div class="comment__author">John Doe</div>
+
+                                <div class="comment__meta">
+                                    <div class="comment__time">April 30, 2019</div>
+                                    <div class="comment__reply">
+                                        <a class="comment-reply-link" href="#0">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="comment__text">
+                            <p>Sumo euismod dissentiunt ne sit, ad eos iudico qualisque adversarium, tota falli et mei. Esse euismod
+                            urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et
+                            tantas semper delicatissimi.</p>
+                            </div>
+
+                        </div>
+
+                        <ul class="children">
+
+                            <li class="depth-2 comment">
+
+                                <div class="comment__avatar">
+                                    <img class="avatar" src="images/avatars/user-03.jpg" alt="" width="50" height="50">
+                                </div>
+
+                                <div class="comment__content">
+
+                                    <div class="comment__info">
+                                        <div class="comment__author">Kakashi Hatake</div>
+
+                                        <div class="comment__meta">
+                                            <div class="comment__time">April 29, 2019</div>
+                                            <div class="comment__reply">
+                                                <a class="comment-reply-link" href="#0">Reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="comment__text">
+                                        <p>Duis sed odio sit amet nibh vulputate
+                                        cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate
+                                        cursus a sit amet mauris</p>
+                                    </div>
+
+                                </div>
+
+                                <ul class="children">
+
+                                    <li class="depth-3 comment">
+
+                                        <div class="comment__avatar">
+                                            <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                                        </div>
+
+                                        <div class="comment__content">
+
+                                            <div class="comment__info">
+                                                <div class="comment__author">John Doe</div>
+
+                                                <div class="comment__meta">
+                                                    <div class="comment__time">April 29, 2019</div>
+                                                    <div class="comment__reply">
+                                                        <a class="comment-reply-link" href="#0">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="comment__text">
+                                            <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
+                                            etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+
+                            </li>
+
+                        </ul>
+
+                    </li> <!-- end comment level 1 -->
+
+                    <li class="depth-1 comment">
+
+                        <div class="comment__avatar">
+                            <img class="avatar" src="images/avatars/user-02.jpg" alt="" width="50" height="50">
+                        </div>
+
+                        <div class="comment__content">
+
+                            <div class="comment__info">
+                                <div class="comment__author">Shikamaru Nara</div>
+
+                                <div class="comment__meta">
+                                    <div class="comment__time">April 26, 2019</div>
+                                    <div class="comment__reply">
+                                        <a class="comment-reply-link" href="#0">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="comment__text">
+                            <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
+                            </div>
+
+                        </div>
+
+                    </li>  <!-- end comment level 1 --> {% endcomment %}
+
+                </ol>
+            {% endif %}
+            <!-- END commentlist -->
+
+        </div> <!-- end comments -->
+
+    </div> <!-- end comments-wrap --> 
+
+
+    {% comment %} <div class="comments-wrap">
+        
+        <div id="comments" class="column large-12">
+
+            <h3 class="h2">Comments</h3>
 
             <!-- START commentlist -->
             <ol class="commentlist">
@@ -256,43 +400,10 @@
 
         </div> <!-- end comments -->
 
-        <div class="column large-12 comment-respond">
+    </div> <!-- end comments-wrap -->  {% endcomment %}
+    
 
-            <!-- START respond -->
-            <div id="respond">
 
-                <h3 class="h2">Add Comment <span>Your email address will not be published</span></h3>
-
-                <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
-                    <fieldset>
-
-                        <div class="form-field">
-                            <input name="cName" id="cName" class="full-width" placeholder="Your Name" value="" type="text">
-                        </div>
-
-                        <div class="form-field">
-                            <input name="cEmail" id="cEmail" class="full-width" placeholder="Your Email" value="" type="text">
-                        </div>
-
-                        <div class="form-field">
-                            <input name="cWebsite" id="cWebsite" class="full-width" placeholder="Website" value="" type="text">
-                        </div>
-
-                        <div class="message form-field">
-                            <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message"></textarea>
-                        </div>
-
-                        <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Add Comment" type="submit">
-
-                    </fieldset>
-                </form> <!-- end form -->
-
-            </div>
-            <!-- END respond-->
-
-        </div> <!-- end comment-respond -->
-
-    </div> <!-- end comments-wrap -->
 </main>
 
 

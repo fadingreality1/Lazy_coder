@@ -20,4 +20,20 @@ class Post(models.Model):
     
     # def get_absolute_url(self):
     #     return reverse("post_detail", kwargs={"pk": self.pk})
+    # ! was used with posts details view
+    
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date_posted = models.DateTimeField(default=timezone.now)
+    content = models.TextField()
+    # ! parent comment
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f'on {self.date_posted } by {self.user}'
+
+    
+
+
     

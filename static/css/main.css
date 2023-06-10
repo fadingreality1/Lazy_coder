@@ -3433,7 +3433,7 @@ body.search-is-visible {
  * ------------------------------------------------------------------- */
 .comments-wrap {
   padding: 6.4rem 0 0 0;
-  background-color: #ffffff;
+  background-color: #f6f7f8;
 }
 
 .comments-wrap h3 {
@@ -3482,8 +3482,8 @@ body.search-is-visible {
 }
 
 .comment__avatar img {
-  height: 6.4rem;
-  width: 6.4rem;
+  height: 7rem;
+  width: 7rem;
   border-radius: 100%;
   vertical-align: bottom;
 }
