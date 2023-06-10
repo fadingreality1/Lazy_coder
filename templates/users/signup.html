@@ -5,18 +5,19 @@
 <main class="row content__page">
 	<section class="column large-full entry format-standard">
 		<h3 class="h1" style="margin-top:0;">Create Account</h3>
+		<p style="color:red;">Note: All fields are mandatory.</p>
 		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
 			{% csrf_token %}
 			<fieldset>
-				{% for field in form %}
+				{% comment %} {% for field in form %}
 				<div class="form-field">
 					<strong>{{field.label}} :</strong> 
 					{{field}}
 					{{field.errors}}
 				</div>
-				{% endfor %}
+				{% endfor %} {% endcomment %}
 
-{% comment %} ! Differeny methods to access form fields and slicing the form feilds {% endcomment %}
+				{% comment %} ! Different methods to access form fields and slicing the form feilds {% endcomment %}
 
 				{% comment %} <div class="row block-large-1-2 block-tab-full">
 					<div class="column">
@@ -65,8 +66,9 @@
 							</div>
 						</fieldset>
 					</div>
-				</div>
-				<div class="row block-large-1-2 block-tab-full">
+				</div> {% endcomment %}
+
+				{% comment %} <div class="row block-large-1-2 block-tab-full">
 					<div class="column">
 						{% for field in form.visible_fields|slice:":3" %}
 							<fieldset>
@@ -76,10 +78,10 @@
 									{{field.errors}}
 								</div>	
 							</fieldset>
-						{% endfor %}
-					</div>
-					<div class="column">
-						{% for field in form.visible_fields|slice:"3:" %}
+							{% endfor %}
+						</div>
+						<div class="column">
+							{% for field in form.visible_fields|slice:"3:" %}
 							<fieldset>
 								<div class="form-field">
 									<strong>{{field.label}} :</strong>
@@ -87,9 +89,21 @@
 									{{field.errors}}
 								</div>
 							</fieldset>
-						{% endfor %}
-					</div>
+							{% endfor %}
+						</div>
 				</div> {% endcomment %}
+
+				<div class="row block-large-1-2 block-tab-full">
+					{% for field in form %}
+						<div class="column">
+							<div class="form-field">
+								<strong>{{field.label}} :</strong>
+								{{field}}
+								{{field.errors}}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
 
 				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create Account" type="submit">
 

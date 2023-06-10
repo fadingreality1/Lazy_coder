@@ -31,7 +31,7 @@
 		{% for post in posts %}
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
-				<a href="/blog/post/{{post.slug}}" class="entry__thumb-link">
+				<a href="/blog/{{post.slug}}" class="entry__thumb-link">
 					<img
 						src="{{post.image.url}}"
 						srcset="{{post.image.url}} 1x, {{post.image.url}} 2x"
@@ -42,7 +42,7 @@
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="/blog/post/{{post.slug}}"
+						<a href="/blog/{{post.slug}}"
 							>{{post.title}}</a
 						>
 					</h2>
