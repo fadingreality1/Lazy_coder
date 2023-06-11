@@ -52,18 +52,18 @@
 
     {% if request.user.is_authenticated %}
         <h3 class="h3">Add Comment.</h3>
-        <form action="{% url 'post_comment' post.slug %}" method="post" class="row large-full entry format-standard">
+        <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
             {% csrf_token %}
-            <div class="column">
+
                 <div class="form-field">
-                    <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700">
+                    <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700" required>
                 </div>
-            </div>
-            <div class="column">
+                <input type="hidden" value="" name="parent_id">
+
                 <div class="form-field">
-                    <input name="submit" id="submit" class="btn full-width" value="Add Comment" type="submit">
+                    <input name="submit" id="submit" class="btn" value="Comment" type="submit">
                 </div>
-            </div>
+
         </form>
     
     {% else %}
@@ -88,32 +88,100 @@
 
                     {% for comment in comments %}
                         <li class="depth-1 comment">
-
                             <div class="comment__avatar">
-                                <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50">
+                                <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50" style="margin-top:0;">
                             </div>
 
                             <div class="comment__content">
 
                                 <div class="comment__info">
-                                    <div class="comment__author">{{comment.user.first_name|title}} {{comment.user.last_name|title}}</div>
+                                    <div class="comment__author" style="line-height: 1.2em;">{{comment.user.first_name|title}} {{comment.user.last_name|title}}<br><p style="font-size: 0.7em; margin-bottom:0; color:#7e7e7e">@{{comment.user.username}}</p></div>
 
                                     <div class="comment__meta">
                                         <div class="comment__time">{{comment.date_posted|date:"F j, Y"}}</div>
-                                        <div class="comment__reply">
-                                            <a class="comment-reply-link" href="#0">Reply</a>
-                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="comment__text">
-                                    <p>
+                                    <p style="margin-bottom:16px">
                                         {{comment.content}}
                                     </p>
                                 </div>
-
+                                {% comment %}! I know below code is shit but it is what it is  {% endcomment %}
+                                <style>
+                                    #rb{{comment.id}} #collapsible{{comment.id}}{
+                                        overflow: hidden;
+                                        padding-bottom: 0;
+                                        margin-bottom: 0;
+                                        height: fit-content;
+                                        margin-bottom: 1em;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible{{comment.id}} .checkbox_1{
+                                        display: none;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible{{comment.id}} #label{{comment.id}}{
+                                        position: relative;
+                                        display: block;
+                                        cursor: pointer; 
+                                        z-index: 1;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible{{comment.id}} #label{{comment.id}}::after{
+                                        content : "";
+                                        position: absolute;
+                                        transition: all 0.3 ease;
+                                        right: 15px;
+                                        top: 20px;
+                                        width: 18px;
+                                        height: 18px;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible-head{{comment.id}}:checked + #collapsible{{comment.id}} #label{{comment.id}}::after{
+                                        transform: rotate(90deg);
+                                        transition: all 0.3 ease;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible-text{{comment.id}}{
+                                        max-height: 1px;
+                                        overflow: hidden;
+                                        line-height: 1.4;
+                                        position: relative;
+                                        opacity: 0.5;
+                                        transition: all 0.3s ease;
+                                        top: -100%;
+                                      }
+                                      
+                                    #rb{{comment.id}} #collapsible{{comment.id}} #collapsible-head{{comment.id}}:checked ~ #collapsible-text{{comment.id}}{
+                                        max-height: 300px;
+                                        background: #f6f7f8;
+                                        padding-bottom: 25px;
+                                        opacity: 1;
+                                        top: 0;
+                                      }
+                                      
+                                      #rb{{comment.id}} #collapsible-text{{comment.id}} #form{{comment.id}}{
+                                        display: flex;
+                                        margin-bottom: 0;
+                                        padding-bottom: 0;
+                                      }
+                                </style>
+                                <div id="rb{{comment.id}}">
+                                    <div class="comment" id="collapsible{{comment.id}}">
+                                        <input type="checkbox" id="collapsible-head{{comment.id}}" class="checkbox_1">
+                                        <label for="collapsible-head{{comment.id}}" style="text-transform: uppercase;  color:black;     font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.15em; padding:0; margin:0;" id="label{{comment.id}}">Reply</label>
+                                        <div id="collapsible-text{{comment.id}}">
+                                            <form action="{% url 'post_comment' post.slug %}" method="post" id="form{{comment.id}}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="parent_id" value="{{comment.id}}">
+                                                <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700" required>
+                                                <input name="submit1" id="submit" class="btn btn--medium" value="Add Reply" type="submit" style="width:min-content;">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
                         </li> <!-- end comment level 1 -->
                     {% endfor %}
 
@@ -138,6 +206,7 @@
                             urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et
                             tantas semper delicatissimi.</p>
                             </div>
+                            {% comment %} !Reply box {% endcomment %}
                             <div class="collapsible">
                                 <input type="checkbox" id="collapsible-head">
                                 <label for="collapsible-head" style="text-transform: uppercase;  color:black;     font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.15em; padding:0; margin:0;">Reply</label>

@@ -31,7 +31,7 @@ class Comment(models.Model):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'on {self.date_posted } by {self.user}'
+        return f'{self.content[:200] } :: {self.user}'
 
     
 

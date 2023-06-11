@@ -3,10 +3,10 @@ from .models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'author', 'date_posted','slug',)
+    list_display = ('title', 'author', 'date_posted','slug','id',)
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'get_post_title' ,'date_posted', 'content')
+    list_display = ('user', 'get_post_title' ,'date_posted', 'content', 'parent','id',)
     
     def get_post_title(self, obj):
         return obj.post.title   

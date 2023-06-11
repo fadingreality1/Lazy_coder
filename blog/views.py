@@ -35,9 +35,16 @@ def postComment(req, slug):
     if req.method == "POST":
         post = Post.objects.get(slug = slug)
         content = req.POST.get('comment')
-        comment = Comment(user = req.user, content = content, post = post, parent = None)
+        parent_id = req.POST.get('parent_id')
+        print(parent_id)
+        if parent_id == "":
+            comment = Comment(user = req.user, content = content, post = post, parent = None)
+            messages.success(req, f"Comment Posted Successfully")
+        else:
+            parent = Comment.objects.get(id = parent_id)
+            comment = Comment(user = req.user, content = content, post = post, parent = parent)
+            messages.success(req, f"Reply to {parent.user.first_name}'s Comment Posted Successfully")
         comment.save()
-        messages.success(req, "Comment Posted Successfully")
         return redirect('post_detail', slug = slug)
 
     return redirect('home')
