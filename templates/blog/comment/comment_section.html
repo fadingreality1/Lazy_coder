@@ -13,6 +13,18 @@
                 {% include "blog/comment/comments.html" with comment=comment %}
             {% endfor %}
 
+        </ol>
+        <!-- END commentlist -->
+
+    </div> <!-- end comments -->
+
+</div> <!-- end comments-wrap -->
+
+{% comment %} TODO : Delete below code before pushing {% endcomment %}
+
+{% comment %} ! reference material {% endcomment %}
+{% comment %} 
+
             <li class="thread-alt depth-1 comment">
 
                 <div class="comment__avatar">
@@ -36,7 +48,6 @@
                             nec et
                             tantas semper delicatissimi.</p>
                     </div>
-                    {% comment %} !Reply box {% endcomment %}
                     <div class="collapsible">
                         <input type="checkbox" id="collapsible-head">
                         <label for="collapsible-head"
@@ -221,9 +232,4 @@
 
             </li> <!-- end comment level 1 -->
 
-        </ol>
-        <!-- END commentlist -->
-
-    </div> <!-- end comments -->
-
-</div> <!-- end comments-wrap -->
+{% endcomment %}
