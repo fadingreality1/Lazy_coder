@@ -60,7 +60,7 @@
 				<a href="{% url 'profile' %}" title="" class="{% if request.path == profile %}current{% endif %}">Hello,
 					{{request.user.first_name}}</a>
 				<ul class="sub-menu">
-					<li><a href="{% url 'profile' %} class=" {% if request.path==profile %}current{% endif %}"">My
+					<li><a href="{% url 'profile' %} class=" {% if request.path == profile %}current{% endif %}"">My
 							Account</a></li>
 					<li><a href="{% url 'signout' %}">Signout</a></li>
 				</ul>
