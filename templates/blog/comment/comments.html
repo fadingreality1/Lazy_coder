@@ -1,0 +1,251 @@
+{% load static %}
+
+<div class="large-full">
+            
+    <div id="comments" class="column large-12">
+
+        <h3 class="h3">{{comments.count}} Comments.</h3>
+
+        <!-- START commentlist -->
+        <ol class="commentlist">
+
+            {% for comment in comments %}
+                <li class="depth-1 comment">
+                    <div class="comment__avatar">
+                        <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50" style="margin-top:0;">
+                    </div>
+
+                    <div class="comment__content">
+
+                        <div class="comment__info">
+                            <div class="comment__author" style="line-height: 1.2em;">{{comment.user.first_name|title}} {{comment.user.last_name|title}}<br><p style="font-size: 0.7em; margin-bottom:0; color:#7e7e7e">@{{comment.user.username}}</p></div>
+
+                            <div class="comment__meta">
+                                <div class="comment__time">{{comment.date_posted|date:"F j, Y"}}</div>
+                            </div>
+                        </div>
+
+                        <div class="comment__text">
+                            <p style="margin-bottom:16px">
+                                {{comment.content}}
+                            </p>
+                        </div>
+                        {% comment %}! I know below code is shit but it is what it is  {% endcomment %}
+                        {% comment %} ! passing argument with include tag {% endcomment %}
+                        {% include "blog/comment/style.html" with id=comment.id %}
+                        <div id="rb{{comment.id}}">
+                            <div class="comment" id="collapsible{{comment.id}}">
+                                <input type="checkbox" id="collapsible-head{{comment.id}}" class="checkbox_1">
+                                <label for="collapsible-head{{comment.id}}" style="text-transform: uppercase;  color:black;     font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.15em; padding:0; margin:0;" id="label{{comment.id}}">Reply</label>
+                                <div id="collapsible-text{{comment.id}}">
+                                    <form action="{% url 'post_comment' post.slug %}" method="post" id="form{{comment.id}}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="parent_id" value="{{comment.id}}">
+                                        <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700" required>
+                                        <input name="submit1" id="submit" class="btn btn--medium" value="Add Reply" type="submit" style="width:min-content;">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li> <!-- end comment level 1 -->
+            {% endfor %}
+
+            <li class="thread-alt depth-1 comment">
+
+                <div class="comment__avatar">
+                    <img class="avatar" src="{% static 'images/avatars/user-04.jpg' %}" alt="" width="50" height="50">
+                </div>
+
+                <div class="comment__content">
+
+                    <div class="comment__info">
+                        <div class="comment__author">John Doe</div>
+
+                        <div class="comment__meta">
+                            <div class="comment__time">April 30, 2019</div>
+                        </div>
+                    </div>
+
+                    <div class="comment__text">
+                    <p>Sumo euismod dissentiunt ne sit, ad eos iudico qualisque adversarium, tota falli et mei. Esse euismod
+                    urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et
+                    tantas semper delicatissimi.</p>
+                    </div>
+                    {% comment %} !Reply box {% endcomment %}
+                    <div class="collapsible">
+                        <input type="checkbox" id="collapsible-head">
+                        <label for="collapsible-head" style="text-transform: uppercase;  color:black;     font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.15em; padding:0; margin:0;">Reply</label>
+                        <div class="collapsible-text">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input name="comment1" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700">
+                                <input name="submit1" id="submit" class="btn" value="Add Comment" type="submit" style="width:min-content;">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="children">
+
+                    <li class="depth-2 comment">
+
+                        <div class="comment__avatar">
+                            <img class="avatar" src="{% static 'images/avatars/user-03.jpg' %}" alt="" width="50" height="50">
+                        </div>
+
+                        <div class="comment__content">
+
+                            <div class="comment__info">
+                                <div class="comment__author">Kakashi Hatake</div>
+
+                                <div class="comment__meta">
+                                    <div class="comment__time">April 29, 2019</div>
+                                    <div class="comment__reply">
+                                        <a class="comment-reply-link" href="#0">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="comment__text">
+                                <p>Duis sed odio sit amet nibh vulputate
+                                cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate
+                                cursus a sit amet mauris</p>
+                            </div>
+
+                        </div>
+
+                        <ul class="children">
+
+                            <li class="depth-3 comment">
+
+                                <div class="comment__avatar">
+                                    <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                                </div>
+
+                                <div class="comment__content">
+
+                                    <div class="comment__info">
+                                        <div class="comment__author">John Doe</div>
+
+                                        <div class="comment__meta">
+                                            <div class="comment__time">April 29, 2019</div>
+                                            <div class="comment__reply">
+                                                <a class="comment-reply-link" href="#0">Reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="comment__text">
+                                    <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
+                                    etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                                    </div>
+
+                                    <ul class="children">
+
+                                        <li class="depth-4 comment">
+    
+                                            <div class="comment__avatar">
+                                                <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                                            </div>
+    
+                                            <div class="comment__content">
+    
+                                                <div class="comment__info">
+                                                    <div class="comment__author">NEw Doe</div>
+    
+                                                    <div class="comment__meta">
+                                                        <div class="comment__time">April 29, 2019</div>
+                                                        <div class="comment__reply">
+                                                            <a class="comment-reply-link" href="#0">Reply</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <div class="comment__text">
+                                                <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
+                                                etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                                                </div>
+                                                <ul class="children">
+
+                                                    <li class="depth-5 comment">
+                
+                                                        <div class="comment__avatar">
+                                                            <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                                                        </div>
+                
+                                                        <div class="comment__content">
+                
+                                                            <div class="comment__info">
+                                                                <div class="comment__author">John Doe</div>
+                
+                                                                <div class="comment__meta">
+                                                                    <div class="comment__time">April 29, 2019</div>
+                                                                    <div class="comment__reply">
+                                                                        <a class="comment-reply-link" href="#0">Reply</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                
+                                                            <div class="comment__text">
+                                                            <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
+                                                            etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
+                                                            </div>
+                
+                                                        </div>
+                
+                                                    </li>
+                
+                                                </ul>
+    
+                                            </div>
+    
+                                        </li>
+    
+                                    </ul>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+            </li> <!-- end comment level 1 -->
+
+            <li class="depth-1 comment">
+
+                <div class="comment__avatar">
+                    <img class="avatar" src="{% static 'images/avatars/user-02.jpg' %}" alt="" width="50" height="50">
+                </div>
+
+                <div class="comment__content">
+
+                    <div class="comment__info">
+                        <div class="comment__author">Shikamaru Nara</div>
+
+                        <div class="comment__meta">
+                            <div class="comment__time">April 26, 2019</div>
+                            <div class="comment__reply">
+                                <a class="comment-reply-link" href="#0">Reply</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment__text">
+                    <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
+                    </div>
+
+                </div>
+
+            </li>  <!-- end comment level 1 -->
+
+        </ol>
+        <!-- END commentlist -->
+
+    </div> <!-- end comments -->
+
+</div> <!-- end comments-wrap -->
