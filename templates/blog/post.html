@@ -77,9 +77,10 @@
 
     {% else %}
 
-        {% include "blog/comment/comments.html" %} 
+        {% include "blog/comment/comment_section.html" with comments=comments %} 
 
     {% endif %}    
+    
 </main>
 
 {% endblock middle_section %}
