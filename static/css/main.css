@@ -3666,3 +3666,55 @@ body.search-is-visible {
 
 /*# sourceMappingURL=main.css.map */
 
+.comment__content .collapsible{
+  width:450px;
+  overflow: hidden;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  height: fit-content;
+}
+
+.comment__content .collapsible #collapsible-head{
+  display: none;
+}
+
+.comment__content .collapsible label{
+  position: relative;
+  display: block;
+  cursor: pointer; 
+  z-index: 1;
+}
+
+.comment__content .collapsible label::after{
+  content : "";
+  position: absolute;
+  transition: all 0.3 ease;
+  right: 15px;
+  top: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+.comment__content input:checked + .collapsible label::after{
+  transform: rotate(90deg);
+  transition: all 0.3 ease;
+}
+
+.comment__content .collapsible-text{
+  max-height: 1px;
+  overflow: hidden;
+  line-height: 1.4;
+  position: relative;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  top: -100%;
+}
+
+.comment__content .collapsible input:checked ~ .collapsible-text{
+  max-height: 300px;
+  background: #f6f7f8;
+  padding-bottom: 25px;
+  opacity: 1;
+  top: 0;
+}
+
