@@ -3,37 +3,31 @@
 {% block middle_section %}
 
 <main class="row content__page">
-                
     <article class="column large-full entry format-standard">
-
         <div class="media-wrap entry__media">
             <div class="entry__post-thumb">
-                <img src="{{post.image.url}}" alt="">
+                <img src="{{post.image.url}}" alt="" />
             </div>
         </div>
 
         <div class="content__page-header entry__header">
-            <h1 class="display-1 entry__title">
-            {{post.title}}
-            </h1>
+            <h1 class="display-1 entry__title">{{post.title}}</h1>
             <ul class="entry__header-meta">
-            <li class="author">By <a href="#0">{{post.author.first_name|title}}</a></li>
+                <li class="author">
+                    By <a href="#0">{{post.author.first_name|title}}</a>
+                </li>
                 <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
                 <li class="cat-links">
                     <a href="#0">Marketing</a><a href="#0">Management</a>
                 </li>
             </ul>
-        </div> <!-- end entry__header -->
+        </div>
+        <!-- end entry__header -->
 
         <div class="entry__content">
+            <p class="lead drop-cap">{{post.description}}</p>
 
-            <p class="lead drop-cap">
-            {{post.description}}
-            </p>
-
-            <p>
-            {{post.content}}
-            </p>
+            <p>{{post.content}}</p>
 
             <p class="entry__tags">
                 <span>Post Tags</span>
@@ -44,208 +38,42 @@
                     <a href="#0">varius</a>
                     <a href="#0">turpis</a>
                 </span>
-
             </p>
-        </div> <!-- end entry content -->
-    </article> <!-- end column large-full entry-->
-    
+        </div>
+        <!-- end entry content -->
+    </article>
+    <!-- end column large-full entry-->
 
     {% if request.user.is_authenticated %}
-        <h3 class="h3">Add Comment.</h3>
-        <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
-            {% csrf_token %}
+    <h3 class="h3">Add Comment.</h3>
+    <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
+        {% csrf_token %}
 
-                <div class="form-field">
-                    <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength = "700" required>
-                </div>
-                <input type="hidden" value="" name="parent_id">
+        <div class="form-field">
+            <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength="700" required />
+        </div>
+        <input type="hidden" value="" name="parent_id" />
 
-                <div class="form-field">
-                    <input name="submit" id="submit" class="btn" value="Comment" type="submit">
-                </div>
+        <div class="form-field">
+            <input name="submit" id="submit" class="btn" value="Comment" type="submit" />
+        </div>
+    </form>
 
-        </form>
-    
     {% else %}
-        <h3 class="h3"><a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.</h3>
+    <h3 class="h3">
+        <a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.
+    </h3>
     {% endif %}
-    
-    
+
     {% if comments.count == 0 %}
 
-        <h3 class="h3">No comments yet. be the first person to comment</h3>
+    <h3 class="h3">No comments yet. be the first person to comment</h3>
 
     {% else %}
 
-        {% include "blog/comment/comment_section.html" with comments=comments %} 
+    {% include "blog/comment/comment_section.html" with comments=comments %}
 
-    {% endif %}    
-    
+    {% endif %}
 </main>
 
 {% endblock middle_section %}
-
-{% comment %} <div class="comments-wrap">
-    
-    <div id="comments" class="column large-12">
-
-        <h3 class="h2">Comments</h3>
-
-        <!-- START commentlist -->
-        <ol class="commentlist">
-
-            <li class="depth-1 comment">
-
-                <div class="comment__avatar">
-                    <img class="avatar" src="images/avatars/user-01.jpg" alt="" width="50" height="50">
-                </div>
-
-                <div class="comment__content">
-
-                    <div class="comment__info">
-                        <div class="comment__author">Itachi Uchiha</div>
-
-                        <div class="comment__meta">
-                            <div class="comment__time">April 30, 2019</div>
-                            <div class="comment__reply">
-                                <a class="comment-reply-link" href="#0">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="comment__text">
-                    <p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate,
-                    facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>
-                    </div>
-
-                </div>
-
-            </li> <!-- end comment level 1 -->
-
-            <li class="thread-alt depth-1 comment">
-
-                <div class="comment__avatar">
-                    <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
-                </div>
-
-                <div class="comment__content">
-
-                    <div class="comment__info">
-                        <div class="comment__author">John Doe</div>
-
-                        <div class="comment__meta">
-                            <div class="comment__time">April 30, 2019</div>
-                            <div class="comment__reply">
-                                <a class="comment-reply-link" href="#0">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="comment__text">
-                    <p>Sumo euismod dissentiunt ne sit, ad eos iudico qualisque adversarium, tota falli et mei. Esse euismod
-                    urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et
-                    tantas semper delicatissimi.</p>
-                    </div>
-
-                </div>
-
-                <ul class="children">
-
-                    <li class="depth-2 comment">
-
-                        <div class="comment__avatar">
-                            <img class="avatar" src="images/avatars/user-03.jpg" alt="" width="50" height="50">
-                        </div>
-
-                        <div class="comment__content">
-
-                            <div class="comment__info">
-                                <div class="comment__author">Kakashi Hatake</div>
-
-                                <div class="comment__meta">
-                                    <div class="comment__time">April 29, 2019</div>
-                                    <div class="comment__reply">
-                                        <a class="comment-reply-link" href="#0">Reply</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="comment__text">
-                                <p>Duis sed odio sit amet nibh vulputate
-                                cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate
-                                cursus a sit amet mauris</p>
-                            </div>
-
-                        </div>
-
-                        <ul class="children">
-
-                            <li class="depth-3 comment">
-
-                                <div class="comment__avatar">
-                                    <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
-                                </div>
-
-                                <div class="comment__content">
-
-                                    <div class="comment__info">
-                                        <div class="comment__author">John Doe</div>
-
-                                        <div class="comment__meta">
-                                            <div class="comment__time">April 29, 2019</div>
-                                            <div class="comment__reply">
-                                                <a class="comment-reply-link" href="#0">Reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="comment__text">
-                                    <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
-                                    etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
-                                    </div>
-
-                                </div>
-
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-                </ul>
-
-            </li> <!-- end comment level 1 -->
-
-            <li class="depth-1 comment">
-
-                <div class="comment__avatar">
-                    <img class="avatar" src="images/avatars/user-02.jpg" alt="" width="50" height="50">
-                </div>
-
-                <div class="comment__content">
-
-                    <div class="comment__info">
-                        <div class="comment__author">Shikamaru Nara</div>
-
-                        <div class="comment__meta">
-                            <div class="comment__time">April 26, 2019</div>
-                            <div class="comment__reply">
-                                <a class="comment-reply-link" href="#0">Reply</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="comment__text">
-                    <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
-                    </div>
-
-                </div>
-
-            </li>  <!-- end comment level 1 -->
-
-        </ol>
-        <!-- END commentlist -->
-
-    </div> <!-- end comments -->
-
-</div> <!-- end comments-wrap -->  {% endcomment %}

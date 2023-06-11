@@ -10,7 +10,7 @@
 			<fieldset>
 				{% for field in form %}
 				<div class="form-field">
-					<strong>{{field.label}} :</strong> 
+					<strong>{{field.label}} :</strong>
 					{{field}}
 					{{field.errors}}
 				</div>
@@ -70,41 +70,42 @@
 				{% comment %} <div class="row block-large-1-2 block-tab-full">
 					<div class="column">
 						{% for field in form.visible_fields|slice:":3" %}
-							<fieldset>
-								<div class="form-field">
-									<strong>{{field.label}} :</strong>
-									{{field}}
-									{{field.errors}}
-								</div>	
-							</fieldset>
-							{% endfor %}
-						</div>
-						<div class="column">
-							{% for field in form.visible_fields|slice:"3:" %}
-							<fieldset>
-								<div class="form-field">
-									<strong>{{field.label}} :</strong>
-									{{field}}
-									{{field.errors}}
-								</div>
-							</fieldset>
-							{% endfor %}
-						</div>
-				</div> {% endcomment %}
-
-				{% comment %} <div class="row block-large-1-2 block-tab-full">
-					{% for field in form %}
-						<div class="column">
+						<fieldset>
 							<div class="form-field">
 								<strong>{{field.label}} :</strong>
 								{{field}}
 								{{field.errors}}
 							</div>
+						</fieldset>
+						{% endfor %}
+					</div>
+					<div class="column">
+						{% for field in form.visible_fields|slice:"3:" %}
+						<fieldset>
+							<div class="form-field">
+								<strong>{{field.label}} :</strong>
+								{{field}}
+								{{field.errors}}
+							</div>
+						</fieldset>
+						{% endfor %}
+					</div>
+				</div> {% endcomment %}
+
+				{% comment %} <div class="row block-large-1-2 block-tab-full">
+					{% for field in form %}
+					<div class="column">
+						<div class="form-field">
+							<strong>{{field.label}} :</strong>
+							{{field}}
+							{{field.errors}}
 						</div>
+					</div>
 					{% endfor %}
 				</div> {% endcomment %}
 
-				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Create Account" type="submit">
+				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width"
+					value="Create Account" type="submit">
 
 			</fieldset>
 		</form> <!-- end form -->

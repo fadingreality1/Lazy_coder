@@ -3,25 +3,22 @@
 {% block middle_section %}
 
 <div class="container  bg1">
-    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6">
-            <h1 class="display-4 font-italic" style="margin-top:0;color:white;">
-                Title of a longer featured blog post
-            </h1>
-            <p class="lead my-3"style="color:white;">
-                Multiple lines of text that form the lede, informing new
-                readers quickly and efficiently about what's most
-                interesting in this post's contents.
-            </p>
-            <p class="lead mb-0" style="margin-bottom:0;">
-                <a
-                    href="https://getbootstrap.com/docs/4.0/examples/blog/#"
-                    class="text-white font-weight-bold"
-                    >Continue reading...</a
-                >
-            </p>
-        </div>
-    </div>
+	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+		<div class="col-md-6">
+			<h1 class="display-4 font-italic" style="margin-top:0;color:white;">
+				Title of a longer featured blog post
+			</h1>
+			<p class="lead my-3" style="color:white;">
+				Multiple lines of text that form the lede, informing new
+				readers quickly and efficiently about what's most
+				interesting in this post's contents.
+			</p>
+			<p class="lead mb-0" style="margin-bottom:0;">
+				<a href="https://getbootstrap.com/docs/4.0/examples/blog/#" class="text-white font-weight-bold">Continue
+					reading...</a>
+			</p>
+		</div>
+	</div>
 </div>
 <div class="masonry-wrap">
 	<div class="masonry">
@@ -30,19 +27,13 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="{{post.image.url}}"
-						srcset="{{post.image.url}} 1x, {{post.image.url}} 2x"
-						alt=""
-					/>
+					<img src="{{post.image.url}}" srcset="{{post.image.url}} 1x, {{post.image.url}} 2x" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>{{post.title}}</a
-						>
+						<a href="single-standard.html">{{post.title}}</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -80,19 +71,15 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="{% static 'images/thumbs/masonry/tulips-600.jpg' %}"
+					<img src="{% static 'images/thumbs/masonry/tulips-600.jpg' %}"
 						srcset="{% static 'images/thumbs/masonry/tulips-600.jpg' %} 1x, {% static 'images/thumbs/masonry/tulips-1200.jpg' %} 2x"
-						alt=""
-					/>
+						alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>10 Interesting Facts About Caffeine.</a
-						>
+						<a href="single-standard.html">10 Interesting Facts About Caffeine.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -118,22 +105,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/dew-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/dew-600.jpg" srcset="
 							images/thumbs/masonry/dew-600.jpg  1x,
 							images/thumbs/masonry/dew-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>Health Benefits Of Morning Dew.</a
-						>
+						<a href="single-standard.html">Health Benefits Of Morning Dew.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -159,23 +140,17 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/rucksack-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/rucksack-600.jpg" srcset="
 							images/thumbs/masonry/rucksack-600.jpg  1x,
 							images/thumbs/masonry/rucksack-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>The Art Of Visual Storytelling.</a
-						>
+						<a href="single-standard.html">The Art Of Visual Storytelling.</a>
 					</h2>
 
 					<div class="entry__meta">
@@ -202,22 +177,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/jump-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/jump-600.jpg" srcset="
 							images/thumbs/masonry/jump-600.jpg  1x,
 							images/thumbs/masonry/jump-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>Create Meaningful Family Moments.</a
-						>
+						<a href="single-standard.html">Create Meaningful Family Moments.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -243,23 +212,17 @@
 		<article class="masonry__brick entry format-audio animate-this">
 			<div class="entry__thumb">
 				<a href="single-audio.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/guitarist-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/guitarist-600.jpg" srcset="
 							images/thumbs/masonry/guitarist-600.jpg  1x,
 							images/thumbs/masonry/guitarist-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-audio.html"
-							>What Your Music Preference Says About You and Your
-							Personality.</a
-						>
+						<a href="single-audio.html">What Your Music Preference Says About You and Your
+							Personality.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -284,22 +247,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/beetle-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/beetle-600.jpg" srcset="
 							images/thumbs/masonry/beetle-600.jpg  1x,
 							images/thumbs/masonry/beetle-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>Throwback To The Good Old Days.</a
-						>
+						<a href="single-standard.html">Throwback To The Good Old Days.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -323,27 +280,18 @@
 		<!-- end article -->
 		<article class="masonry__brick entry format-video animate-this">
 			<div class="entry__thumb video-image">
-				<a
-					href="https://player.vimeo.com/video/117310401?color=339989&title=0&byline=0&portrait=0"
-					data-lity
-					class="entry__thumb-link"
-				>
-					<img
-						src="images/thumbs/masonry/cookies-600.jpg"
-						srcset="
+				<a href="https://player.vimeo.com/video/117310401?color=339989&title=0&byline=0&portrait=0" data-lity
+					class="entry__thumb-link">
+					<img src="images/thumbs/masonry/cookies-600.jpg" srcset="
 							images/thumbs/masonry/cookies-600.jpg  1x,
 							images/thumbs/masonry/cookies-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-video.html"
-							>No Sugar Oatmeal Cookies.</a
-						>
+						<a href="single-video.html">No Sugar Oatmeal Cookies.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -369,22 +317,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/lamp-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/lamp-600.jpg" srcset="
 							images/thumbs/masonry/lamp-600.jpg  1x,
 							images/thumbs/masonry/lamp-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>Another Standard Format Post.</a
-						>
+						<a href="single-standard.html">Another Standard Format Post.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -415,11 +357,7 @@
 						at $2.59/mo!
 					</h2>
 					<cite>
-						<a
-							target="_blank"
-							href="https://www.dreamhost.com/r.cgi?287326"
-							>https://www.dreamhost.com</a
-						>
+						<a target="_blank" href="https://www.dreamhost.com/r.cgi?287326">https://www.dreamhost.com</a>
 					</cite>
 				</div>
 			</div>
@@ -429,43 +367,29 @@
 			<div class="entry__thumb slider">
 				<div class="slider__slides">
 					<div class="slider__slide">
-						<img
-							src="images/thumbs/masonry/gallery/slide-1-600.jpg"
-							srcset="
+						<img src="images/thumbs/masonry/gallery/slide-1-600.jpg" srcset="
 								images/thumbs/masonry/gallery/slide-1-600.jpg  1x,
 								images/thumbs/masonry/gallery/slide-1-1200.jpg 2x
-							"
-							alt=""
-						/>
+							" alt="" />
 					</div>
 					<div class="slider__slide">
-						<img
-							src="images/thumbs/masonry/gallery/slide-2-600.jpg"
-							srcset="
+						<img src="images/thumbs/masonry/gallery/slide-2-600.jpg" srcset="
 								images/thumbs/masonry/gallery/slide-2-600.jpg  1x,
 								images/thumbs/masonry/gallery/slide-2-1200.jpg 2x
-							"
-							alt=""
-						/>
+							" alt="" />
 					</div>
 					<div class="slider__slide">
-						<img
-							src="images/thumbs/masonry/gallery/slide-3-600.jpg"
-							srcset="
+						<img src="images/thumbs/masonry/gallery/slide-3-600.jpg" srcset="
 								images/thumbs/masonry/gallery/slide-3-600.jpg  1x,
 								images/thumbs/masonry/gallery/slide-3-1200.jpg 2x
-							"
-							alt=""
-						/>
+							" alt="" />
 					</div>
 				</div>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-gallery.html"
-							>The Best Tropical Leaves Images.</a
-						>
+						<a href="single-gallery.html">The Best Tropical Leaves Images.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -490,22 +414,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/walk-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/walk-600.jpg" srcset="
 							images/thumbs/masonry/walk-600.jpg  1x,
 							images/thumbs/masonry/walk-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>Using Repetition and Patterns in Photography.</a
-						>
+						<a href="single-standard.html">Using Repetition and Patterns in Photography.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
@@ -530,22 +448,16 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="single-standard.html" class="entry__thumb-link">
-					<img
-						src="images/thumbs/masonry/real-600.jpg"
-						srcset="
+					<img src="images/thumbs/masonry/real-600.jpg" srcset="
 							images/thumbs/masonry/real-600.jpg  1x,
 							images/thumbs/masonry/real-1200.jpg 2x
-						"
-						alt=""
-					/>
+						" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="single-standard.html"
-							>How We Live Is What Makes Us Real.</a
-						>
+						<a href="single-standard.html">How We Live Is What Makes Us Real.</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">

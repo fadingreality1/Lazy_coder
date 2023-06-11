@@ -2,13 +2,17 @@
 
 <li class="depth-1 comment">
     <div class="comment__avatar">
-        <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50" style="margin-top:0;">
+        <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50"
+            style="margin-top:0;">
     </div>
 
     <div class="comment__content">
 
         <div class="comment__info">
-            <div class="comment__author" style="line-height: 1.2em;">{{comment.user.first_name|title}} {{comment.user.last_name|title}}<br><p style="font-size: 0.7em; margin-bottom:0; color:#7e7e7e">@{{comment.user.username}}</p></div>
+            <div class="comment__author" style="line-height: 1.2em;">{{comment.user.first_name|title}}
+                {{comment.user.last_name|title}}<br>
+                <p style="font-size: 0.7em; margin-bottom:0; color:#7e7e7e">@{{comment.user.username}}</p>
+            </div>
 
             <div class="comment__meta">
                 <div class="comment__time">{{comment.date_posted|date:"F j, Y"}}</div>
@@ -20,7 +24,7 @@
                 {{comment.content}}
             </p>
         </div>
-        {% comment %}! I know below code is shit but it is what it is  {% endcomment %}
+        {% comment %}! I know below code is shit but it is what it is {% endcomment %}
         {% comment %} ! passing argument with include tag {% endcomment %}
         {% include "blog/comment/style.html" with id=comment.id %}
         {% include "blog/comment/reply_form.html" with id=comment.id %}

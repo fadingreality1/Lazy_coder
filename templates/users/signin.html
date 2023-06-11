@@ -8,16 +8,17 @@
 		<form name="signinForm" id="signinForm" method="post" action="" autocomplete="off">
 			{% csrf_token %}
 			<fieldset>
-                {% comment %} ! crack head problem to show errors bitch {% endcomment %}
-				{{form.non_field_errors}} 
-                {{form.password.errors}}
+				{% comment %} ! crack head problem to show errors bitch {% endcomment %}
+				{{form.non_field_errors}}
+				{{form.password.errors}}
 				{% for field in form %}
-                    <div class="form-field">
-                        <strong>{{field.label}} :</strong> 
-                        {{field}}
-                    </div>
+				<div class="form-field">
+					<strong>{{field.label}} :</strong>
+					{{field}}
+				</div>
 				{% endfor %}
-				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Signin" type="submit">
+				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Signin"
+					type="submit">
 			</fieldset>
 		</form> <!-- end form -->
 	</section>

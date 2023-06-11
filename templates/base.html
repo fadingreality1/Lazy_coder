@@ -1,105 +1,90 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-	<head>
-		<!--- basic page needs
-    ================================================== -->
-		<meta charset="utf-8" />
-		<title>Lazy Coder</title>
 
-		<!-- mobile specific metas
+<head>
+	<!--- basic page needs
     ================================================== -->
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="utf-8" />
+	<title>Lazy Coder</title>
 
-		<!-- CSS
+	<!-- mobile specific metas
     ================================================== -->
-		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
-		<link rel="stylesheet" href="{% static 'css/vendor.css' %}" />
-		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<!-- script
+	<!-- CSS
     ================================================== -->
-		<script src="{% static 'js/modernizr.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/vendor.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
 
-		<!-- favicons
+	<!-- script
     ================================================== -->
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="favicon-16x16.png"
-		/>
-		<link rel="manifest" href="site.webmanifest" />
-		<style>
-			.bg1{
-				background-size: cover;
-				background-position: center;
-				background-image : url({% static 'images/main.gif' url %});
-				padding : 5rem;
-				margin-bottom: 5rem;
-				background-repeat:no-repeat;
-			}
-		</style>
-	</head>
+	<script src="{% static 'js/modernizr.js' %}"></script>
 
-	<body>
-		<!-- preloader
+	<!-- favicons
     ================================================== -->
-		<div id="preloader">
-			<div id="loader" class="dots-fade">
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+	<link rel="manifest" href="site.webmanifest" />
+	<style>
+		.bg1 {
+			background-size: cover;
+			background-position: center;
+			background-image : url({% static 'images/main.gif' url %});
+			padding: 5rem;
+			margin-bottom: 5rem;
+			background-repeat: no-repeat;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- preloader
+    ================================================== -->
+	<div id="preloader">
+		<div id="loader" class="dots-fade">
+			<div></div>
+			<div></div>
+			<div></div>
 		</div>
-
-		<div id="top" class="s-wrap site-wrapper">
-			<!-- site header
-        ================================================== -->
-        
-        {% include "header.html" %}
-        
-        <!-- Content section
-    ================================================== -->
-	<div class="s-content content">
-		{% if messages %}
-			{% for message in messages %}
-				<div class="alert-box alert-box--{{message.tags}} hideit st1">
-					<p>{{message}}</p>
-					<i
-						class="fa fa-times alert-box__close"
-						aria-hidden="true"
-					></i>
-				</div>
-			{% endfor %}
-		{% endif %}
-        {% block middle_section %}
-		
-        {% endblock middle_section %}
 	</div>
-			<!-- end s-content -->
 
-			<!-- footer
+	<div id="top" class="s-wrap site-wrapper">
+		<!-- site header
         ================================================== -->
-			{% include "footer.html" %}
-		</div>
-		<!-- end s-wrap -->
 
-		<!-- Java Script
+		{% include "header.html" %}
+
+		<!-- Content section
     ================================================== -->
-		<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-		<script src="{% static 'js/plugins.js' %}"></script>
-		<script src="{% static 'js/main.js' %}"></script>
-	</body>
+		<div class="s-content content">
+			{% if messages %}
+				{% for message in messages %}
+					<div class="alert-box alert-box--{{message.tags}} hideit st1">
+						<p>{{message}}</p>
+						<i class="fa fa-times alert-box__close" aria-hidden="true"></i>
+					</div>
+				{% endfor %}
+			{% endif %}
+			{% block middle_section %}
+
+			{% endblock middle_section %}
+		</div>
+		<!-- end s-content -->
+
+		<!-- footer
+        ================================================== -->
+		{% include "footer.html" %}
+	</div>
+	<!-- end s-wrap -->
+
+	<!-- Java Script
+    ================================================== -->
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'js/plugins.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+
 </html>

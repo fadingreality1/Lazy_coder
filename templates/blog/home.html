@@ -5,20 +5,22 @@
 {% if s %}
 
 <div class="container">
-    {% comment %} <h1>Search result for "{{s}}":</h1> {% endcomment %}
+	{% comment %} <h1>Search result for "{{s}}":</h1> {% endcomment %}
 	{% if posts.count%}
-		<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Search results for "<strong>{{s|truncatechars:20}}</strong>" ({{posts.count}}) :</h3>
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Search results for
+		"<strong>{{s|truncatechars:20}}</strong>" ({{posts.count}}) :</h3>
 	{% else %}
-		<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No search found results for  "<strong>{{s|truncatechars:20}}</strong>".</h3>
-		<p class="adjustments">
-			<h4 class="adjustments">Some suggestions to help you:</h4>
-			<ul class="adjustments">
-				<li>Make sure that all words are spelled correctly.</li>
-				<li>Try different keywords.</li>
-				<li>Try more general keywords.</li>
-				<li>Try fewer keywords.</li>
-			</ul>
-		</p>
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No search found results for
+		"<strong>{{s|truncatechars:20}}</strong>".</h3>
+	<p class="adjustments">
+	<h4 class="adjustments">Some suggestions to help you:</h4>
+	<ul class="adjustments">
+		<li>Make sure that all words are spelled correctly.</li>
+		<li>Try different keywords.</li>
+		<li>Try more general keywords.</li>
+		<li>Try fewer keywords.</li>
+	</ul>
+	</p>
 	{% endif %}
 </div>
 
@@ -32,19 +34,13 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="{% url 'post_detail' post.slug %}" class="entry__thumb-link">
-					<img
-						src="{{post.image.url}}"
-						srcset="{{post.image.url}} 1x, {{post.image.url}} 2x"
-						alt=""
-					/>
+					<img src="{{post.image.url}}" srcset="{{post.image.url}} 1x, {{post.image.url}} 2x" alt="" />
 				</a>
 			</div>
 			<div class="entry__text">
 				<div class="entry__header">
 					<h2 class="entry__title">
-						<a href="{% url 'post_detail' post.slug %}"
-							>{{post.title}}</a
-						>
+						<a href="{% url 'post_detail' post.slug %}">{{post.title}}</a>
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
