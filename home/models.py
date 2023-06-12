@@ -18,4 +18,11 @@ class Contact(models.Model):
     def __str__(self) -> str:
         return f'{self.name}---{self.email}'
 
-    
+
+# ! To get Total no of unique viewer on our site
+class VUser(models.Model):
+    ip = models.CharField(max_length=100, null=True, default=None)
+    date_arrived_first = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.ip

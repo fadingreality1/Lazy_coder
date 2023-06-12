@@ -33,4 +33,4 @@ class Profile(models.Model):
             img.save(self.image.path)
             
 
-# TODO : There might be some bug in prifle icture saving and deleting previous one, check it out
+# TODO : There might be some bug in prifle picture saving and deleting previous one, check it out
