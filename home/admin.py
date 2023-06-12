@@ -6,7 +6,7 @@ class contactAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'date','message']
     
 class VUserAdmin(admin.ModelAdmin):
-    list_display = ['ip', 'date_arrived_first']
+    list_display = ['ip', 'arrived_first', 'last_seen']
 
 admin.site.register(Contact, contactAdmin)
 admin.site.register(VUser, VUserAdmin)

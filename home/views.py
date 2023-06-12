@@ -4,6 +4,19 @@ from django.contrib import messages
 from blog.models import Post
 from django.db.models import Q
 from .models import VUser
+from django.utils import timezone
+
+
+# ! to capture ip address of viewer
+def get_ip(req):
+    x_forwarded_for = req.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = req.META.get('REMOTE_ADDR')
+    return ip
+
+
 
 # ! implemented multithreading to make response faster
 from . import thread
@@ -15,6 +28,11 @@ def home(req):
     ip = get_ip(req)
     if not VUser.objects.filter(ip = ip).exists():
         VUser(ip = ip).save()
+    else:
+        o_user = VUser.objects.get(ip = ip)
+        o_user.last_seen = timezone.now()
+        o_user.save()
+        
     # return HttpResponse("this is home")
     return render(req, "home/home.html")
 
@@ -58,12 +76,3 @@ def search(req):
         posts = Post.objects.filter(Q(title__icontains = q) | Q(description__icontains = q) | Q(content__icontains = q) | Q(author__first_name__icontains = q)).order_by('-date_posted')
     return render(req, "blog/home.html", {'s':q, 'posts':posts})
     
-    
-# ! to capture ip address of viewer
-def get_ip(req):
-    x_forwarded_for = req.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[-1].strip()
-    else:
-        ip = req.META.get('REMOTE_ADDR')
-    return ip

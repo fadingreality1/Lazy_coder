@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
+from home.models import VUser
 
 # TODO : Likes and views to be added in to model along with comments
 
@@ -15,24 +16,18 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(default='blog/default.jpg', upload_to='blog')
     slug = AutoSlugField(populate_from = 'title', unique=True, null=True, default=None, always_update = True,)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
+    # viewers = models.ManyToManyField(VUser, related_name="viewers",default=None, null=True)
+    likers = models.ManyToManyField(User, related_name='liked', blank=True)
+    dislikers = models.ManyToManyField(User, related_name='disliked', blank=True)
 
-    
     def __str__(self):
         return f'{self.title } by {self.author}'
     
-    # def get_absolute_url(self):
-    #     return reverse("post_detail", kwargs={"pk": self.pk})
-    # ! was used with posts details view
     
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
     content = models.TextField()
     # ! parent comment
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='replies')
