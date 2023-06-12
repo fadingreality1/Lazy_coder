@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Post, Comment
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -14,6 +14,8 @@ def home(req):
 def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
+        post.views = F('views') + 1
+        post.save()
         comments = Comment.objects.filter(Q(post = post) & Q(parent = None)).order_by('-date_posted')
     except:
         messages.error(req, f"No such page exists for '{slug.replace('-', ' ')}'.")
@@ -48,3 +50,5 @@ def postComment(req, slug):
         return redirect('post_detail', slug = slug)
 
     return redirect('home')
+# TODO : add like and disike buttons to comments as well as post
+# TODO : add delete button for comments for author of comment and author of post

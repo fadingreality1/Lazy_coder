@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a1da18cab1f2deb434158b9107762280b8b9f833ba4de92dd2526a1a8988ad6e"
+            "sha256": "31abe2177316720703b7fe8e4d30c3b26e23ffbe401ac77ad7f055c7939fa4a7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,22 @@
             ],
             "index": "pypi",
             "version": "==1.9.9"
+        },
+        "django-ckeditor": {
+            "hashes": [
+                "sha256:1321f24df392f30698513930ce5c9f6d899f9bd0ef734c3b64fe936d809e11b3",
+                "sha256:57cd8fb7cd150adca354cd4e5c35a743fadaab7073f957d2b7167f0d9fe1fcaf"
+            ],
+            "index": "pypi",
+            "version": "==6.5.1"
+        },
+        "django-js-asset": {
+            "hashes": [
+                "sha256:86f9f300d682537ddaf0487dc2ab356581b8f50c069bdba91d334a46e449f923",
+                "sha256:adc1ee1efa853fad42054b540c02205344bb406c9bddf87c9e5377a41b7db90f"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.0.0"
         },
         "django-phone-field": {
             "hashes": [

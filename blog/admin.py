@@ -3,7 +3,7 @@ from .models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date_posted','slug','id',)
+    list_display = ('title', 'author', 'date_posted','slug','views',)
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('user', 'get_post_title' ,'date_posted', 'content', 'parent','id',)
