@@ -1,23 +1,15 @@
 {% load static %}
 
 <div class="large-full">
-
     <div id="comments" class="column large-12">
-
         <h3 class="h3">{{comments.count}} Comments.</h3>
-
         <!-- START commentlist -->
         <ol class="commentlist">
-
             {% for comment in comments %}
-                {% include "blog/comment/comments.html" with comment=comment %}
+                {% include "blog/comment/comment.html" with comment=comment %}
             {% endfor %}
-
-        </ol>
-        <!-- END commentlist -->
-
+        </ol> <!-- END commentlist -->
     </div> <!-- end comments -->
-
 </div> <!-- end comments-wrap -->
 
 {% comment %} TODO : Delete below code before pushing {% endcomment %}

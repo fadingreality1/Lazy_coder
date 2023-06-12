@@ -14,7 +14,7 @@ def home(req):
 def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
-        comments = Comment.objects.filter(post = post).order_by('-date_posted')
+        comments = Comment.objects.filter(Q(post = post) & Q(parent = None)).order_by('-date_posted')
     except:
         messages.error(req, f"No such page exists for '{slug.replace('-', ' ')}'.")
         return redirect("home")

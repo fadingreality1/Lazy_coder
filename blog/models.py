@@ -28,10 +28,10 @@ class Comment(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     content = models.TextField()
     # ! parent comment
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='replies')
 
     def __str__(self):
-        return f'{self.content[:200] } :: {self.user}'
+        return f'{self.content[:200] } :: {self.parent}'
 
     
 

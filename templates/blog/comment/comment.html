@@ -1,6 +1,7 @@
 {% load static %}
-
-<li class="depth-1 comment">
+{% comment %} ! this is level 0 comment template {% endcomment %}
+{% comment %} <ul class="children"> {% endcomment %}
+<li class="comment">
     <div class="comment__avatar">
         <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50"
             style="margin-top:0;">
@@ -26,7 +27,16 @@
         </div>
         {% comment %}! I know below code is shit but it is what it is {% endcomment %}
         {% comment %} ! passing argument with include tag {% endcomment %}
+
         {% include "blog/comment/style.html" with id=comment.id %}
         {% include "blog/comment/reply_form.html" with id=comment.id %}
+
     </div>
+    {% comment %} ! ISke neeche aega reply {% endcomment %}
+    {% comment %} ! recursively comments ko call krne ka jugaad bna le bhai {% endcomment %}
+    {% comment %} {% if comment.replies.all.exist %} {% endcomment %}
+        {% comment %} <h1>{{comment.replies.all}}</h1> {% endcomment %}
+        {% include "blog/comment/reply.html" with parent=comment %}
+    {% comment %} {% endif %} {% endcomment %}
 </li> <!-- end comment level 1 -->
+{% comment %} </ul> {% endcomment %}

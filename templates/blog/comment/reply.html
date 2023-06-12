@@ -1,0 +1,45 @@
+{% load static %}
+{% for comment in parent.replies.all %}
+<ul class="children">
+    <li class="comment">
+        <div class="comment__avatar">
+            <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50"
+                style="margin-top:0;">
+        </div>
+    
+        <div class="comment__content">
+    
+            <div class="comment__info">
+                <div class="comment__author" style="line-height: 1.2em;">{{comment.user.first_name|title}}
+                    {{comment.user.last_name|title}}<br>
+                    <p style="font-size: 0.7em; margin-bottom:0; color:#7e7e7e">@{{comment.user.username}}</p>
+                </div>
+    
+                <div class="comment__meta">
+                    <div class="comment__time">{{comment.date_posted|date:"F j, Y"}}</div>
+                </div>
+            </div>
+    
+            <div class="comment__text">
+                <p style="margin-bottom:16px">
+                    @{{comment.parent.user.username}} {{comment.content}}
+                </p>
+            </div>
+            {% comment %}! I know below code is shit but it is what it is {% endcomment %}
+            {% comment %} ! passing argument with include tag {% endcomment %}
+    
+            {% include "blog/comment/style.html" with id=comment.id %}
+            {% include "blog/comment/reply_form.html" with id=comment.id %}
+    
+        </div>
+        {% comment %} ! ISke neeche aega reply {% endcomment %}
+        {% comment %} ! recursively comments ko call krne ka jugaad bna le bhai {% endcomment %}
+        {% comment %} {% if comment.replies.all.exist %} {% endcomment %}
+        
+            {% include "blog/comment/reply.html" with parent=comment %}
+
+        {% comment %} {% endif %} {% endcomment %}
+    </li> <!-- end comment level 1 -->
+</ul>
+{% endfor %}
+{% comment %} ! list item k just upr recursive call starts {% endcomment %}
