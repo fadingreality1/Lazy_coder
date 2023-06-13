@@ -20,15 +20,22 @@ def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
         ip = get_ip(req)
-        if VUser.objects.filter(ip = ip).exists():
-            ouser = VUser.objects.get(ip = ip)
-            post.viewers.add(ouser)
-            post.save()
-        else:
-            nuser = VUser(ip = ip)
-            nuser.save()
-            post.viewers.add(nuser)
-            post.save()
+        
+        # if VUser.objects.filter(ip = ip).exists():
+        #     ouser = VUser.objects.get(ip = ip)
+        #     post.viewers.add(ouser)
+        #     post.save()
+        # else:
+        #     nuser = VUser(ip = ip)
+        #     nuser.save()
+        #     post.viewers.add(nuser)
+        #     post.save()
+        # ! better method to get the user and if it doesn't exists, create it.
+        
+        # ? get_or_create() returns a tuple, one object and one is flag whether object created or already existed in the DB.
+        viewer, _ = VUser.objects.get_or_create(ip = ip)
+        post.viewers.add(viewer)
+        post.save()
             
         # !comments handling
         comments = Comment.objects.filter(Q(post = post) & Q(parent = None)).order_by('-date_posted')

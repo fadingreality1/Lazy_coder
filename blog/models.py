@@ -36,6 +36,7 @@ class Comment(models.Model):
     def __str__(self):
         return f'{self.content[:200] } :: {self.parent}'
 
+
     
 
 
