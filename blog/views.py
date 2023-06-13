@@ -1,11 +1,11 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Post, Comment
 from django.contrib import messages
 from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
 from home.views import get_ip
 from home.models import VUser
-from django.urls import reverse
+from django.core.paginator import Paginator
 # Create your views here.
 
 # TODO : add viewer incremet function before every route so that every ip is captured
@@ -14,7 +14,10 @@ from django.urls import reverse
 
 def home(req):
     posts = Post.objects.all().order_by('-date_posted')
-    return render(req, "blog/home.html", {'posts':posts})
+    p = Paginator(posts, 1)
+    page_number = req.GET.get('page')
+    data_showing = p.get_page(page_number)
+    return render(req, "blog/home.html", {'posts':data_showing,})
 
 def post(req, slug):
     try:

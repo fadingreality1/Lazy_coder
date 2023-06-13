@@ -26,7 +26,9 @@
 
 {% endif %}
 
-{% if posts.count %}
+{% comment %} ! to handle whether page paginated or is a search result {% endcomment %}
+
+{% if posts.paginator.count or posts.count %}
 <div class="masonry-wrap">
 	<div class="masonry">
 		<div class="grid-sizer"></div>
@@ -66,23 +68,41 @@
 	</div>
 	<!-- end masonry -->
 </div>
-<div class="row">
-	<div class="column large-full">
-		<nav class="pgn">
-			<ul>
-				<li><a class="pgn__prev" href="#0">Prev</a></li>
-				<li><a class="pgn__num" href="#0">1</a></li>
-				<li><span class="pgn__num current">2</span></li>
-				<li><a class="pgn__num" href="#0">3</a></li>
-				<li><a class="pgn__num" href="#0">4</a></li>
-				<li><a class="pgn__num" href="#0">5</a></li>
-				<li><span class="pgn__num dots">…</span></li>
-				<li><a class="pgn__num" href="#0">8</a></li>
-				<li><a class="pgn__next" href="#0">Next</a></li>
-			</ul>
-		</nav>
+
+
+{% if posts.paginator.count %}
+
+	<div class="row">
+		<div class="column large-full">
+			<nav class="pgn">
+				<ul>
+					{% if posts.has_previous %}
+					<li><a class="pgn__prev" href="?page={{posts.previous_page_number}}" title="Previous page">Prev</a></li>
+					{% endif %}
+					{% if posts.number|add:'-4' > 0 %}
+						<li><span><a class="pgn__num dots" href="?page=1">First</a></span></li>
+						<li><span class="pgn__num dots">…</span></li>
+					{% endif %}
+					{% for num in posts.paginator.page_range %}
+						{% if posts.number == num %}
+							<li><span class="pgn__num current">{{num}}</span></li>
+						{% elif num > posts.number|add:'-4' and num < posts.number|add:'4' %}
+							<li><a href="?page={{num}}" class="pgn__num">{{num}}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if posts.number|add:'4' <= posts.paginator.num_pages %}
+						<li><span class="pgn__num dots">…</span></li>
+						<li><span><a class="pgn__num dots" href="?page={{posts.paginator.num_pages}}">Last</a></span></li>
+					{% endif %}
+					{% if posts.has_next %}
+						<li><a class="pgn__next" href="?page={{posts.next_page_number}}" title="Next page">Next</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
 	</div>
-</div>
+
+{% endif %}
 
 {% endif %}
 
