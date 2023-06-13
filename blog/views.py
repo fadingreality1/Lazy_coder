@@ -16,8 +16,6 @@ def home(req):
     posts = Post.objects.all().order_by('-date_posted')
     return render(req, "blog/home.html", {'posts':posts})
 
-# TODO : viewers count is fucking me up
-
 def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
@@ -37,12 +35,6 @@ def post(req, slug):
     except:
         messages.error(req, f"No such page exists for '{slug.replace('-', ' ')}'.")
         return redirect("home")
-    # viewer = VUser(ip = ip)
-    # # viewer.save()
-    # post = Post.objects.get(slug = slug)
-    # post.save()
-    # post.viewers.add(viewer)
-   
     return render(req, "blog/post.html", {'post':post, 'comments': comments})
 
 def createPost(req):

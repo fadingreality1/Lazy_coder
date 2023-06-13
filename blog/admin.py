@@ -3,8 +3,7 @@ from .models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date_posted','slug','get_likes','get_dislikes','get_views',)
-    # list_display = ('title', 'author', 'date_posted','slug','get_views',)
+    list_display = ('title', 'author', 'date_posted', 'get_likes','get_dislikes','get_views',)
     
     def get_likes(self, obj):
         # ! converting to count to show at admin panel
