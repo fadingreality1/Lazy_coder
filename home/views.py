@@ -5,7 +5,7 @@ from blog.models import Post
 from django.db.models import Q
 from .models import VUser
 from django.utils import timezone
-
+from django.db.models import Count #? To add order by count facility which will help in trending as well as popular
 
 # ! to capture ip address of viewer
 def get_ip(req):
@@ -34,8 +34,10 @@ def home(req):
         o_user.last_seen = timezone.now()
         o_user.save()
         
-    # return HttpResponse("this is home")
-    return render(req, "home/home.html")
+    
+    # TODO : Apply pagination here too
+    posts = Post.objects.annotate(count = Count('viewers')).order_by('-count')[:10]
+    return render(req, "home/home.html", {'posts':posts})
 
 
 def contact(req):
