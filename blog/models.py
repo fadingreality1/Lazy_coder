@@ -16,7 +16,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(default='blog/default.jpg', upload_to='blog')
     slug = AutoSlugField(populate_from = 'title', unique=True, null=True, default=None, always_update = True,)
-    # viewers = models.ManyToManyField(VUser, related_name="viewers",default=None, null=True)
+    # ! likes, dislikes, views
+    viewers = models.ManyToManyField(VUser, related_name="viewers", blank=True)
     likers = models.ManyToManyField(User, related_name='liked', blank=True)
     dislikers = models.ManyToManyField(User, related_name='disliked', blank=True)
 

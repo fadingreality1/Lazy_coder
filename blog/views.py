@@ -22,9 +22,15 @@ def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
         ip = get_ip(req)
-        # Capturing any new viewer
-        if not VUser.objects.filter(ip = ip).exists():
-            VUser(ip = ip).save()
+        if VUser.objects.filter(ip = ip).exists():
+            ouser = VUser.objects.get(ip = ip)
+            post.viewers.add(ouser)
+            post.save()
+        else:
+            nuser = VUser(ip = ip)
+            nuser.save()
+            post.viewers.add(nuser)
+            post.save()
             
         # !comments handling
         comments = Comment.objects.filter(Q(post = post) & Q(parent = None)).order_by('-date_posted')

@@ -3,7 +3,7 @@ from .models import Post, Comment
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date_posted','slug','get_likes','get_dislikes')
+    list_display = ('title', 'author', 'date_posted','slug','get_likes','get_dislikes','get_views',)
     # list_display = ('title', 'author', 'date_posted','slug','get_views',)
     
     def get_likes(self, obj):
@@ -17,15 +17,15 @@ class PostAdmin(admin.ModelAdmin):
         # ! converting to count to show at admin panel
         return obj.dislikers.count()
     
-    get_likes.short_description = "Disikes"
-    get_likes.admin_order_field = "dislikers"
+    get_dislikes.short_description = "Dislikes"
+    get_dislikes.admin_order_field = "dislikers"
     
-    # def get_views(self, obj):
-    #     # ! converting to count to show at admin panel
-    #     return obj.viewers.count()
+    def get_views(self, obj):
+        # ! converting to count to show at admin panel
+        return obj.viewers.count()
     
-    # get_views.short_description = "Views"
-    # get_views.admin_order_field = "viewers"
+    get_views.short_description = "Views"
+    get_views.admin_order_field = "viewers"
 
 
 class CommentAdmin(admin.ModelAdmin):

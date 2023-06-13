@@ -25,6 +25,7 @@ from . import thread
 # TODO: Redirect the user to login page if user is not authenticated after filling contact form
 
 def home(req):
+    # ! regiters new user to blog
     ip = get_ip(req)
     if not VUser.objects.filter(ip = ip).exists():
         VUser(ip = ip).save()
