@@ -7,6 +7,17 @@ from ckeditor.fields import RichTextField
 from home.models import VUser
 
 # TODO : Likes and views to be added in to model along with comments
+# ? Category Model
+
+class Category(models.Model):
+    title = models.CharField(max_length=200, blank=False, unique=True)
+
+    def __str__(self):
+        return self.title
+
+# ? To give defult value to categories
+def uncategorized():
+    return Category.objects.filter(title = 'Uncategorized')
 
 class Post(models.Model):
     title = models.CharField(max_length=100, null=True)
@@ -16,13 +27,15 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(default='blog/default.jpg', upload_to='blog')
     slug = AutoSlugField(populate_from = 'title', unique=True, null=True, default=None, always_update = True,)
-    # ! likes, dislikes, views
+    # ! likes, dislikes, views, category
     viewers = models.ManyToManyField(VUser, related_name="viewers", blank=True)
     likers = models.ManyToManyField(User, related_name='liked', blank=True)
     dislikers = models.ManyToManyField(User, related_name='disliked', blank=True)
+    categories = models.ManyToManyField(Category, related_name="category", default=uncategorized,blank=False)
 
     def __str__(self):
         return f'{self.title } by {self.author}'
+    
     
     
 class Comment(models.Model):
@@ -37,7 +50,6 @@ class Comment(models.Model):
         return f'{self.content[:200] } :: {self.parent}'
 
 
-    
 
 
     

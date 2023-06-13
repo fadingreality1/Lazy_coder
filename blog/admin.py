@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Category
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'date_posted', 'get_likes','get_dislikes','get_views',)
+    list_display = ('title', 'author','get_category', 'date_posted', 'get_likes','get_dislikes','get_views',)
     
     def get_likes(self, obj):
         # ! converting to count to show at admin panel
@@ -25,6 +25,17 @@ class PostAdmin(admin.ModelAdmin):
     
     get_views.short_description = "Views"
     get_views.admin_order_field = "viewers"
+    
+    def get_category(self, obj):
+        category = []
+        c =  obj.categories.all()
+        for i in c:
+            category += [i]
+            
+        return category
+    
+    get_category.short_description = "Categories"
+    
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -36,5 +47,13 @@ class CommentAdmin(admin.ModelAdmin):
     get_post_title.admin_order_field = "post__title"
     get_post_title.short_description = "Post Title"
 
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['title',]
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Category, CategoryAdmin)
+
+
