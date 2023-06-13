@@ -5,7 +5,7 @@
 <main class="row content__page">
 	<section class="column large-full entry format-standard">
 		<h3 class="h2" style="margin-top:0;">Create Account</h3>
-		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+		<form name="contactForm" id="contactForm" method="post" action="" autocomplete="off" enctype = "multipart/form-data">
 			{% csrf_token %}
 			<fieldset>
 				{% for field in form %}

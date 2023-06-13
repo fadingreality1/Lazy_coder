@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from home.views import get_ip
 from home.models import VUser
 from django.core.paginator import Paginator
+from .forms import PostCreateForm
 # Create your views here.
 
 # TODO : add viewer incremet function before every route so that every ip is captured
@@ -47,8 +48,21 @@ def post(req, slug):
         return redirect("home")
     return render(req, "blog/post.html", {'post':post, 'comments': comments})
 
+@login_required
 def createPost(req):
-    return HttpResponse("create post called")
+    if req.method == "POST":
+        form = PostCreateForm(req.POST)
+        if form.is_valid():
+            print("----------------------------------------------------------------")
+            post = form.save(commit=False)
+            post.author = req.user
+            post.save()
+            return redirect("post_detail", slug = post.slug)
+        else:
+            return render(req, "blog/create_post.html", {"form":form})
+            
+    form = PostCreateForm()
+    return render(req, "blog/create_post.html", {"form":form})
 
 
 # TODO : apply pagination to comments and main blog page

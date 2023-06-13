@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SigninForm
 from django.contrib.auth.decorators import login_required
@@ -53,7 +53,7 @@ def signup(req):
 
 
 @login_required(login_url='signin')
-def profile(req):
+def updateProfile(req):
     if req.method == "POST":
         old_image = ''
         
@@ -89,3 +89,7 @@ def deleteUser(req):
     User.objects.get(username = req.user).delete()
     return redirect('blog_home')
 
+
+@login_required
+def profile(req):
+    return HttpResponse("This is profile page")

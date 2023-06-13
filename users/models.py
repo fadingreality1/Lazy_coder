@@ -21,6 +21,8 @@ class Profile(models.Model):
     profile_description = models.CharField(max_length=400, blank=True,default="")
     gender = models.CharField(choices=gen_choice, null=False, default='M', max_length=1)
     
+    
+    
     def __str__(self):
         return f'{self.user.username} Profile'
     
