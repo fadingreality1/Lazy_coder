@@ -950,6 +950,19 @@ input[type="button"] {
   border: 0.2rem solid #d3d3d3;
 }
 
+.btn-success{
+  color:#019780;
+  border-color: #0d8674;
+  background-color: #f6f7f8;
+}
+
+.btn-danger{
+  color:#d71e10;
+  border-color: #c72115;
+  background-color: #f6f7f8;
+}
+
+
 .btn:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -966,6 +979,17 @@ input[type="button"]:focus {
   outline: 0;
 }
 
+.btn-success:hover{
+  color:white;
+  border-color: #0d8674;
+  background-color: #0d8674;
+}
+
+.btn-danger:hover{
+  color:white;
+  border-color: #c72115;
+  background-color: #c72115;
+}
 /* button primary
  * ------------------------------------------------- */
 .btn.btn--primary,

@@ -44,11 +44,11 @@
         <div style="display:flex;">
             <form action="{% url 'like_post' %}" method="POST" style = "margin-right:1em;">
                 {% csrf_token %}
-                <button type="submit" name='post_id' value="{{post.id}}" class="btn">Like ({{post.likers.count}})</button>
+                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-success" >Like ({{post.likers.count}})</button>
             </form>
             <form action="{% url 'dislike_post' %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" name='post_id' value="{{post.id}}" class="btn">Dislike ({{post.dislikers.count}})</button>
+                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-danger" >Dislike ({{post.dislikers.count}})</button>
             </form> 
         </div>
     </article>

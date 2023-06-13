@@ -16,6 +16,8 @@ def home(req):
     posts = Post.objects.all().order_by('-date_posted')
     return render(req, "blog/home.html", {'posts':posts})
 
+# TODO : viewers count is fucking me up
+
 def post(req, slug):
     try:
         post = Post.objects.get(slug = slug)
