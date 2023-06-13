@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
 from home.models import VUser
+from PIL import Image
+
 
 # TODO : Likes and views to be added in to model along with comments
 # ? Category Model
@@ -34,6 +36,12 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title } by {self.author}'
+    
+    def save(self ,*args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+       
+        img.save(self.image.path)
     
     
     
