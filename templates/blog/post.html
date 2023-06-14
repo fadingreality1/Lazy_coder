@@ -21,7 +21,7 @@
 
                     {% comment %} ! to access ManyToMany field via template {% endcomment %}
                     {% for cat in post.categories.all %}
-                        <a href="">{{cat.title}}</a>
+                        <a href="{% url 'category_post' category=cat.title %}">{{cat.title}}</a>
                     {% endfor %}
                 </li>
             </ul>
@@ -59,13 +59,16 @@
                     function isconfirmed(){
                         let v = window.confirm("Are you sure you want to delete your Post?")
                         if(v){
-                          let v = window.prompt("Enter your Username to complete deletion of Post.")
-                          if(v == '{{request.user.username}}'){
+                          let v2 = window.prompt("Enter your Username to complete deletion of Post.")
+                          if(v2 == '{{request.user.username}}'){
                             return true;
                           }
                           else{
                             return false;
                           }
+                        }
+                        else{
+                            return false;
                         }
                       }
                 </script>
