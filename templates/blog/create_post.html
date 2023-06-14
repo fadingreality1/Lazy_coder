@@ -12,10 +12,12 @@
 					<div class="form-field">
 						<strong>{{field.label}} :</strong>
 						{{field}}
+						{% if field == "select" %}
+						Hold the Ctrl key to select multiple options from the list box.
+						{% endif %}
 						{{field.errors}}
 					</div>
 				{% endfor %}
-				{% comment %} {{form}} {% endcomment %}
                 {{form.media}}
 				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width"
 					value="Create Account" type="submit" >

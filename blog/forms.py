@@ -24,15 +24,16 @@ class PostCreateForm(forms.ModelForm):
         )
     
     image = forms.ImageField(
-            label="Image for front view",
+            label="Image",
             required=True,
+            help_text="for front view"
         )
 
     content = RichTextFormField()
     
     # ! many to many field m aise hota h insertions
     category = forms.ModelMultipleChoiceField(
-        label = "Category (maximum 3):",
+        label = "Category (Hold the Ctrl key to select multiple options from the list box. Maximum 3 are allowed)",
         queryset = Category.objects.all().order_by('title'),
         widget = forms.SelectMultiple(attrs={"class":"full-width", "multiple":True, "style":"height:15em;", "size":"3",})
     )

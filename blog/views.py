@@ -57,11 +57,15 @@ def createPost(req):
             post = form.save(commit = False)
             post.author = req.user
             # ? saving the post first is req before we use "add" fucntion because it works on "id" and without saving, we won't have a "id".
+            
             post.save()
             # ? this is the method by which we can add many to many fields in our posts.
+            
             for i in choice_selected[:3]:
                 post.categories.add(Category.objects.get(id = i))
+                
             # ? add function automatically saves the Post object and we don't need to call save() method again
+            
             return redirect("post_detail", slug = post.slug)
         else:
             return render(req, "blog/create_post.html", {"form":form})
@@ -103,14 +107,14 @@ def like(req):
     disliked = Post.objects.filter(id = req.POST.get('post_id'), dislikers = req.user).exists()
     if liked:
         post.likers.remove(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
     else:
         post.likers.add(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
         
     if disliked:
         post.dislikers.remove(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
         
     return redirect('post_detail', slug = post.slug)
 
@@ -123,13 +127,16 @@ def dislike(req):
     disliked = Post.objects.filter(id = req.POST.get('post_id'), dislikers = req.user).exists()
     if disliked:
         post.dislikers.remove(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
     else:
         post.dislikers.add(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
     
     if liked:
         post.likers.remove(req.user)
-        post.save()
+        # ? We don't need to call save method again because add and remove method does it themselves.
         
     return redirect('post_detail', slug = post.slug)
+
+def category():
+    pass

@@ -18,7 +18,11 @@
                 </li>
                 <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
                 <li class="cat-links">
-                    <a href="#0">Marketing</a><a href="#0">Management</a>
+
+                    {% comment %} ! to access ManyToMany field via template {% endcomment %}
+                    {% for cat in post.categories.all %}
+                        <a href="">{{cat.title}}</a>
+                    {% endfor %}
                 </li>
             </ul>
         </div>

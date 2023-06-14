@@ -3,6 +3,7 @@
 {% block middle_section %}
 
 {% if s %}
+{% comment %} ! If searched {% endcomment %}
 
 <div class="container">
 	{% comment %} <h1>Search result for "{{s}}":</h1> {% endcomment %}
@@ -27,6 +28,7 @@
 {% endif %}
 
 {% comment %} ! to handle whether page paginated or is a search result {% endcomment %}
+{% comment %} TODO : I should paginate search result too right? {% endcomment %}
 
 {% if posts.paginator.count or posts.count %}
 <div class="masonry-wrap">
@@ -46,14 +48,15 @@
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
-							<a href="category.html">Design</a>
-							<a href="category.html">Photography</a>
+							{% for cat in post.categories.all %}
+								<a href="#">{{cat.title}}</a>
+							{% endfor %}
 						</span>
 						<span class="entry__meta-date">
 							<a href="#">{{post.date_posted|date:"F j, Y"}}</a>
 						</span>
 						<span class="entry__meta-cat">
-							<a href="#">{{post.author.first_name|title}} {{post.author.last_name|title}}</a>
+							<a href="#">BY {{post.author.first_name|title}} {{post.author.last_name|title}}</a>
 						</span>
 					</div>
 				</div>
@@ -62,9 +65,22 @@
 						{{post.description|truncatechars:120}}
 					</p>
 				</div>
+				<div class="entry__meta">
+					<span class="entry__meta-cat">
+						Views ({{post.viewers.count}})
+					</span>
+					<span class="entry__meta-cat">
+						Likes ({{post.likers.count}})
+					</span>
+					<span class="entry__meta-cat">
+						Dislikes ({{post.dislikers.count}})
+					</span>
+					
+				</div>
 			</div>
 		</article>
 		{% endfor %}
+		<!-- end article -->
 	</div>
 	<!-- end masonry -->
 </div>

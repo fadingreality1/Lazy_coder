@@ -20,6 +20,11 @@
 		</div>
 	</div>
 </div>
+
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Trending Blog Posts:</h3>
+</div>
+
 <div class="masonry-wrap">
 	<div class="masonry">
 		<div class="grid-sizer"></div>
@@ -37,14 +42,15 @@
 					</h2>
 					<div class="entry__meta">
 						<span class="entry__meta-cat">
-							<a href="category.html">Design</a>
-							<a href="category.html">Photography</a>
+							{% for cat in post.categories.all %}
+								<a href="#">{{cat.title}}</a>
+							{% endfor %}
 						</span>
 						<span class="entry__meta-date">
 							<a href="#">{{post.date_posted|date:"F j, Y"}}</a>
 						</span>
 						<span class="entry__meta-cat">
-							<a href="#">{{post.author.first_name|title}} {{post.author.last_name|title}}</a>
+							<a href="#">BY {{post.author.first_name|title}} {{post.author.last_name|title}}</a>
 						</span>
 					</div>
 				</div>
@@ -53,29 +59,24 @@
 						{{post.description|truncatechars:120}}
 					</p>
 				</div>
+				<div class="entry__meta">
+					<span class="entry__meta-cat">
+						Views ({{post.viewers.count}})
+					</span>
+					<span class="entry__meta-cat">
+						Likes ({{post.likers.count}})
+					</span>
+					<span class="entry__meta-cat">
+						Dislikes ({{post.dislikers.count}})
+					</span>
+					
+				</div>
 			</div>
 		</article>
 		{% endfor %}
 		<!-- end article -->
 	</div>
 	<!-- end masonry -->
-</div>
-<div class="row">
-	<div class="column large-full">
-		<nav class="pgn">
-			<ul>
-				<li><a class="pgn__prev" href="#0">Prev</a></li>
-				<li><a class="pgn__num" href="#0">1</a></li>
-				<li><span class="pgn__num current">2</span></li>
-				<li><a class="pgn__num" href="#0">3</a></li>
-				<li><a class="pgn__num" href="#0">4</a></li>
-				<li><a class="pgn__num" href="#0">5</a></li>
-				<li><span class="pgn__num dots">…</span></li>
-				<li><a class="pgn__num" href="#0">8</a></li>
-				<li><a class="pgn__next" href="#0">Next</a></li>
-			</ul>
-		</nav>
-	</div>
 </div>
 
 {% endblock middle_section %}

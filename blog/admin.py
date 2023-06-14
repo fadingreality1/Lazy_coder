@@ -26,11 +26,10 @@ class PostAdmin(admin.ModelAdmin):
     get_views.short_description = "Views"
     get_views.admin_order_field = "viewers"
     
+    # ! to access ManyToMany Related field
     def get_category(self, obj):
-        category = []
-        c =  obj.categories.all()
-        for i in c:
-            category += [i]
+        
+        category = [x for x in obj.categories.all()]
             
         return category
     
