@@ -35,14 +35,8 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, related_name="category", default=uncategorized,blank=False)
 
     def __str__(self):
-        return f'{self.title } by {self.author}'
-    
-    def save(self ,*args, **kwargs):
-        super(Post, self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-       
-        img.save(self.image.path)
-    
+        return f'{self.title}'
+
     
     
 class Comment(models.Model):

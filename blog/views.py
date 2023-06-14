@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from django.contrib import messages
 from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,7 @@ from .forms import PostCreateForm
 
 def home(req):
     posts = Post.objects.all().order_by('-date_posted')
-    p = Paginator(posts, 1)
+    p = Paginator(posts, 10)
     page_number = req.GET.get('page')
     data_showing = p.get_page(page_number)
     return render(req, "blog/home.html", {'posts':data_showing,})
@@ -48,21 +48,27 @@ def post(req, slug):
         return redirect("home")
     return render(req, "blog/post.html", {'post':post, 'comments': comments})
 
-@login_required
+@login_required(login_url='signin')
 def createPost(req):
     if req.method == "POST":
-        form = PostCreateForm(req.POST)
+        form = PostCreateForm(req.POST, req.FILES)
+        choice_selected = [int(x) for x in req.POST.getlist('category')]
         if form.is_valid():
-            print("----------------------------------------------------------------")
-            post = form.save(commit=False)
+            post = form.save(commit = False)
             post.author = req.user
+            # ? saving the post first is req before we use "add" fucntion because it works on "id" and without saving, we won't have a "id".
             post.save()
+            # ? this is the method by which we can add many to many fields in our posts.
+            for i in choice_selected[:3]:
+                post.categories.add(Category.objects.get(id = i))
+            # ? add function automatically saves the Post object and we don't need to call save() method again
             return redirect("post_detail", slug = post.slug)
         else:
             return render(req, "blog/create_post.html", {"form":form})
-            
+        
     form = PostCreateForm()
     return render(req, "blog/create_post.html", {"form":form})
+        
 
 
 # TODO : apply pagination to comments and main blog page

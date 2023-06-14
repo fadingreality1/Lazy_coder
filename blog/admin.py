@@ -49,7 +49,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title',]
+    list_display = ['title','id']
 
 
 admin.site.register(Post, PostAdmin)
