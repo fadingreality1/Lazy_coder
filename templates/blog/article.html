@@ -25,7 +25,7 @@
 							<a href="#">{{post.date_posted|date:"F j, Y"}}</a>
 						</span>
 						<span class="entry__meta-cat">
-							<a href="#">BY {{post.author.first_name|title}} {{post.author.last_name|title}}</a>
+							<a href="{% url 'user_post' username=post.author.username %}">BY {{post.author.first_name|title}} {{post.author.last_name|title}}</a>
 						</span>
 					</div>
 				</div>

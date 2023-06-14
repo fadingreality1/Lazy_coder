@@ -3,6 +3,7 @@ from .models import Post, Comment, Category
 from django.contrib import messages
 from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from home.views import get_ip
 from home.models import VUser
 from django.core.paginator import Paginator
@@ -149,7 +150,7 @@ def category(req, category):
         p = Paginator(all_posts, 10)
         page_number = req.GET.get('page')
         data_showing = p.get_page(page_number)
-        return render(req, "blog/category.html", {"posts": data_showing, "category": category,})
+        return render(req, "blog/category.html", {"posts": data_showing, "name": category,})
     except:
         messages.error(req, "No such category exists")
         return redirect("home")
@@ -235,4 +236,17 @@ def deleteComment(req, id, slug):
         return redirect("post_detail", slug = slug)
     except:
         messages.error(req, "Some internal error occured While deletion.")
+        return redirect("home")
+    
+
+def userPost(req, username):
+    try:
+        user = User.objects.get(username = username)
+        all_posts = Post.objects.filter(author = user).order_by("-date_posted")
+        p = Paginator(all_posts, 10)
+        page_number = req.GET.get('page')
+        data_showing = p.get_page(page_number)
+        return render(req, "blog/category.html", {'posts':data_showing, 'name':username})
+    except:
+        messages.error(req, "Some error ocuured while filtering posts by Authors, That author might not exists.")
         return redirect("home")
