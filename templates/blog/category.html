@@ -2,33 +2,16 @@
 {% load static %}
 {% block middle_section %}
 
-{% if s %}
-{% comment %} ! If searched {% endcomment %}
+
+{% if posts.count == 0 or posts.paginator.count == 0 %}
 
 <div class="container">
-	{% comment %} <h1>Search result for "{{s}}":</h1> {% endcomment %}
-	{% if posts.count%}
-	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Search results for
-		"<strong>{{s|truncatechars:20}}</strong>" ({{posts.count}}) :</h3>
-	{% else %}
-	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No search found results for
-		"<strong>{{s|truncatechars:20}}</strong>".</h3>
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists for
+		"<strong>{{category}}</strong>".</h3>
 	<p class="adjustments">
-	<h4 class="adjustments">Some suggestions to help you:</h4>
-	<ul class="adjustments">
-		<li>Make sure that all words are spelled correctly.</li>
-		<li>Try different keywords.</li>
-		<li>Try more general keywords.</li>
-		<li>Try fewer keywords.</li>
-	</ul>
-	</p>
-	{% endif %}
 </div>
 
 {% endif %}
-
-{% comment %} ! to handle whether page paginated or is a search result {% endcomment %}
-{% comment %} TODO : I should paginate search result too right? {% endcomment %}
 
 {% if posts.paginator.count or posts.count %}
 
@@ -67,6 +50,7 @@
 	</div>
 
 {% endif %}
+
 
 {% endif %}
 

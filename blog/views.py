@@ -43,7 +43,7 @@ def post(req, slug):
             
         # !comments handling
         comments = Comment.objects.filter(Q(post = post) & Q(parent = None)).order_by('-date_posted')
-    except:
+    except Exception as e:
         messages.error(req, f"No such page exists for '{slug.replace('-', ' ')}'.")
         return redirect("home")
     return render(req, "blog/post.html", {'post':post, 'comments': comments})
@@ -138,5 +138,16 @@ def dislike(req):
         
     return redirect('post_detail', slug = post.slug)
 
-def category():
-    pass
+def category(req, category):
+    # ! make some changes 
+    try:
+        cat = Category.objects.get(title = category)
+        cat_id = cat.id
+        all_posts = Post.objects.filter(categories = cat_id)
+        p = Paginator(all_posts, 10)
+        page_number = req.GET.get('page')
+        data_showing = p.get_page(page_number)
+        return render(req, "blog/category.html", {"posts": data_showing, "category": category,})
+    except Exception as e:
+        messages.error(req, "No such category exists")
+        return redirect("home")

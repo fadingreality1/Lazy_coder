@@ -37,7 +37,7 @@ def home(req):
     
     # TODO : Apply pagination here too
     # ? Accessing many to many field with annotate method 
-    posts = Post.objects.annotate(count = Count('viewers')).order_by('-count')[:11]
+    posts = Post.objects.annotate(count = Count('viewers')).order_by('-count')[:10]
     return render(req, "home/home.html", {'posts':posts})
 
 
