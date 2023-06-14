@@ -157,7 +157,7 @@ def category(req, category):
     
 @login_required(login_url="signin")
 def update(req, slug):
-    # try:
+    try:
         if req.method == "POST":
             prev_post = Post.objects.get(slug = slug)
             old_image = (f'{MEDIA_ROOT}'+ f'{prev_post.image.url}').replace("\\", "/").replace('media/media/', 'media/')
@@ -202,7 +202,7 @@ def update(req, slug):
         form = PostCreateForm(instance=post, initial={'category': prev_choices})
         return render(req, "blog/update_post.html", {'form': form, 'slug':post.slug})
 
-    # except:
+    except:
         messages.error(req, "No Such page exists")
         return redirect("home")
 
@@ -220,4 +220,19 @@ def delete(req):
         return redirect("home")
     except:
         messages.error(req, "Some error occured")
+        return redirect("home")
+    
+    
+@login_required(login_url="signin")
+def deleteComment(req, id, slug):
+    try:
+        comment = Comment.objects.get(id = id)
+        if comment.user == req.user or comment.post.author == req.user and comment.post.slug == slug:
+            comment.delete()
+            messages.success(req, "Comment removed successfully.")
+            return redirect("post_detail", slug = slug)
+        messages.warning(req, "Not your territory nigga.")
+        return redirect("post_detail", slug = slug)
+    except:
+        messages.error(req, "Some internal error occured While deletion.")
         return redirect("home")
