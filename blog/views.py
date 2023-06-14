@@ -7,6 +7,8 @@ from home.views import get_ip
 from home.models import VUser
 from django.core.paginator import Paginator
 from .forms import PostCreateForm
+import os
+from Lazy_coder.settings import MEDIA_ROOT, MEDIA_URL
 # Create your views here.
 
 # TODO : add viewer incremet function before every route so that every ip is captured
@@ -155,16 +157,17 @@ def category(req, category):
     
 @login_required(login_url="signin")
 def update(req, slug):
-    try:
+    # try:
         if req.method == "POST":
             prev_post = Post.objects.get(slug = slug)
-            
+            old_image = (f'{MEDIA_ROOT}'+ f'{prev_post.image.url}').replace("\\", "/").replace('media/media/', 'media/')
             # ! if someone tries to access other people's post
             if prev_post.author != req.user:
                 messages.warning(req, "Not your Post nigga.")
                 return redirect("home")
             
             form = PostCreateForm(req.POST, req.FILES, instance=prev_post)
+            
 
             if form.is_valid():
                 # ! Removing previously selected categories
@@ -180,8 +183,11 @@ def update(req, slug):
                 
                 for i in choice_selected[:3]:
                     Updated_post.categories.add(Category.objects.get(id = i))
+                
+                if os.path.exists(old_image) and req.POST.get('image') == None and old_image != f'{MEDIA_ROOT}'+'\\profile_pics\\default.png' :
+                    os.remove(old_image)
 
-
+                messages.success(req, "Post has been updated successfully.")
                 return redirect("post_detail", slug = Updated_post.slug)
             else:
                 return render(req, "blog/update_post.html", {'form':form, 'slug':prev_post.slug})
@@ -196,7 +202,7 @@ def update(req, slug):
         form = PostCreateForm(instance=post, initial={'category': prev_choices})
         return render(req, "blog/update_post.html", {'form': form, 'slug':post.slug})
 
-    except:
+    # except:
         messages.error(req, "No Such page exists")
         return redirect("home")
 
@@ -205,9 +211,11 @@ def update(req, slug):
 def delete(req):
     try:
         post = Post.objects.filter(id = req.POST.get("post_id")).first()
+        old_image = (f'{MEDIA_ROOT}'+ f'{post.image.url}').replace("\\", "/").replace('media/media/', 'media/')
         if post.author != req.user:
             return redirect("home")
         post.delete()
+        os.remove(old_image)
         messages.success(req, "Post Deleted Successfully.")
         return redirect("home")
     except:

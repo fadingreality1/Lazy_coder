@@ -5,7 +5,9 @@
 		<article class="masonry__brick entry format-standard animate-this">
 			<div class="entry__thumb">
 				<a href="{% url 'post_detail' post.slug %}" class="entry__thumb-link">
-					<img src="{{post.image.url}}" srcset="{{post.image.url}} 1x, {{post.image.url}} 2x" alt="" />
+					<img src="{{post.image.url}}" srcset="{{post.image.url}} 1x, {{post.image.url}} 2x" alt="" style="display: block;
+					margin-left: auto;
+					margin-right: auto;"/>
 				</a>
 			</div>
 			<div class="entry__text">
