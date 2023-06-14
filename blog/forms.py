@@ -33,8 +33,8 @@ class PostCreateForm(forms.ModelForm):
     
     # ! many to many field m aise hota h insertions
     category = forms.ModelMultipleChoiceField(
-        label = "Category (Hold the Ctrl key to select multiple options from the list box. Maximum 3 are allowed)",
-        queryset = Category.objects.all().order_by('title'),
+        label = "Category (Hold the Ctrl key to select multiple options from the list box. Maximum 3 are allowed, anymore, will be ignored)",
+        queryset = Category.objects.all(),
         widget = forms.SelectMultiple(attrs={"class":"full-width", "multiple":True, "style":"height:15em;", "size":"3",})
     )
 

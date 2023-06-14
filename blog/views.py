@@ -158,21 +158,41 @@ def update(req, slug):
     try:
         if req.method == "POST":
             prev_post = Post.objects.get(slug = slug)
+            
             # ! if someone tries to access other people's post
             if prev_post.author != req.user:
                 messages.warning(req, "Not your Post nigga.")
                 return redirect("home")
-            form = PostCreateForm(req.POST, instance=prev_post)
+            
+            form = PostCreateForm(req.POST, req.FILES, instance=prev_post)
+
             if form.is_valid():
-                p = form.save()
-                return redirect("post_detail", slug = p.slug)
+                # ! Removing previously selected categories
+                # prev_choices = prev_post.categories.all
+                # ! it is iterable but above line is not
+                
+                for i in prev_post.categories.all():
+                    prev_post.categories.remove(i)
+                
+                # ? Adding newly selected fields
+                Updated_post = form.save()
+                choice_selected = [int(x) for x in req.POST.getlist('category')]
+                
+                for i in choice_selected[:3]:
+                    Updated_post.categories.add(Category.objects.get(id = i))
+
+
+                return redirect("post_detail", slug = Updated_post.slug)
             else:
                 return render(req, "blog/update_post.html", {'form':form, 'slug':prev_post.slug})
+            
         post = Post.objects.get(slug = slug)
         if post.author != req.user:
             messages.warning(req, "Not your Post nigga.")
             return redirect("home")
-        prev_choices = post.categories.all
+        
+        prev_choices = post.categories.all()
+
         form = PostCreateForm(instance=post, initial={'category': prev_choices})
         return render(req, "blog/update_post.html", {'form': form, 'slug':post.slug})
 
