@@ -18,7 +18,7 @@ class PostCreateForm(forms.ModelForm):
 
     description = forms.CharField(
             label="Description",
-            max_length=100, 
+            max_length=250, 
             required=True,
             widget=forms.TextInput(attrs={"class": "full-width", "placeholder":"Description of Post", "multiple":"multiple"}),
         )

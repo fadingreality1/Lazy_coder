@@ -50,11 +50,34 @@
                 {% csrf_token %}
                 <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-success" >Like ({{post.likers.count}})</button>
             </form>
-            <form action="{% url 'dislike_post' %}" method="POST">
+            <form action="{% url 'dislike_post' %}" method="POST" style = "margin-right:1em;">
                 {% csrf_token %}
                 <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-danger" >Dislike ({{post.dislikers.count}})</button>
-            </form> 
+            </form>  
         </div>
+        {% if request.user == post.author %}
+            <div style="display:flex; maximum-width:100%;"> 
+                <a href="{% url 'update_post' post.slug %}" class="btn btn-success" style = "margin-right:1em;">Update Post</a>
+                <form onsubmit="return isconfirmed();" method="POST" style = "margin-right:1em; maximum-width:100%" id="delete_form" action="{% url 'delete_post' %}">
+                    {% csrf_token %}
+                    <button type="submit" name='post_id' id="delete_btn" value="{{post.id}}" class="btn btn-danger" >Delete Post</button>
+                </form>
+                <script>
+                    function isconfirmed(){
+                        let v = window.confirm("Are you sure you want to delete your Post?")
+                        if(v){
+                          let v = window.prompt("Enter your Username to complete deletion of Post.")
+                          if(v == '{{request.user.username}}'){
+                            return true;
+                          }
+                          else{
+                            return false;
+                          }
+                        }
+                      }
+                </script>
+            </div>
+           {% endif %}
     </article>
     <!-- end column large-full entry-->
 

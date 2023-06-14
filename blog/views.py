@@ -148,6 +148,48 @@ def category(req, category):
         page_number = req.GET.get('page')
         data_showing = p.get_page(page_number)
         return render(req, "blog/category.html", {"posts": data_showing, "category": category,})
-    except Exception as e:
+    except:
         messages.error(req, "No such category exists")
+        return redirect("home")
+    
+    
+@login_required(login_url="signin")
+def update(req, slug):
+    try:
+        if req.method == "POST":
+            prev_post = Post.objects.get(slug = slug)
+            # ! if someone tries to access other people's post
+            if prev_post.author != req.user:
+                messages.warning(req, "Not your Post nigga.")
+                return redirect("home")
+            form = PostCreateForm(req.POST, instance=prev_post)
+            if form.is_valid():
+                p = form.save()
+                return redirect("post_detail", slug = p.slug)
+            else:
+                return render(req, "blog/update_post.html", {'form':form, 'slug':prev_post.slug})
+        post = Post.objects.get(slug = slug)
+        if post.author != req.user:
+            messages.warning(req, "Not your Post nigga.")
+            return redirect("home")
+        prev_choices = post.categories.all
+        form = PostCreateForm(instance=post, initial={'category': prev_choices})
+        return render(req, "blog/update_post.html", {'form': form, 'slug':post.slug})
+
+    except:
+        messages.error(req, "No Such page exists")
+        return redirect("home")
+
+
+@login_required(login_url="signin")
+def delete(req):
+    try:
+        post = Post.objects.filter(id = req.POST.get("post_id")).first()
+        if post.author != req.user:
+            return redirect("home")
+        post.delete()
+        messages.success(req, "Post Deleted Successfully.")
+        return redirect("home")
+    except:
+        messages.error(req, "Some error occured")
         return redirect("home")
