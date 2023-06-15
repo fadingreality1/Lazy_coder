@@ -73,47 +73,47 @@ def updateProfile(req):
             
             messages.success(req, f"Account Updated successfully for {req.user.first_name}.")
             
-            return redirect('profile')
+            return redirect('profile', username=req.user.username)
     else:   
         u_form = UserUpdateForm(instance=req.user)
         p_form = ProfileUpdateForm(instance=req.user.profile)
     
-    return render(req, "users/profile.html",{'uform': u_form, 'pform':p_form})
+    return render(req, "users/update_profile.html",{'uform': u_form, 'pform':p_form})
 
 
 @login_required(login_url='signin')
 def deleteUser(req):
-    old = req.user.profile.image.path
-    if old != f'{MEDIA_ROOT}'+'\\profile_pics\\default.png':
-        os.remove(old)
-    
-    User.objects.get(username = req.user).delete()
-    return redirect('blog_home')
+    try:
+        old = req.user.profile.image.path
+        if old != f'{MEDIA_ROOT}'+'\\profile_pics\\default.png':
+            os.remove(old)
+        
+        User.objects.get(username = req.user).delete()
+        return redirect('home')
+    except:
+        messages.error(req, "Some error occurred while deleting profile.")
+        return redirect("home")
 
 
 @login_required
 def profile(req, username):
-    # try:
+    try:
         user = User.objects.get(username = username)
         all_posts = Post.objects.filter(author = user)
         likes = 0
         dislikes = 0
         views = 0
         category = []
-        posts = all_posts.annotate(count = Count('likers')).order_by('-count')[:6]
+        posts = all_posts.annotate(count = Count('likers')).order_by('-count')[:4]
         for p in all_posts:
             likes += p.likers.count()
             dislikes += p.dislikers.count()
             views += p.viewers.count()
             category += (p.categories.all())
-        
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        print(category)
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
+            
         views = max(views, likes+dislikes)
             
         return render(req, "users/profile.html", {'user':user, 'posts':posts,'count':all_posts.count, 'likes':likes, 'dislikes':dislikes, 'views': views, 'category': set(category),})
-    # except Exception as e:
+    except Exception as e:
         messages.error(req, "Some Error occurred. No Such User Exists.")
         return redirect("home")

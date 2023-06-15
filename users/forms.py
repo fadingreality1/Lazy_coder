@@ -44,13 +44,27 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+    
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'full-width'
 
 
 class ProfileUpdateForm(forms.ModelForm):
+    
+    fb = forms.URLField(label="Facebook", required=False)
+    insta = forms.URLField(label="Instagram", required=False)
+    snap = forms.URLField(label="snapchat", required=False)
+    
     class Meta:
         model = Profile
         widgets = {
             'date_of_birth': DateInput(),
         }
-        fields = ['image', 'phone_number', 'date_of_birth',
-                  'gender', 'address', 'bio']
+        fields = ['image', 'phone_number', 'date_of_birth', 'address', 'tagline', 'bio', 'gender', 'fb', 'insta', 'twitter', 'snap', 'github', 'website', 'linkedin']
+        
+    def __init__(self, *args, **kwargs):
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'full-width'

@@ -105,7 +105,25 @@
         {% include "blog/article.html" with posts=posts %}
         <div>
             <h3>For All posts by me follow the <a href="{% url 'user_post' username=user.username %}" class="">Link</a>.</h3>
+            {% if request.user.is_authenticated and request.user == user %}
+                <a href="{% url 'update_profile' %}" class="btn btn-success" title="Update account">update</a>
+                <a href="javascript:isconfirmed()" class="btn btn-danger" title="delete account">delete</a>
+            {% endif %}
         </div>
+        <script>
+            function isconfirmed(){
+              let v = window.confirm("Are you sure you want to delete your account?")
+              if(v){
+                let v = window.prompt("Enter your Username to complete deletion of profile.")
+                if(v == '{{request.user.username}}'){
+                  window.location.replace('{% url 'delete_profile' %}');
+                }
+                else{
+                  window.alert("Username didn't matched.")
+                }
+              }
+            }
+          </script>
     </article>
 </main>
 

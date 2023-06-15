@@ -36,6 +36,14 @@ class Post(models.Model):
 
     def __str__(self):
         return f'{self.title}'
+    
+    def save(self ,*args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if img.height > 1000 or img.width > 1000:
+            new_img_size = (1000,1000)
+            img.thumbnail(new_img_size)
+            img.save(self.image.path)
 
     
     

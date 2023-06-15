@@ -25,7 +25,7 @@
 								{{form.title.errors}}
 					</div>
 					<div class="form-field">
-						<strong>{{form.description.label}} :</strong>
+						<strong>{{form.description.label}} {% if form.description.field.attrs.required %}kuch to{% endif %} :</strong>
 								{{form.description}}
 								{{form.description.errors}}
 					</div>
