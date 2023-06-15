@@ -7,7 +7,23 @@
 
 <div class="container">
 	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists for
-		"<strong>{{name}}</strong>".</h3>
+		"<strong>{{catname}}</strong>".</h3>
+	<p class="adjustments">
+</div>
+
+{% endif %}
+
+{% if uname %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts by <strong>{{uname.first_name}} {{uname.last_name}}</strong>.</h3>
+	<p class="adjustments">
+</div>
+
+{% endif %}
+
+{% if catname %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts for category "<strong>{{catname}}</strong>".</h3>
 	<p class="adjustments">
 </div>
 

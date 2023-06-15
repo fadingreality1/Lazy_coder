@@ -20,7 +20,7 @@ class PostCreateForm(forms.ModelForm):
             label="Description",
             max_length=250, 
             required=True,
-            widget=forms.TextInput(attrs={"class": "full-width", "placeholder":"Description of Post", "multiple":"multiple"}),
+            widget=forms.TextInput(attrs={"class": "full-width", "placeholder":"Description of Post",}),
         )
     
     image = forms.ImageField(
@@ -33,9 +33,9 @@ class PostCreateForm(forms.ModelForm):
     
     # ! many to many field m aise hota h insertions
     category = forms.ModelMultipleChoiceField(
-        label = "Category (Hold the Ctrl key to select multiple options from the list box. Maximum 3 are allowed, anymore, will be ignored)",
+        label = "Category",
         queryset = Category.objects.all(),
-        widget = forms.SelectMultiple(attrs={"class":"full-width", "multiple":True, "style":"height:15em;", "size":"3",})
+        widget = forms.SelectMultiple(attrs={"class":"full-width", "multiple":True, "style":"height:10em;", "size":"3",})
     )
 
     class Meta:

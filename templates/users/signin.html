@@ -17,9 +17,10 @@
 					{{field}}
 				</div>
 				{% endfor %}
-				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Signin"
+				<input name="submit" id="submit" class="btn btn--primary" value="Signin"
 					type="submit">
 			</fieldset>
+			First time here? <a href="{% url 'signup' %}" class="">Signup</a>.
 		</form> <!-- end form -->
 	</section>
 </main>

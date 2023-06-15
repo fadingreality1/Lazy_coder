@@ -17,7 +17,7 @@
             <h1 class="display-1 entry__title">{{post.title}}</h1>
             <ul class="entry__header-meta">
                 <li class="author">
-                    By <a href="#0">{{post.author.first_name|title}}</a>
+                    By <a href="{% url 'profile' username=post.author.username %}">{{post.author.first_name|title}}</a>
                 </li>
                 <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
                 <li class="cat-links">

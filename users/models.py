@@ -18,8 +18,16 @@ class Profile(models.Model):
     phone_number = PhoneNumberField(blank=True)
     date_of_birth = models.DateField(default=timezone.now)
     address = models.CharField(max_length=200, null=True, blank=True)
-    profile_description = models.CharField(max_length=400, blank=True,default="")
-    gender = models.CharField(choices=gen_choice, null=False, default='M', max_length=1)
+    bio = models.CharField(max_length=500, blank=True,default="")
+    tagline = models.CharField(max_length=200, blank=True,default="")
+    gender = models.CharField(choices=gen_choice, null=False, default='M', max_length=10)
+    fb = models.URLField(max_length=100, null=True, blank=True,)
+    insta = models.URLField(max_length=100, null=True, blank=True,)
+    twitter = models.URLField(max_length=100, null=True, blank=True,)
+    snap = models.URLField(max_length=100, null=True, blank=True,)
+    github = models.URLField(max_length=100, null=True, blank=True,)
+    website = models.URLField(max_length=100, null=True, blank=True,)
+    linkedin = models.URLField(max_length=100, null=True, blank=True,)
     
     
     

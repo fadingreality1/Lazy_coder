@@ -8,7 +8,7 @@
 		<form action="{% url 'create_post' %}" method="POST" enctype = "multipart/form-data">
 			{% csrf_token %}
 			<fieldset>
-				{% for field in form %}
+				{% comment %} {% for field in form %}
 					<div class="form-field">
 						<strong>{{field.label}} :</strong>
 						{{field}}
@@ -17,6 +17,38 @@
 				{% endfor %}
                 {{form.media}}
 				<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width"
+					value="Create Post" type="submit" > {% endcomment %}
+
+					<div class="form-field">
+						<strong>{{form.title.label}} :</strong>
+								{{form.title}}
+								{{form.title.errors}}
+					</div>
+					<div class="form-field">
+						<strong>{{form.description.label}} :</strong>
+								{{form.description}}
+								{{form.description.errors}}
+					</div>
+					<div class="form-field">
+						<strong>{{form.image.label}} :</strong>
+								{{form.image}}
+								{{form.image.errors}}
+					</div>
+					<div class="form-field">
+						<strong>{{form.category.label}} :</strong>
+						<p>(Hold Ctrl to select multiple, only 3 Categories are allowed and rest will be ignored.)</p>
+								{{form.category}}
+								{{form.category.errors}}
+					</div>
+					<div class="form-field">
+						<strong>{{form.content.label}} :</strong>
+								{{form.content}}
+								{{form.content.errors}}
+					</div>
+					<div class="form-field">
+						{{form.media}}
+					</div>
+					<input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width"
 					value="Create Post" type="submit" >
 
 			</fieldset>

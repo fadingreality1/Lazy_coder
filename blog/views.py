@@ -141,21 +141,24 @@ def dislike(req):
         
     return redirect('post_detail', slug = post.slug)
 
-def category(req, category):
+def category(req, category, username = None):
     # ! make some changes 
     try:
         cat = Category.objects.get(title = category)
         cat_id = cat.id
         all_posts = Post.objects.filter(categories = cat_id)
+        if username != None:
+            uid = User.objects.filter(username=username).first().id
+            all_posts = all_posts.filter(author = uid)
         p = Paginator(all_posts, 10)
         page_number = req.GET.get('page')
         data_showing = p.get_page(page_number)
-        return render(req, "blog/category.html", {"posts": data_showing, "name": category,})
+        return render(req, "blog/category.html", {"posts": data_showing, "catname": category,})
     except:
         messages.error(req, "No such category exists")
         return redirect("home")
-    
-    
+
+
 @login_required(login_url="signin")
 def update(req, slug):
     try:
@@ -246,7 +249,8 @@ def userPost(req, username):
         p = Paginator(all_posts, 10)
         page_number = req.GET.get('page')
         data_showing = p.get_page(page_number)
-        return render(req, "blog/category.html", {'posts':data_showing, 'name':username})
+        return render(req, "blog/category.html", {'posts':data_showing, 'uname':user})
     except:
         messages.error(req, "Some error ocuured while filtering posts by Authors, That author might not exists.")
         return redirect("home")
+    

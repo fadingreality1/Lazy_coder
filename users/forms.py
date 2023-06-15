@@ -53,4 +53,4 @@ class ProfileUpdateForm(forms.ModelForm):
             'date_of_birth': DateInput(),
         }
         fields = ['image', 'phone_number', 'date_of_birth',
-                  'gender', 'address', 'profile_description']
+                  'gender', 'address', 'bio']

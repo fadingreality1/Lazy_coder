@@ -4,86 +4,109 @@
 
 <main class="row content__page">
     <article class="column large-full entry format-standard">
-        <div class="media-wrap entry__media">
-            <div class="entry__post-thumb">
-                <img src="{{request.user.image.url}}" alt="" style="border-radius:100%">
+        <div class="media-wrap entry__media" style="margin-bottom:2em;">
+            <div class="entry__post-thumb" style="margin-bottom:0;line-height:0;">
+                <img src="{{user.profile.image.url}}" alt="{{user.profile.image.url}}" style="width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                margin-right:auto;
+                margin-left:auto;">
             </div>
         </div>
 
-        <div class="content__page-header entry__header">
-            <h1 class="display-1 entry__title">{{post.title}}</h1>
-            <ul class="entry__header-meta">
+        <div class="content__page-header entry__header" style="margin-bottom:0;line-height:0;">
+            <h1 class="display-1 entry__title">{{user.first_name|title}} {{user.last_name|title}}</h1><br>
+            <ul class="entry__header-meta" style="margin-bottom:0;">
                 <li class="author">
-                    By <a href="#0">{{post.author.first_name|title}}</a>
-                </li>
-                <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
-                <li class="cat-links">
-                    <a href="#0">Marketing</a><a href="#0">Management</a>
-                </li>
+                    <a href="#0">@{{user.username}}</a>
+                </li><br>
+                <li>
+                    {{user.profile.tagline}}
+                </li><br>
+                {% if user.profile.github %}
+                    <li>
+                        <a href="" title="Github"><img src="{% static 'images/icons/github.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.fb %}
+                    <li>
+                        <a href="" title="facebook"><img src="{% static 'images/icons/facebook.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.insta %}
+                    <li>
+                        <a href="" title="instagram"><img src="{% static 'images/icons/instagram.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.linkedin %}
+                    <li>
+                        <a href="" title="linkedin"><img src="{% static 'images/icons/linkedin.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.snap %}
+                    <li>
+                        <a href="" title="snapchat"><img src="{% static 'images/icons/snapchat.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.twitter %}
+                    <li>
+                        <a href="" title="twitter"><img src="{% static 'images/icons/twitter.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+                
+                {% if user.profile.website %}
+                    <li>
+                        <a href="" title="website"><img src="{% static 'images/icons/website.svg' %}" alt="" style="height:30px;"></a>
+                    </li>
+                {% endif %}
+
+                {% if user.email %}
+                    <li>
+                        <a href="" title="email"><img src="{% static 'images/icons/email.svg' %}" alt="" style="height:35px;"></a>
+                    </li>
+                {% endif %}
+                
             </ul>
         </div>
         <!-- end entry__header -->
+        <h3 style="margin-top:1em;">About me.</h3>
 
-        <div class="entry__content">
-            <p class="lead drop-cap">{{post.description}}</p>
+        <p>
+            {{user.profile.bio}}
+        </p>
+        
+        <div class="">
 
-            <p>{{post.content|safe}}</p>
+            <h3>Stats:</h3>
 
-            <p class="entry__tags">
-                <span>Views ({{post.viewers.count}})</span>
-                <span>Post Tags</span>
-                <span class="entry__tag-list">
-                    <a href="#0">orci</a>
-                    <a href="#0">lectus</a>
-                    <a href="#0">varius</a>
-                    <a href="#0">turpis</a>
-                </span>
-            </p>
+        <ul class="stats-tabs">
+            <li><a href="javascript:void(0)">{{count}}<em>Posts</em></a></li>
+            <li><a href="javascript:void(0)">{{likes}}<em>Likes</em></a></li>
+            <li><a href="javascript:void(0)">{{views}}<em>Views</em></a></li>
+            <li><a href="javascript:void(0)" >{{dislikes}}<em>Dislikes</em></a></li>
+        </ul>
+        <h3>Categories in which i have posted:</h3>
+        <ul class="disc">
+            {% for cat in category %}
+                <li><a href="{% url 'category_post_user' category=cat.title username=user.username %}" class="j">{{cat.title}}</a></li>
+            {% endfor %}
+        </ul>
+        <div>
+            <h3>Popular blog posts by me.</h3>
         </div>
-        <!-- end entry content -->
-        <div style="display:flex;">
-            <form action="{% url 'like_post' %}" method="POST" style = "margin-right:1em;">
-                {% csrf_token %}
-                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-success" >Like ({{post.likers.count}})</button>
-            </form>
-            <form action="{% url 'dislike_post' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-danger" >Dislike ({{post.dislikers.count}})</button>
-            </form> 
+        {% include "blog/article.html" with posts=posts %}
+        <div>
+            <h3>For All posts by me follow the <a href="{% url 'user_post' username=user.username %}" class="">Link</a>.</h3>
         </div>
     </article>
-    <!-- end column large-full entry-->
-
-    {% if request.user.is_authenticated %}
-    <h3 class="h3">Add Comment.</h3>
-    <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
-        {% csrf_token %}
-
-        <div class="form-field">
-            <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength="700" required />
-        </div>
-        <input type="hidden" value="" name="parent_id" />
-
-        <div class="form-field">
-            <input name="submit" id="submit" class="btn" value="Comment" type="submit" />
-        </div>
-    </form>
-
-    {% else %}
-    <h3 class="h3">
-        <a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.
-    </h3>
-    {% endif %}
-
-    {% if comments.count == 0 %}
-
-    <h3 class="h3">No comments yet. be the first person to comment</h3>
-
-    {% else %}
-
-    {% include "blog/comment/comment_section.html" with comments=comments %}
-
-    {% endif %}
 </main>
 
 {% endblock middle_section %}

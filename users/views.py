@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import views as auth_views
 from Lazy_coder.settings import MEDIA_ROOT
+from django.db.models import Count
 import os
-
+from blog.models import Post
 
 def signin(req):
     if req.method == "POST":
@@ -43,7 +44,7 @@ def signup(req):
             
             new_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'],)
             login(req, new_user)
-            return redirect('profile')
+            return redirect('profile', username = new_user.username)
         else:
             messages.warning(req, "There are some error in form you submitted. Kindly fill correct information.")
     else:
@@ -91,5 +92,28 @@ def deleteUser(req):
 
 
 @login_required
-def profile(req):
-    return HttpResponse("This is profile page")
+def profile(req, username):
+    # try:
+        user = User.objects.get(username = username)
+        all_posts = Post.objects.filter(author = user)
+        likes = 0
+        dislikes = 0
+        views = 0
+        category = []
+        posts = all_posts.annotate(count = Count('likers')).order_by('-count')[:6]
+        for p in all_posts:
+            likes += p.likers.count()
+            dislikes += p.dislikers.count()
+            views += p.viewers.count()
+            category += (p.categories.all())
+        
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print(category)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+        views = max(views, likes+dislikes)
+            
+        return render(req, "users/profile.html", {'user':user, 'posts':posts,'count':all_posts.count, 'likes':likes, 'dislikes':dislikes, 'views': views, 'category': set(category),})
+    # except Exception as e:
+        messages.error(req, "Some Error occurred. No Such User Exists.")
+        return redirect("home")

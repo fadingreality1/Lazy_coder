@@ -57,11 +57,10 @@
 			</li>
 			{% if request.user.is_authenticated %}
 			<li class="has-children">
-				<a href="{% url 'profile' %}" title="" class="{% if request.path == profile %}current{% endif %}">Hello,
+				<a href="{% url 'profile' request.user.username %}" title="" class="{% if request.path == profile %}current{% endif %}">Hello,
 					{{request.user.first_name}}</a>
 				<ul class="sub-menu">
-					<li><a href="{% url 'profile' %} class=" {% if request.path == profile %}current{% endif %}"">My
-							Account</a></li>
+					<li><a href="{% url 'profile' request.user.username %}" class="{% if request.path == profile %}current{% endif %}">My Account</a></li>
 					<li><a href="{% url 'signout' %}">Signout</a></li>
 				</ul>
 			</li>
