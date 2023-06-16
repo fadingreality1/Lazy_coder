@@ -8,6 +8,7 @@ from django.contrib.auth import views as auth_views
 from Lazy_coder.settings import MEDIA_ROOT
 from django.db.models import Count
 import os
+from . import thread
 from blog.models import Post
 
 def signin(req):
@@ -38,6 +39,7 @@ def signup(req):
         form = UserRegisterForm(req.POST)
         if form.is_valid():
             form.save()
+            thread.sendMail(form).start()
             var = f"{form.cleaned_data.get('first_name')} {form.cleaned_data.get('last_name')}"
             
             messages.success(req, f"Account created successfully for {var.title()}. You are signed in")
