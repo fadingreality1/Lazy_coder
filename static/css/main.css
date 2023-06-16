@@ -2597,6 +2597,12 @@ input::-moz-focus-inner {
 .header__social .ss-rss a::after {
   background-image: url(../images/icons/social/icon-rss.svg);
 }
+.header__social .ss-linkedin a::after {
+  background-image: url(../images/icons/linkedin_white.svg);
+}
+.header__social .ss-github a::after {
+  background-image: url(../images/icons/github_white.svg);
+}
 .header__social .ss-email a::after {
   background-image: url(../images/icons/social/icon-email.svg);
 }
