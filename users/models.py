@@ -4,6 +4,8 @@ from django.utils import timezone
 from PIL import Image
 from phonenumber_field.modelfields import PhoneNumberField
 
+# ! to make unique email to each user
+User._meta.get_field('email')._unique = True
 
 class Profile(models.Model):
     
