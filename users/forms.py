@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
         AuthenticationForm,
         PasswordResetForm,
         SetPasswordForm,
+        PasswordChangeForm,
     )
 from django.contrib.auth.models import User
 from .models import Profile
@@ -78,9 +79,17 @@ class ResetPasswordForm(PasswordResetForm):
         super(ResetPasswordForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'full-width'
-            
+
+
 class EnterNewPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(EnterNewPasswordForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'full-width'
+      
+            
+class ChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'full-width'

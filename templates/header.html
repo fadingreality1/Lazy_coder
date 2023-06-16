@@ -48,19 +48,20 @@
 		{% url 'home' as home %}
 		{% url 'signin' as signin %}
 		{% url 'signup' as signup %}
-		{% url 'profile' as profile %}
+		{% url 'profile' username=request.user.username as profile %}
 		{% url 'create_post' as create_post %}
+		{% url 'category' as category %}
 
 		<ul class="header__nav">
 			<li class="{% if request.path == home %}current{% endif %}">
 				<a href="{% url 'home' %}" title="">Home</a>
 			</li>
 			{% if request.user.is_authenticated %}
-			<li class="has-children">
-				<a href="{% url 'profile' request.user.username %}" title="" class="{% if request.path == profile %}current{% endif %}">Hello,
+			<li class="has-children {% if request.path == profile %}current{% endif %}">
+				<a href="{% url 'profile' request.user.username %}" title="" class="">Hello,
 					{{request.user.first_name}}</a>
 				<ul class="sub-menu">
-					<li><a href="{% url 'profile' request.user.username %}" class="{% if request.path == profile %}current{% endif %}">My Account</a></li>
+					<li><a href="{% url 'profile' request.user.username %}" class="">My Account</a></li>
 					<li><a href="{% url 'signout' %}">Signout</a></li>
 				</ul>
 			</li>
@@ -76,16 +77,8 @@
 				<a href="{% url 'signup' %}" title="">Signup</a>
 			</li>
 			{% endif %}
-			<li class="has-children">
-				<a href="#0" title="">Categories</a>
-				<ul class="sub-menu">
-					<li><a href="category.html">Lifestyle</a></li>
-					<li><a href="category.html">Health</a></li>
-					<li><a href="category.html">Family</a></li>
-					<li><a href="category.html">Management</a></li>
-					<li><a href="category.html">Travel</a></li>
-					<li><a href="category.html">Work</a></li>
-				</ul>
+			<li class="{% if request.path == category %}current{% endif %}">
+				<a href="{% url 'category' %}" title="">Categories</a>
 			</li>
 			<li class="{% if request.path == blog_home %}current{% endif %}">
 				<a href="{% url 'blog_home' %}" title="">All Blog Posts</a>

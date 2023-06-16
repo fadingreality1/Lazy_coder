@@ -141,7 +141,7 @@ def dislike(req):
         
     return redirect('post_detail', slug = post.slug)
 
-def category(req, category, username = None):
+def categoryPost(req, category, username = None):
     # ! make some changes 
     try:
         cat = Category.objects.get(title = category)
@@ -254,3 +254,10 @@ def userPost(req, username):
         messages.error(req, "Some error ocuured while filtering posts by Authors, That author might not exists.")
         return redirect("home")
     
+def categories(req):
+    # return HttpResponse("categoeies page")
+    categories = Category.objects.all().order_by('title')
+    n = categories.count()
+    c1 = categories[:n//2]
+    c2 = categories[n//2:]
+    return render(req, "blog/categories.html", {'categories1': c1, 'categories2':c2})

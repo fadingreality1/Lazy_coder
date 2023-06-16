@@ -1,0 +1,29 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block middle_section %}
+
+<main class="row content__page">
+    <div class="column large-full">
+
+        <h2 style="margin-top:0;">All Categories.</h2>
+
+    </div>
+        <div class="column large-6 tab-full">
+            <ul class="disc">
+                {% for cat in categories1 %}
+                    <a href="{% url 'category_post' category=cat.title %}" class=""><li>{{cat.title}}</li></a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="column large-6 tab-full">
+            <ul class="disc">
+                {% for cat in categories2 %}
+                    <a href="{% url 'category_post' category=cat.title %}" class=""><li>{{cat.title}}</li></a>
+                {% endfor %}
+            </ul>
+        </div>
+    <!-- end column large-full entry-->
+</main>
+
+{% endblock middle_section %}

@@ -108,6 +108,7 @@
             {% if request.user.is_authenticated and request.user == user %}
                 <a href="{% url 'update_profile' %}" class="btn btn-success" title="Update account">update</a>
                 <a href="javascript:isconfirmed()" class="btn btn-danger" title="delete account">delete</a>
+                <a href="{% url 'change_password' %}" class="btn btn-info" title="Change Password">Change Password</a>
             {% endif %}
         </div>
         <script>

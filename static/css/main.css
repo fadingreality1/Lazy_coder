@@ -962,6 +962,12 @@ input[type="button"] {
   background-color: #f6f7f8;
 }
 
+.btn-info{
+  color:#0064fa;
+  border-color: #0064fa;
+  background-color: #f6f7f8;
+}
+
 
 .btn:hover,
 button:hover,
@@ -989,6 +995,12 @@ input[type="button"]:focus {
   color:white;
   border-color: #c72115;
   background-color: #c72115;
+}
+
+.btn-info:hover{
+  color: white;
+  background-color: #0064fa;
+  border-color: #0064fa;
 }
 /* button primary
  * ------------------------------------------------- */

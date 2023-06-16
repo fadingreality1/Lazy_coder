@@ -95,7 +95,6 @@ def deleteUser(req):
         return redirect("home")
 
 
-@login_required
 def profile(req, username):
     try:
         user = User.objects.get(username = username)
@@ -117,3 +116,9 @@ def profile(req, username):
     except Exception as e:
         messages.error(req, "Some Error occurred. No Such User Exists.")
         return redirect("home")
+    
+# ! To redirect users after changing password we need to amke a seperate view for it
+@login_required
+def PasswordChangeSuccess(req):
+    messages.success(req,"Your password has be chnaged successfully.")
+    return redirect("profile", username=req.user.username)
