@@ -17,8 +17,6 @@ class SigninForm(AuthenticationForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'full-width'
             
-# TODO : Format every file before pushing to github and launching the project
-
 class DateInput(forms.DateInput):
     input_type = 'date'
 

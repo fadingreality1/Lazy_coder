@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views 
 
-# TODO : update and delete post routes create krne h or unke lie template bhi
 
 urlpatterns = [
     path('', views.home, name="blog_home"),
