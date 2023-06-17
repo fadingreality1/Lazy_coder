@@ -156,13 +156,14 @@ def categoryPost(req, category, username = None):
     try:
         cat = Category.objects.get(title = category)
         cat_id = cat.id
-        all_posts = Post.objects.filter(categories = cat_id)
+        all_posts = Post.objects.filter(categories = cat_id).order_by("-date_posted")
         c = True
         cu = False
+        user = None
         if username != None:
             user = User.objects.filter(username=username).first()
             uid = user.id
-            all_posts = all_posts.filter(author = uid)
+            all_posts = all_posts.filter(author = uid).order_by("-date_posted")
             c = False
             cu = True
         p = Paginator(all_posts, 10)
