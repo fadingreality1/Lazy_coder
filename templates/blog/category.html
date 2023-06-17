@@ -2,32 +2,48 @@
 {% load static %}
 {% block middle_section %}
 
-
-{% if posts.count == 0 or posts.paginator.count == 0 %}
-
+{% comment %} TODO: Bug bhre pde h idhr {% endcomment %}
+{{posts.count}}
+{% if posts.paginator.count == 0 and c %}
 <div class="container">
 	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists for
 		"<strong>{{catname}}</strong>".</h3>
-	<p class="adjustments">
 </div>
-
 {% endif %}
 
-{% if uname %}
+{% if posts.paginator.count == 0 and u %}
 <div class="container">
-	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts by <strong>{{uname.first_name}} {{uname.last_name}}</strong>.</h3>
-	<p class="adjustments">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists by author
+		"<strong>{{uname.first_name}} {{uname.last_name}}</strong>".</h3>
 </div>
-
 {% endif %}
 
-{% if catname %}
+{% if posts.paginator.count == 0 and cu %}
 <div class="container">
-	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts for category "<strong>{{catname}}</strong>".</h3>
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists by author
+		"<strong>{{uname.first_name}} {{uname.last_name}}</strong>" in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and cu %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts By "<strong>{{uname.first_name}} {{uname.last_name}}</strong>" in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and c %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and u %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts by Author "<strong>{{uname.first_name}} {{uname.last_name}}</strong>".</h3>
 	<p class="adjustments">
 </div>
-
 {% endif %}
+
 
 {% if posts.paginator.count or posts.count %}
 

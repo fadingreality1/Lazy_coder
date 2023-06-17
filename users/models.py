@@ -4,7 +4,8 @@ from django.utils import timezone
 from PIL import Image
 from phonenumber_field.modelfields import PhoneNumberField
 
-# ! to make unique email to each user
+# ? Modifying user model to make email field unique
+
 User._meta.get_field('email')._unique = True
 
 class Profile(models.Model):
@@ -32,10 +33,10 @@ class Profile(models.Model):
     linkedin = models.URLField(max_length=100, null=True, blank=True,)
     
     
-    
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f"{self.user.username}'s Profile"
     
+    # ! This is modified save method which will resize the image to save our storage  using oillow library
     def save(self ,*args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
         img = Image.open(self.image.path)
@@ -43,6 +44,3 @@ class Profile(models.Model):
             new_img_size = (500,500)
             img.thumbnail(new_img_size)
             img.save(self.image.path)
-            
-
-# TODO : There might be some bug in prifle picture saving and deleting previous one, check it out

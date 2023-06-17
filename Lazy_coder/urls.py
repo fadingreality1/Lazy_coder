@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 admin.site.site_header = "Lazy Coder Admin"
 admin.site.site_title = "Lazy Coder Admin"
-admin.site.index_title = "Welcome Lazy Coder"
+admin.site.index_title = "Welcome to Lazy Coder"
 
 
 urlpatterns = [

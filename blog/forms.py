@@ -3,7 +3,6 @@ from django import forms
 from .models import Post, Category
 from ckeditor.fields import RichTextFormField
 
-# ! below code is to make dynamic choices but i don't plan on adding any more categories and they are enough
 
 class PostCreateForm(forms.ModelForm):
     # ! all parameter defined to apply styling over the page

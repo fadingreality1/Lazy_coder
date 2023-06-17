@@ -11,7 +11,7 @@ from .models import Profile
 
 
 class SigninForm(AuthenticationForm):
-    # ! To add custom class to all feilds of forms
+    # ! To add custom class to all fields of forms
     def __init__(self, *args, **kwargs):
         super(SigninForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
@@ -22,18 +22,15 @@ class SigninForm(AuthenticationForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-
+# ? using custom form for registering new user
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    first_name = forms.CharField(
-        max_length=50, label="First name", required=True)
-    last_name = forms.CharField(
-        max_length=50, label="Last name", required=True)
+    first_name = forms.CharField(max_length=50, label="First name", required=True)
+    last_name = forms.CharField(max_length=50, label="Last name", required=True)
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name',
-                  'email', 'password1', 'password2',]
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1','password2',]
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)

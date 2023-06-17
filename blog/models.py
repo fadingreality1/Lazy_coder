@@ -7,7 +7,6 @@ from home.models import VUser
 from PIL import Image
 
 
-# TODO : Likes and views to be added in to model along with comments
 # ? Category Model
 
 class Category(models.Model):
@@ -16,7 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
-# ? To give defult value to categories
+# ? To give default value to categories
 def uncategorized():
     return Category.objects.filter(title = 'Uncategorized')
 

@@ -2,9 +2,8 @@ import threading
 from django.core.mail import get_connection, EmailMultiAlternatives
 from Lazy_coder import settings
 
-
+# ? Email multi alternative is used to send html code to reciever
 class sendMail(threading.Thread):
-
     def __init__(self,form) -> None:
         mail_to_user = EmailMultiAlternatives(
                 "Welcome to Lazy Coder!",
@@ -48,6 +47,9 @@ class sendMail(threading.Thread):
         
         mail_to_user.content_subtype = 'html'
         mail_to_lazycoder.content_subtype = 'html'
+        
+        
+        # ? rc1, rc2, are recievers
         
         self.rc1 = mail_to_user
         self.rc2 = mail_to_lazycoder
