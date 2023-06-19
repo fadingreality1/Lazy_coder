@@ -72,7 +72,7 @@ def about(req):
 def search(req):
     try:
         q = req.GET.get('query')
-        if len(q) > 100 or len(q) < 4:
+        if len(q) > 100 or len(q) < 3:
             posts = Post.objects.none()
             messages.error(req,"No results found. refine keywords")
         else:
