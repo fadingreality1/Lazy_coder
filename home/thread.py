@@ -17,7 +17,13 @@ class sendMail(threading.Thread):
                 At Lazy Coder, we strive to provide prompt and personalized assistance to our readers. Our team is reviewing your inquiry, and we will address your questions, feedback, or any other matter you raised in your message. We aim to deliver a comprehensive response that meets your expectations and assists you in the best possible way.
                 </p>
                 <p>
-                While we work on crafting a thoughtful reply, we kindly ask for your patience. Depending on the volume of inquiries we receive, it may take us a couple of business days to respond. However, please rest assured that we value your contact and will do our utmost to provide you with the information or assistance you seek.</p>
+                While we work on crafting a thoughtful reply, we kindly ask for your patience. Depending on the volume of inquiries we receive, it may take us a couple of business days to respond. However, please rest assured that we value your contact and will do our utmost to provide you with the information or assistance you seek.</p><p>
+                Best regards,<br/>
+                </p>
+                <p>
+                Kunal verma<br/>
+                Lazy Coder Team<br/>
+                </p>
                 """,
                 f"{settings.EMAIL_HOST_USER}",
                 [f"{form.cleaned_data.get('email')}"],

@@ -53,8 +53,10 @@ def contact(req):
 
             messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact you soon.")
             
-            return redirect('signin')
-
+            if not req.user.is_authenticated:
+                return redirect('signin')
+            
+            return redirect("home")
         messages.warning(req, "There are some errors in form that you have submitted. Please fill correct information")
         return render(req, "home/contact.html", {'form': form})
 
