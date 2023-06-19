@@ -109,7 +109,7 @@ def updateProfile(req):
 
 @login_required(login_url='signin')
 def deleteUser(req):
-    # try:
+    try:
         old = '' or req.user.profile.image
         if old:
             os.remove(old)
@@ -118,7 +118,7 @@ def deleteUser(req):
         User.objects.get(username = req.user).delete()
         messages.success(req, "account deleted successfully")
         return redirect('home')
-    # except:
+    except:
         messages.error(req, "Some error occurred while deleting your account. Contact lazy coder team.")
         return redirect("home")
 
