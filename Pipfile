@@ -12,6 +12,9 @@ phonenumbers = "*"
 pillow = "*"
 django-autoslug = "*"
 django-ckeditor = "*"
+python-decouple = "*"
+gunicorn = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

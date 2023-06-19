@@ -5,3 +5,4 @@ migrations/
 media/
 features.txt
 track.txt
+.env
