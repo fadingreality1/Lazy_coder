@@ -56,6 +56,7 @@ class ProfileUpdateForm(forms.ModelForm):
     fb = forms.URLField(label="Facebook", required=False)
     insta = forms.URLField(label="Instagram", required=False)
     snap = forms.URLField(label="snapchat", required=False)
+    image = forms.ImageField(label="profile picture", required=False)
     
     class Meta:
         model = Profile

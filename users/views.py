@@ -4,7 +4,6 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, SigninFo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from Lazy_coder.settings import MEDIA_ROOT
 from django.db.models import Count
 import os
 from . import thread
@@ -89,8 +88,9 @@ def updateProfile(req):
                 # ? 1. it exists 
                 # ? 2. user uploaded new image
                 # ? 3. previous profile is not default
-                
-                if os.path.exists(old_image) and req.POST.get('image') == None and old_image != f'{MEDIA_ROOT}'+'\\profile_pics\\default.png' :
+
+
+                if os.path.exists(old_image) and (req.FILES.get('image') != None or req.POST.get('image-clear') == 'on' ) :
                     os.remove(old_image)
                 
                 messages.success(req, f"Account Updated successfully for {req.user.first_name}.")
@@ -109,14 +109,16 @@ def updateProfile(req):
 
 @login_required(login_url='signin')
 def deleteUser(req):
-    try:
-        old = req.user.profile.image.path
-        if old != f'{MEDIA_ROOT}'+'\\profile_pics\\default.png':
+    # try:
+        old = '' or req.user.profile.image
+        if old:
             os.remove(old)
+        # ! i am shifting default to statci and removing delete logic for it
         
         User.objects.get(username = req.user).delete()
+        messages.success(req, "account deleted successfully")
         return redirect('home')
-    except:
+    # except:
         messages.error(req, "Some error occurred while deleting your account. Contact lazy coder team.")
         return redirect("home")
 

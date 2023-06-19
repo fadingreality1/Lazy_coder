@@ -6,7 +6,7 @@
     <article class="column large-full entry format-standard">
         <div class="media-wrap entry__media" style="margin-bottom:2em;">
             <div class="entry__post-thumb" style="margin-bottom:0;line-height:0;">
-                <img src="{{user.profile.image.url}}" alt="{{user.profile.image.url}}" style="width: 200px;
+                <img src="{% if user.profile.image %}{{user.profile.image.url}}{% else %}{% static 'default.png' %}{% endif %}" alt="profile picture" style="width: 200px;
                 height: 200px;
                 border-radius: 50%;
                 display: flex;

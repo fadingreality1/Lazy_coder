@@ -3,7 +3,7 @@
 <ul class="children">
     <li class="comment">
         <div class="comment__avatar">
-            <img class="avatar" src="{{comment.user.profile.image.url}}" alt="" width="50" height="50"
+            <img class="avatar" src="{% if comment.user.profile.image %}{{comment.user.profile.image.url}}{% else %}{% static 'default.png' %}{% endif %}" alt="" width="50" height="50"
                 style="margin-top:0;">
         </div>
     
