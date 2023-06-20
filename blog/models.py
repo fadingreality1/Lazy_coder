@@ -20,7 +20,7 @@ class Post(models.Model):
     content = RichTextField(blank=False, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='blog/default.jpg', upload_to='blog')
+    image = models.ImageField(upload_to='blog')
     slug = AutoSlugField(populate_from = 'title', unique=True, null=True, default=None, always_update = True,)
     viewers = models.ManyToManyField(VUser, related_name="viewers", blank=True)
     likers = models.ManyToManyField(User, related_name='liked', blank=True)

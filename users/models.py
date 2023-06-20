@@ -12,7 +12,7 @@ class Profile(models.Model):
         ('F', 'Female'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile_pics', blank=True, null= True, default=None)
+    image = models.ImageField(upload_to='profile_pics/', blank=True, null= True, default=None)
     phone_number = PhoneNumberField(blank=True, null=True)
     date_of_birth = models.DateField(default=timezone.now, blank=True, null=True)
     address = models.CharField(max_length=200, null=True, blank=True)
