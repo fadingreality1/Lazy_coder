@@ -39,7 +39,6 @@ ROOT_URLCONF = 'Lazy_coder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # ! Setup for Templates
         'DIRS': [BASE_DIR, "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
