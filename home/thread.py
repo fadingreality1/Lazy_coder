@@ -2,9 +2,7 @@ import threading
 from django.core.mail import get_connection, EmailMultiAlternatives
 from Lazy_coder import settings
 
-
 class sendMail(threading.Thread):
-
     def __init__(self,form) -> None:
         mail_to_user = EmailMultiAlternatives(
                 "Thank You for Contacting Lazy Coder!",
@@ -28,17 +26,14 @@ class sendMail(threading.Thread):
                 f"{settings.EMAIL_HOST_USER}",
                 [f"{form.cleaned_data.get('email')}"],
             )
-        
         mail_to_lazycoder = EmailMultiAlternatives(
                 f"{form.cleaned_data.get('name')} has Contacted us.",
                 f"Some one wants to contact us.<br>Responses are:-<br>Name: {form.cleaned_data.get('name')}<br>Email: {form.cleaned_data.get('email')}<br>Phone: {form.cleaned_data.get('phone')}<br>Website: {form.cleaned_data.get('website')}<br>Message: {form.cleaned_data.get('message')}",
                 f"{settings.EMAIL_HOST_USER}",
                 ["kunalverma.learn@gmail.com"],
             )
-        
         mail_to_user.content_subtype = 'html'
         mail_to_lazycoder.content_subtype = 'html'
-        
         self.rc1 = mail_to_user
         self.rc2 = mail_to_lazycoder
         threading.Thread.__init__(self)

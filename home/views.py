@@ -1,13 +1,12 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from .forms import contactForm
 from django.contrib import messages
 from blog.models import Post
 from django.db.models import Q
 from .models import VUser
 from django.utils import timezone
-from django.db.models import Count #? To add order by count facility which will help in trending as well as popular
+from django.db.models import Count 
 
-# ! to capture ip address of viewer
 def get_ip(req):
     x_forwarded_for = req.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -17,59 +16,35 @@ def get_ip(req):
     return ip
 
 
-# ! implemented multithreading to make response faster
-from . import thread
-# Create your views here.
-
-
 def home(req):
     # ! regiters new user to blog
     ip = get_ip(req)
-    # if not VUser.objects.filter(ip = ip).exists():
-    #     VUser(ip = ip).save()
-    # else:
-    #     o_user = VUser.objects.get(ip = ip)
-    #     o_user.last_seen = timezone.now()
-    #     o_user.save()
-    
-    # ? better method
     viewer, _ = VUser.objects.get_or_create(ip = ip)
     viewer.last_seen = timezone.now()
     viewer.save()
-    # ? Accessing many to many field with annotate method 
     posts = Post.objects.annotate(count = Count('viewers')).order_by('-count')[:10]
     return render(req, "home/home.html", {'posts':posts})
-
 
 def contact(req):
     if req.method == 'POST':
         form = contactForm(req.POST)
         if form.is_valid():
-            
-            # ! implemented multithreading to send mail and make response faster
             thread.sendMail(form).start()
-            
             form.save()
-
             messages.info(req, f"Contact request recieved for {form.cleaned_data.get('name')}. Our team will contact you soon.")
-            
             if not req.user.is_authenticated:
                 return redirect('signin')
-            
             return redirect("home")
         messages.warning(req, "There are some errors in form that you have submitted. Please fill correct information")
         return render(req, "home/contact.html", {'form': form})
-
     if req.user.is_authenticated:
         form = contactForm(initial={'name': f"{req.user.first_name} {req.user.last_name}", 'email': f"{req.user.email}",})
     else:
         form = contactForm()
     return render(req, "home/contact.html", {'form': form})
 
-
 def about(req):
     return render(req, "home/about.html")
-
 
 def search(req):
     try:

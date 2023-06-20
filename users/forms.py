@@ -11,7 +11,6 @@ from .models import Profile
 
 
 class SigninForm(AuthenticationForm):
-    # ! To add custom class to all fields of forms
     def __init__(self, *args, **kwargs):
         super(SigninForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
@@ -35,7 +34,6 @@ class UserRegisterForm(UserCreationForm):
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'full-width'
 
-
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(label="Email address", required=True)
     first_name = forms.CharField(max_length=150)
@@ -52,7 +50,6 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class ProfileUpdateForm(forms.ModelForm):
-    
     fb = forms.URLField(label="Facebook", required=False)
     insta = forms.URLField(label="Instagram", required=False)
     snap = forms.URLField(label="snapchat", required=False)

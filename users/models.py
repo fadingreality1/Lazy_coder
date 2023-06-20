@@ -4,20 +4,15 @@ from django.utils import timezone
 from PIL import Image
 from phonenumber_field.modelfields import PhoneNumberField
 
-# ? Modifying user model to make email field unique
-
 User._meta.get_field('email')._unique = True
 
 class Profile(models.Model):
-    
     gen_choice = [
         ('M', 'Male'),
         ('F', 'Female'),
     ]
-    
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='profile_pics', blank=True, null= True, default=None)
-    
     phone_number = PhoneNumberField(blank=True, null=True)
     date_of_birth = models.DateField(default=timezone.now, blank=True, null=True)
     address = models.CharField(max_length=200, null=True, blank=True)
@@ -36,7 +31,6 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Profile"
     
-    # ! This is modified save method which will resize the image to save our storage  using oillow library
     def save(self ,*args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
         if self.image:
