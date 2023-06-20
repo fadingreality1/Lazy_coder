@@ -52,11 +52,12 @@ def signup(req):
         
 @login_required(login_url='signin')
 def updateProfile(req):
-    # try: 
+    try: 
         if req.method == "POST":
             old_image = ''
             if req.user.profile.image:
-                old_image = req.user.profile.image.path
+                if os.path.isfile(req.user.profile.image.path):
+                    old_image = req.user.profile.image.path
             u_form = UserUpdateForm(req.POST, instance=req.user)
             p_form = ProfileUpdateForm(req.POST, req.FILES, instance=req.user.profile)
             if u_form.is_valid() and p_form.is_valid():
@@ -70,16 +71,16 @@ def updateProfile(req):
             u_form = UserUpdateForm(instance=req.user)
             p_form = ProfileUpdateForm(instance=req.user.profile)
         return render(req, "users/update_profile.html",{'uform': u_form, 'pform':p_form})
-    # except Exception as e:
+    except Exception as e:
         messages.error(req, "Some error occured while updating your profile. kindly contact Lazy coder team or try again.")
         return redirect("home")
 
 @login_required(login_url='signin')
 def deleteUser(req):
     try:
-        old = '' or req.user.profile.image
-        if old:
-            os.remove(old)
+        if req.user.profile.image:
+                if os.path.isfile(req.user.profile.image.path):
+                    os.remove(req.user.profile.image.path)
         User.objects.get(username = req.user).delete()
         messages.success(req, "account deleted successfully")
         return redirect('home')
