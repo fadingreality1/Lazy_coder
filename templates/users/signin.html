@@ -1,29 +1,21 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block middle_section %}
-
+{% extends '../base.html' %} {% load static %} {% block middle_section %}
 <main class="row content__page">
-	<section class="column large-full entry format-standard">
-		<h3 class="h2" style="margin-top:0;">Signin</h3>
-		<form name="signinForm" id="signinForm" method="post" action="" autocomplete="off">
-			{% csrf_token %}
-			<fieldset>
-				{% comment %} ! crack head problem to show errors bitch {% endcomment %}
-				{{form.non_field_errors}}
-				{{form.password.errors}}
-				{% for field in form %}
-				<div class="form-field">
-					<strong>{{field.label}} :</strong>
-					{{field}}
-				</div>
-				{% endfor %}
-				<input name="submit" id="submit" class="btn btn--primary" value="Signin"
-					type="submit">
-			</fieldset>
-			First time here? <a href="{% url 'signup' %}" class="">Signup</a>.<br/>
-			Forgot password? <a href="{% url 'forgot_password' %}" class="">Click here</a>.
-		</form> <!-- end form -->
-	</section>
+<section class="column large-full entry format-standard">
+<h3 class=h2 style=margin-top:0>Signin</h3>
+<form name=signinForm id=signinForm method=post action="" autocomplete=off>
+{% csrf_token %}
+<fieldset>
+{{form.non_field_errors}} {{form.password.errors}} {% for field in form %}
+<div class=form-field>
+<strong>{{field.label}} :</strong>
+{{field}}
+</div>
+{% endfor %}
+<input name=submit id=submit class="btn btn--primary" value=Signin type=submit>
+</fieldset>
+First time here? <a href="{% url 'signup' %}">Signup</a>.<br>
+Forgot password? <a href="{% url 'forgot_password' %}">Click here</a>.
+</form>
+</section>
 </main>
-
 {% endblock middle_section %}

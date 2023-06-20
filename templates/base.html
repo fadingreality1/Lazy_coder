@@ -1,91 +1,43 @@
 {% load static %}
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<!doctype html>
+<html class=no-js lang=en>
 <head>
-	<!--- basic page needs
-    ================================================== -->
-	<meta charset="utf-8" />
-	<title>Lazy Coder</title>
-
-	<!-- mobile specific metas
-    ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<!-- CSS
-    ================================================== -->
-	<link rel="stylesheet" href="{% static 'css/base.css' %}" />
-	<link rel="stylesheet" href="{% static 'css/vendor.css' %}" />
-	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
-
-	<!-- script
-    ================================================== -->
-	<script src="{% static 'js/modernizr.js' %}"></script>
-
-	<!-- favicons
-    ================================================== -->
-	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
-	<link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicon/android-chrome-192x192.png' %}" />
-	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
-	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
-	<link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
-	<style>
-		.bg1 {
-			background-size: cover;
-			background-position: center;
-			background-image : url({% static 'images/main.gif' url %});
-			padding: 5rem;
-			margin-bottom: 5rem;
-			background-repeat: no-repeat;
-		}
-	</style>
+<meta charset=utf-8>
+<title>Lazy Coder</title>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=stylesheet href="{% static 'css/base.css' %}">
+<link rel=stylesheet href="{% static 'css/vendor.css' %}">
+<link rel=stylesheet href="{% static 'css/main.css' %}">
+<script src="{% static 'js/modernizr.js' %}"></script>
+<link rel=icon type=image/png sizes=32x32 href="{% static 'favicon/favicon-32x32.png' %}">
+<link rel=icon type=image/png sizes=192x192 href="{% static 'favicon/android-chrome-192x192.png' %}">
+<link rel=icon type=image/png sizes=32x32 href="{% static 'favicon/favicon-32x32.png' %}">
+<link rel=icon type=image/png sizes=16x16 href="{% static 'favicon/favicon-16x16.png' %}">
+<link rel=manifest href="{% static 'favicon/site.webmanifest' %}">
+<style>.bg1{background-size:cover;background-position:center;background-image:url({% static 'images/main.gif' url %});padding:5rem;margin-bottom:5rem;background-repeat:no-repeat}</style>
 </head>
-
 <body>
-	<!-- preloader
-    ================================================== -->
-	<div id="preloader">
-		<div id="loader" class="dots-fade">
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</div>
-
-	<div id="top" class="s-wrap site-wrapper">
-		<!-- site header
-        ================================================== -->
-
-		{% include "header.html" %}
-
-		<!-- Content section
-    ================================================== -->
-		<div class="s-content content">
-			{% if messages %}
-				{% for message in messages %}
-					<div class="alert-box alert-box--{{message.tags}} hideit st1">
-						<p>{{message}}</p>
-						<i class="fa fa-times alert-box__close" aria-hidden="true"></i>
-					</div>
-				{% endfor %}
-			{% endif %}
-			{% block middle_section %}
-
-			{% endblock middle_section %}
-		</div>
-		<!-- end s-content -->
-
-		<!-- footer
-        ================================================== -->
-		{% include "footer.html" %}
-	</div>
-	<!-- end s-wrap -->
-
-	<!-- Java Script
-    ================================================== -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="{% static 'js/plugins.js' %}"></script>
-	<script src="{% static 'js/main.js' %}"></script>
+<div id=preloader>
+<div id=loader class=dots-fade>
+<div></div>
+<div></div>
+<div></div>
+</div>
+</div>
+<div id=top class="s-wrap site-wrapper">
+{% include "header.html" %}
+<div class="s-content content">
+{% if messages %} {% for message in messages %}
+<div class="alert-box alert-box--{{message.tags}} hideit st1">
+<p>{{message}}</p>
+<i class="fa fa-times alert-box__close" aria-hidden=true></i>
+</div>
+{% endfor %} {% endif %} {% block middle_section %} {% endblock middle_section %}
+</div>
+{% include "footer.html" %}
+</div>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
+<script src="{% static 'js/plugins.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 </body>
-
 </html>

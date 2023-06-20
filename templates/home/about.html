@@ -1,59 +1,45 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block middle_section %}
-
+{% extends '../base.html' %} {% load static %} {% block middle_section %}
 <main class="row content__page">
-	<section class="column large-full entry format-standard">
-		<div class="media-wrap">
-			<div>
-				<img src="{% static 'images/thumbs/about/lazy_coder.png' %}" srcset="{% static 'images/thumbs/about/lazy_coder.png' %} 2000w, 
-				{% static 'images/thumbs/about/lazy_coder_1000.png' %} 1000w, 
-				{% static 'images/thumbs/about/lazy_coder_500.png' %} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
-			</div>
-		</div>
-
-		<div class="content__page-header">
-			<h1 class="display-1">Welcome to Lazy Coder!</h1>
-		</div>
-		<!-- end content__page-header -->
-
-		<p class="lead drop-cap">
-			Hey there, fellow coding enthusiasts and self-proclaimed lazy folks! Welcome to Lazy Coder, a blog dedicated to all things coding, productivity, and breaking free from the clutches of laziness.
-		</p>
-
-		<h2>Why Lazy Coder?</h2>
-
-		<p>
-			Lazy Coder was born out of a unique combination of two factors: my passion for coding and my personal struggle with laziness. Like many of you, I often found myself procrastinating and putting off tasks, especially when it came to coding projects. But I realized that laziness doesn't have to be a roadblock—it can be a catalyst for creativity and efficiency.
-		</p>
-		<hr />
-
-		<div class="row block-large-1-2 block-tab-full">
-			<div class="column">
-				<h4>What to Expect</h4>
-				<p>
-					On this blog, you'll find a treasure trove of tips, tutorials, and insights that will empower you to overcome laziness and become a more productive coder. From practical coding techniques and time-saving shortcuts to project management strategies and motivation boosters, we cover a wide range of topics to fuel your coding journey.
-				</p>
-			</div>
-
-			<div class="column">
-				<h4>Join the Lazy Coder Community</h4>
-				<p>
-					Lazy Coder is more than just a blog—it's a community of like-minded individuals striving to improve their coding skills while embracing their lazy side. We encourage you to actively engage with us by sharing your thoughts, asking questions, and contributing your own tips and tricks. Together, we can learn, grow, and achieve great things.
-				</p>
-			</div>
-			<p>
-				Thank you for visiting Lazy Coder, and we hope you find inspiration and practical wisdom that will transform your coding journey.
-
-			</p>
-			<p>
-				Credits: I would like to thank <a href="https://www.styleshout.com/" target="_blank">StyleShout</a> for this amazing template on which i could put my Django skills and made it into full stack website.
-			</p>
-			<p>
-				With their template as it's base, i could include minor tweaks to the template to modify it according to my use and apply my django knowledge and work to put up this Blog Website.
-			</p>
-		</div>
-	</section>
+<section class="column large-full entry format-standard">
+<div class=media-wrap>
+<div>
+<img src="{% static 'images/thumbs/about/lazy_coder.png' %}" srcset="{% static 'images/thumbs/about/lazy_coder.png' %} 2000w, {% static 'images/thumbs/about/lazy_coder_1000.png' %} 1000w, {% static 'images/thumbs/about/lazy_coder_500.png' %} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+</div>
+</div>
+<div class=content__page-header>
+<h1 class=display-1>Welcome to Lazy Coder!</h1>
+</div>
+<p class="lead drop-cap">
+Hey there, fellow coding enthusiasts and self-proclaimed lazy folks! Welcome to Lazy Coder, a blog dedicated to all things coding, productivity, and breaking free from the clutches of laziness.
+</p>
+<h2>Why Lazy Coder?</h2>
+<p>
+Lazy Coder was born out of a unique combination of two factors: my passion for coding and my personal struggle with laziness. Like many of you, I often found myself procrastinating and putting off tasks, especially when it came to coding projects. But I realized that laziness doesn't have to be a roadblock—it can be a catalyst for creativity and efficiency.
+</p>
+<hr>
+<div class="row block-large-1-2 block-tab-full">
+<div class=column>
+<h4>What to Expect</h4>
+<p>
+On this blog, you'll find a treasure trove of tips, tutorials, and insights that will empower you to overcome laziness and become a more productive coder. From practical coding techniques and time-saving shortcuts to project management strategies and motivation boosters, we cover a wide range of topics to fuel your coding journey.
+</p>
+</div>
+<div class=column>
+<h4>Join the Lazy Coder Community</h4>
+<p>
+Lazy Coder is more than just a blog—it's a community of like-minded individuals striving to improve their coding skills while embracing their lazy side. We encourage you to actively engage with us by sharing your thoughts, asking questions, and contributing your own tips and tricks. Together, we can learn, grow, and achieve great things.
+</p>
+</div>
+<p>
+Thank you for visiting Lazy Coder, and we hope you find inspiration and practical wisdom that will transform your coding journey.
+</p>
+<p>
+Credits: I would like to thank <a href=https://www.styleshout.com/ target=_blank>StyleShout</a> for this amazing template on which i could put my Django skills and made it into full stack website.
+</p>
+<p>
+With their template as it's base, i could include minor tweaks to the template to modify it according to my use and apply my django knowledge and work to put up this Blog Website.
+</p>
+</div>
+</section>
 </main>
-
 {% endblock middle_section %}

@@ -133,7 +133,7 @@ USE_TZ = True
 
 # ! Setup for static files 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR, "static",

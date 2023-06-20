@@ -1,7 +1,4 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block middle_section %}
-
+{% extends '../base.html' %}{% load static %}{% block middle_section %}
 <main class="row content__page">
     <article class="column large-full entry format-standard">
         <div class="media-wrap entry__media">
@@ -12,7 +9,6 @@
                 width: 80%;"/ >
             </div>
         </div>
-
         <div class="content__page-header entry__header">
             <h1 class="display-1 entry__title">{{post.title}}</h1>
             <ul class="entry__header-meta">
@@ -21,16 +17,12 @@
                 </li>
                 <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
                 <li class="cat-links">
-
-                    {% comment %} ! to access ManyToMany field via template {% endcomment %}
                     {% for cat in post.categories.all %}
                         <a href="{% url 'category_post' category=cat.title %}">{{cat.title}}</a>
                     {% endfor %}
                 </li>
             </ul>
         </div>
-        <!-- end entry__header -->
-
         <div class="entry__content">
             <p class="lead drop-cap">{{post.description}}</p>
 
@@ -40,7 +32,6 @@
                 <span>Views ({{post.viewers.count}})</span>
             </p>
         </div>
-        <!-- end entry content -->
         <div style="display:flex;">
             <form action="{% url 'like_post' %}" method="POST" style = "margin-right:1em;">
                 {% csrf_token %}
@@ -78,8 +69,6 @@
             </div>
            {% endif %}
     </article>
-    <!-- end column large-full entry-->
-
     {% if request.user.is_authenticated %}
     <h3 class="h3">Add Comment.</h3>
     <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
@@ -100,16 +89,7 @@
         <a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.
     </h3>
     {% endif %}
-
     {% if comments.count == 0 %}
-
-    <h3 class="h3">No comments yet. be the first person to comment</h3>
-
-    {% else %}
-
-    {% include "blog/comment/comment_section.html" with comments=comments %}
-
-    {% endif %}
+    <h3 class="h3">No comments yet. be the first person to comment</h3>{% else %}{% include "blog/comment/comment_section.html" with comments=comments %}{% endif %}
 </main>
-
 {% endblock middle_section %}

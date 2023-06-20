@@ -1,12 +1,5 @@
-{% extends '../base.html' %}
-{% load static %}
-{% block middle_section %}
-
-{% if s %}
-{% comment %} ! If searched {% endcomment %}
-
+{% extends '../base.html' %}{% load static %}{% block middle_section %}{% if s %}
 <div class="container">
-	{% comment %} <h1>Search result for "{{s}}":</h1> {% endcomment %}
 	{% if posts.count%}
 	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Search results for
 		"<strong>{{s|truncatechars:20}}</strong>" ({{posts.count}}) :</h3>
@@ -24,17 +17,7 @@
 	</p>
 	{% endif %}
 </div>
-
-{% endif %}
-
-{% comment %} ! to handle whether page paginated or is a search result {% endcomment %}
-
-{% if posts.paginator.count or posts.count %}
-
-{% include "blog/article.html" with posts=posts %}
-
-{% if posts.paginator.count %}
-
+{% endif %}{% if posts.paginator.count or posts.count %}{% include "blog/article.html" with posts=posts %}{% if posts.paginator.count %}
 	<div class="row">
 		<div class="column large-full">
 			<nav class="pgn">
@@ -64,9 +47,4 @@
 			</nav>
 		</div>
 	</div>
-
-{% endif %}
-
-{% endif %}
-
-{% endblock middle_section %}
+{% endif %}{% endif %}{% endblock middle_section %}
