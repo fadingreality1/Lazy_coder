@@ -1,0 +1,19 @@
+{% load static %}
+<div id="rb{{id}}">
+    <div class="comment" id="collapsible{{id}}">
+        <input type="checkbox" id="collapsible-head{{id}}" class="checkbox_1">
+        <label for="collapsible-head{{id}}"
+            style="text-transform: uppercase; color:black; font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.15em; padding:0; margin:0;"
+            id="label{{id}}">Reply</label>
+        <div id="collapsible-text{{id}}">
+            <form action="{% url 'post_comment' post.slug %}" method="post" id="form{{id}}">
+                {% csrf_token %}
+                <input type="hidden" name="parent_id" value="{{id}}">
+                <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text"
+                    maxlength="700" required>
+                <input name="submit1" id="submit" class="btn btn--medium" value="Add Reply" type="submit"
+                    style="width:min-content;">
+            </form>
+        </div>
+    </div>
+</div>
