@@ -17,35 +17,35 @@
 </li><br>
 {% if user.profile.github %}
 <li>
-<a href="" title=Github><img src="{% static 'images/icons/github.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.github}}" title=Github><img src="{% static 'images/icons/github.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.fb %}
 <li>
-<a href="" title=facebook><img src="{% static 'images/icons/facebook.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.fb}}" title=facebook><img src="{% static 'images/icons/facebook.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.insta %}
 <li>
-<a href="" title=instagram><img src="{% static 'images/icons/instagram.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.insta}}" title=instagram><img src="{% static 'images/icons/instagram.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.linkedin %}
 <li>
-<a href="" title=linkedin><img src="{% static 'images/icons/linkedin.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.linkedin}}" title=linkedin><img src="{% static 'images/icons/linkedin.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.snap %}
 <li>
-<a href="" title=snapchat><img src="{% static 'images/icons/snapchat.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.snap}}" title=snapchat><img src="{% static 'images/icons/snapchat.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.twitter %}
 <li>
-<a href="" title=twitter><img src="{% static 'images/icons/twitter.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.twitter}}" title=twitter><img src="{% static 'images/icons/twitter.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.profile.website %}
 <li>
-<a href="" title=website><img src="{% static 'images/icons/website.svg' %}" alt="" style=height:30px></a>
+<a href="{{user.profile.website}}" title=website><img src="{% static 'images/icons/website.svg' %}" alt="" style=height:30px></a>
 </li>
 {% endif %} {% if user.email %}
 <li>
-<a href="" title=email><img src="{% static 'images/icons/email.svg' %}" alt="" style=height:35px></a>
+<a href="{{user.email}}" title=email><img src="{% static 'images/icons/email.svg' %}" alt="" style=height:35px></a>
 </li>
 {% endif %}
 </ul>
