@@ -50,10 +50,12 @@
 {% endif %}
 </ul>
 </div>
+{% if user.profile.bio %}
 <h3 style=margin-top:1em>About me.</h3>
 <p>
 {{user.profile.bio}}
 </p>
+{% endif %}
 <div>
 <h3>Stats:</h3>
 <ul class=stats-tabs>

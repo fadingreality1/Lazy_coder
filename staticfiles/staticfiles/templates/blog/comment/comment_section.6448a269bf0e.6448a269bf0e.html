@@ -1,0 +1,9 @@
+{% load static %}
+<div class=large-full>
+<div id=comments class="column large-12">
+<h3 class=h3>{{comments.count}} Comments.</h3>
+<ol class=commentlist>
+{% for comment in comments %} {% include "blog/comment/comment.html" with comment=comment %} {% endfor %}
+</ol>
+</div>
+</div>

@@ -1,0 +1,19 @@
+remaining task:
+1. profile page bnana
+2. profile update page bnana including delete route
+
+3. post create page bnana [done]
+4. post update page bnana with delete button [done]
+
+5. comment delete button bnana author of post and writer or comment, dono k lie. [done]
+
+6. reset and update password route bnana.
+7. google ka integration hopae to vo bhi.
+
+8. add paginations to blog pages [done]
+9. category wise filteration on a seperate page render [done]
+10. user wise filteration [done]
+11. adding tags to posts
+
+
+**Ab jitni facilities bnai h abhi tk, unko sampurna roop se pakka krna h 

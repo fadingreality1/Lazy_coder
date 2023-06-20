@@ -1,0 +1,59 @@
+<style>
+    #rb{{id}} #collapsible{{id}}{
+        overflow: hidden;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        height: fit-content;
+        margin-bottom: 1em;
+      }
+      
+    #rb{{id}} #collapsible{{id}} .checkbox_1{
+        display: none;
+      }
+      
+    #rb{{id}} #collapsible{{id}} #label{{id}}{
+        position: relative;
+        display: block;
+        cursor: pointer; 
+        z-index: 1;
+      }
+      
+    #rb{{id}} #collapsible{{id}} #label{{id}}::after{
+        content : "";
+        position: absolute;
+        transition: all 0.3 ease;
+        right: 15px;
+        top: 20px;
+        width: 18px;
+        height: 18px;
+      }
+      
+    #rb{{id}} #collapsible-head{{id}}:checked + #collapsible{{id}} #label{{id}}::after{
+        transform: rotate(90deg);
+        transition: all 0.3 ease;
+      }
+      
+    #rb{{id}} #collapsible-text{{id}}{
+        max-height: 1px;
+        overflow: hidden;
+        line-height: 1.4;
+        position: relative;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+        top: -100%;
+      }
+      
+    #rb{{id}} #collapsible{{id}} #collapsible-head{{id}}:checked ~ #collapsible-text{{id}}{
+        max-height: 300px;
+        background: #f6f7f8;
+        padding-bottom: 25px;
+        opacity: 1;
+        top: 0;
+      }
+      
+      #rb{{id}} #collapsible-text{{id}} #form{{id}}{
+        display: flex;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+</style>

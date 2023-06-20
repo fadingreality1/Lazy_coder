@@ -1,0 +1,87 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block middle_section %}
+
+{% if posts.paginator.count == 0 and c %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists for
+		"<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count == 0 and u %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists by author
+		"<strong>{{uname.first_name}} {{uname.last_name}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count == 0 and cu %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">No Posts Exists by author
+		"<strong>{{uname.first_name}} {{uname.last_name}}</strong>" in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and cu %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts By "<strong>{{uname.first_name}} {{uname.last_name}}</strong>" in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and c %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts in category "<strong>{{catname}}</strong>".</h3>
+</div>
+{% endif %}
+
+{% if posts.paginator.count != 0 and u %}
+<div class="container">
+	<h3 style="margin-top:0;margin-bottom:5rem" class="adjustments">Posts by Author "<strong>{{uname.first_name}} {{uname.last_name}}</strong>".</h3>
+	<p class="adjustments">
+</div>
+{% endif %}
+
+
+{% if posts.paginator.count or posts.count %}
+
+{% include "blog/article.html" with posts=posts %}
+
+{% if posts.paginator.count %}
+
+	<div class="row">
+		<div class="column large-full">
+			<nav class="pgn">
+				<ul>
+					{% if posts.has_previous %}
+					<li><a class="pgn__prev" href="?page={{posts.previous_page_number}}" title="Previous page">Prev</a></li>
+					{% endif %}
+					{% if posts.number|add:'-4' > 0 %}
+						<li><span><a class="pgn__num dots" href="?page=1">First</a></span></li>
+						<li><span class="pgn__num dots">…</span></li>
+					{% endif %}
+					{% for num in posts.paginator.page_range %}
+						{% if posts.number == num %}
+							<li><span class="pgn__num current">{{num}}</span></li>
+						{% elif num > posts.number|add:'-4' and num < posts.number|add:'4' %}
+							<li><a href="?page={{num}}" class="pgn__num">{{num}}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if posts.number|add:'4' <= posts.paginator.num_pages %}
+						<li><span class="pgn__num dots">…</span></li>
+						<li><span><a class="pgn__num dots" href="?page={{posts.paginator.num_pages}}">Last</a></span></li>
+					{% endif %}
+					{% if posts.has_next %}
+						<li><a class="pgn__next" href="?page={{posts.next_page_number}}" title="Next page">Next</a></li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+{% endif %}
+
+
+{% endif %}
+
+{% endblock middle_section %}

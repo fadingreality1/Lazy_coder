@@ -1,0 +1,95 @@
+{% extends '../base.html' %}{% load static %}{% block middle_section %}
+<main class="row content__page">
+    <article class="column large-full entry format-standard">
+        <div class="media-wrap entry__media">
+            <div class="entry__post-thumb">
+                <img src="{{post.image.url}}" alt=""  style="display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;"/ >
+            </div>
+        </div>
+        <div class="content__page-header entry__header">
+            <h1 class="display-1 entry__title">{{post.title}}</h1>
+            <ul class="entry__header-meta">
+                <li class="author">
+                    By <a href="{% url 'profile' username=post.author.username %}">{{post.author.first_name|title}}</a>
+                </li>
+                <li class="date">{{post.date_posted|date:"F j, Y"}}</li>
+                <li class="cat-links">
+                    {% for cat in post.categories.all %}
+                        <a href="{% url 'category_post' category=cat.title %}">{{cat.title}}</a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+        <div class="entry__content">
+            <p class="lead drop-cap">{{post.description}}</p>
+
+            <p>{{post.content|safe}}</p>
+
+            <p class="entry__tags">
+                <span>Views ({{post.viewers.count}})</span>
+            </p>
+        </div>
+        <div style="display:flex;">
+            <form action="{% url 'like_post' %}" method="POST" style = "margin-right:1em;">
+                {% csrf_token %}
+                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-success" >Like ({{post.likers.count}})</button>
+            </form>
+            <form action="{% url 'dislike_post' %}" method="POST" style = "margin-right:1em;">
+                {% csrf_token %}
+                <button type="submit" name='post_id' value="{{post.id}}" class="btn btn-danger" >Dislike ({{post.dislikers.count}})</button>
+            </form>  
+        </div>
+        {% if request.user == post.author %}
+            <div style="display:flex; maximum-width:100%;"> 
+                <a href="{% url 'update_post' post.slug %}" class="btn btn-success" style = "margin-right:1em;">Update Post</a>
+                <form onsubmit="return isconfirmed();" method="POST" style = "margin-right:1em; maximum-width:100%" id="delete_form" action="{% url 'delete_post' %}">
+                    {% csrf_token %}
+                    <button type="submit" name='post_id' id="delete_btn" value="{{post.id}}" class="btn btn-danger" >Delete Post</button>
+                </form>
+                <script>
+                    function isconfirmed(){
+                        let v = window.confirm("Are you sure you want to delete your Post?")
+                        if(v){
+                          let v2 = window.prompt("Enter your Username to complete deletion of Post.")
+                          if(v2 == '{{request.user.username}}'){
+                            return true;
+                          }
+                          else{
+                            return false;
+                          }
+                        }
+                        else{
+                            return false;
+                        }
+                      }
+                </script>
+            </div>
+           {% endif %}
+    </article>
+    {% if request.user.is_authenticated %}
+    <h3 class="h3">Add Comment.</h3>
+    <form action="{% url 'post_comment' post.slug %}" method="post" class="large-full">
+        {% csrf_token %}
+
+        <div class="form-field">
+            <input name="comment" id="cWebsite" class="full-width" placeholder="Comment here" value="" type="text" maxlength="700" required />
+        </div>
+        <input type="hidden" value="" name="parent_id" />
+
+        <div class="form-field">
+            <input name="submit" id="submit" class="btn" value="Comment" type="submit" />
+        </div>
+    </form>
+
+    {% else %}
+    <h3 class="h3">
+        <a href="{% url 'signin' %}" class="">Signin</a> to Post Comments.
+    </h3>
+    {% endif %}
+    {% if comments.count == 0 %}
+    <h3 class="h3">No comments yet. be the first person to comment</h3>{% else %}{% include "blog/comment/comment_section.html" with comments=comments %}{% endif %}
+</main>
+{% endblock middle_section %}
