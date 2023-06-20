@@ -52,7 +52,7 @@ def signup(req):
         
 @login_required(login_url='signin')
 def updateProfile(req):
-    try: 
+    # try: 
         if req.method == "POST":
             old_image = ''
             if req.user.profile.image:
@@ -70,7 +70,7 @@ def updateProfile(req):
             u_form = UserUpdateForm(instance=req.user)
             p_form = ProfileUpdateForm(instance=req.user.profile)
         return render(req, "users/update_profile.html",{'uform': u_form, 'pform':p_form})
-    except Exception as e:
+    # except Exception as e:
         messages.error(req, "Some error occured while updating your profile. kindly contact Lazy coder team or try again.")
         return redirect("home")
 

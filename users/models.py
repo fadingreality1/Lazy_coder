@@ -16,7 +16,7 @@ class Profile(models.Model):
     phone_number = PhoneNumberField(blank=True, null=True)
     date_of_birth = models.DateField(default=timezone.now, blank=True, null=True)
     address = models.CharField(max_length=200, null=True, blank=True)
-    bio = models.CharField(max_length=500, blank=True,default="")
+    bio = models.CharField(max_length=500, blank=True,default="", null=True)
     tagline = models.CharField(max_length=200, blank=True,default="", null=True)
     gender = models.CharField(choices=gen_choice, null=False, default='M', max_length=10)
     fb = models.URLField(max_length=100, null=True, blank=True,)
