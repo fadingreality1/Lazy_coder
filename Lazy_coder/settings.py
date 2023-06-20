@@ -8,7 +8,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lazycoder-production.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
