@@ -6,6 +6,7 @@ from django.db.models import Q
 from .models import VUser
 from django.utils import timezone
 from django.db.models import Count 
+from . import thread
 
 def get_ip(req):
     x_forwarded_for = req.META.get('HTTP_X_FORWARDED_FOR')
