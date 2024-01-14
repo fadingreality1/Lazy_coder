@@ -3,7 +3,7 @@
 <article class="column large-full entry format-standard">
 <div class="media-wrap entry__media" style=margin-bottom:2em>
 <div class=entry__post-thumb style=margin-bottom:0;line-height:0>
-<img src="{% if user.profile.image %}{{user.profile.image.url}}{% else %}{% static 'default.png' %}{% endif %}" alt="profile picture" style=width:200px;height:200px;border-radius:50%;display:flex;align-items:center;text-align:center;margin-right:auto;margin-left:auto>
+<img src="{% if user.profile.image %}data:image/jpeg;charset=utf-8;base64,{{user.profile.image}}{% else %}{% static 'default.png' %}{% endif %}" alt="profile picture" style=width:200px;height:200px;border-radius:50%;display:flex;align-items:center;text-align:center;margin-right:auto;margin-left:auto>
 </div>
 </div>
 <div class="content__page-header entry__header" style=margin-bottom:0;line-height:0>

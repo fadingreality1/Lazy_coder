@@ -4,3 +4,4 @@ db.sqlite3
 features.txt
 track.txt
 .env
+migrations/

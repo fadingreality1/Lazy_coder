@@ -8,9 +8,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['lazycoder-production.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '*']
 
-CSRF_TRUSTED_ORIGINS = ['https://lazycoder-production.up.railway.app']
+# CSRF_TRUSTED_ORIGINS = ['https://lazycoder-production.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,17 +58,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Lazy_coder.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASS'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_PORT'),
+#         'OPTIONS': {'sslmode': 'require'},
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASS'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
-        'OPTIONS': {'sslmode': 'require'},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

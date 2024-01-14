@@ -53,14 +53,14 @@ class ProfileUpdateForm(forms.ModelForm):
     fb = forms.URLField(label="Facebook", required=False)
     insta = forms.URLField(label="Instagram", required=False)
     snap = forms.URLField(label="snapchat", required=False)
-    image = forms.ImageField(label="profile picture", required=False)
+    proxyimage = forms.ImageField(label="Profile Picture", required=False)
     
     class Meta:
         model = Profile
         widgets = {
             'date_of_birth': DateInput(),
         }
-        fields = ['image', 'phone_number', 'date_of_birth', 'address', 'tagline', 'bio', 'gender', 'fb', 'insta', 'twitter', 'snap', 'github', 'website', 'linkedin']
+        fields = ['proxyimage', 'phone_number', 'date_of_birth', 'address', 'tagline', 'bio', 'gender', 'fb', 'insta', 'twitter', 'snap', 'github', 'website', 'linkedin']
         
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)

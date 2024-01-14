@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from PIL import Image
 from phonenumber_field.modelfields import PhoneNumberField
+import os
+import base64
+
 
 User._meta.get_field('email')._unique = True
 
@@ -12,7 +15,13 @@ class Profile(models.Model):
         ('F', 'Female'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile_pics/', blank=True, null= True, default=None)
+    # image = models.ImageField(upload_to='profile_pics/', blank=True, null= True, default=None)
+    
+    proxyimage = models.ImageField(upload_to='profile_pics/', blank=True, default=None)
+    
+    image = models.TextField(db_column='image', blank=True, null=True)
+    
+    
     phone_number = PhoneNumberField(blank=True, null=True)
     date_of_birth = models.DateField(default=timezone.now, blank=True, null=True)
     address = models.CharField(max_length=200, null=True, blank=True)
@@ -32,10 +41,18 @@ class Profile(models.Model):
         return f"{self.user.username}'s Profile"
     
     def save(self ,*args, **kwargs):
-        super(Profile, self).save(*args, **kwargs)
-        if self.image:
-            img = Image.open(self.image.path)
+        if self.proxyimage:
+            super(Profile, self).save(*args, **kwargs)
+            old_path = self.proxyimage.path
+            img = Image.open(self.proxyimage.path)
             if img.height > 500 or img.width > 500:
-                new_img_size = (500,500)
+                new_img_size = (500, 500)
                 img.thumbnail(new_img_size)
-                img.save(self.image.path)
+                img.save(self.proxyimage.path)
+            img.close()
+            with open(self.proxyimage.path, "rb") as image_file:
+                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+                self.image = image_data
+                self.proxyimage = None
+            os.remove(old_path)
+        super(Profile, self).save(*args, **kwargs)

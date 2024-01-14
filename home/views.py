@@ -18,7 +18,7 @@ def get_ip(req):
 
 
 def home(req):
-    # ! regiters new user to blog
+    # ! registers new user to blog
     ip = get_ip(req)
     viewer, _ = VUser.objects.get_or_create(ip = ip)
     viewer.last_seen = timezone.now()

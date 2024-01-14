@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.db.models import Count
-import os
 from . import thread
 from blog.models import Post
 
@@ -54,17 +53,11 @@ def signup(req):
 def updateProfile(req):
     try: 
         if req.method == "POST":
-            old_image = ''
-            if req.user.profile.image:
-                if os.path.isfile(req.user.profile.image.path):
-                    old_image = req.user.profile.image.path
             u_form = UserUpdateForm(req.POST, instance=req.user)
             p_form = ProfileUpdateForm(req.POST, req.FILES, instance=req.user.profile)
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
                 p_form.save()
-                if os.path.exists(old_image) and (req.FILES.get('image') != None or req.POST.get('image-clear') == 'on' ) :
-                    os.remove(old_image)
                 messages.success(req, f"Account Updated successfully for {req.user.first_name}.")
                 return redirect('profile', username=req.user.username)
         else:   
@@ -78,9 +71,6 @@ def updateProfile(req):
 @login_required(login_url='signin')
 def deleteUser(req):
     try:
-        if req.user.profile.image:
-                if os.path.isfile(req.user.profile.image.path):
-                    os.remove(req.user.profile.image.path)
         User.objects.get(username = req.user).delete()
         messages.success(req, "account deleted successfully")
         return redirect('home')

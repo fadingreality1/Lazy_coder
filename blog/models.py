@@ -5,6 +5,9 @@ from autoslug import AutoSlugField
 from ckeditor.fields import RichTextField
 from home.models import VUser
 from PIL import Image
+import os
+import base64
+
 
 class Category(models.Model):
     title = models.CharField(max_length=200, blank=False, unique=True)
@@ -20,7 +23,11 @@ class Post(models.Model):
     content = RichTextField(blank=False, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='blog')
+    
+    # image = models.ImageField(upload_to='blog')
+    proxyimage = models.ImageField(upload_to='blog', blank=True, default=None)
+    image = models.TextField(db_column='image', blank=True, null=True)
+    
     slug = AutoSlugField(populate_from = 'title', unique=True, null=True, default=None, always_update = True,)
     viewers = models.ManyToManyField(VUser, related_name="viewers", blank=True)
     likers = models.ManyToManyField(User, related_name='liked', blank=True)
@@ -31,12 +38,25 @@ class Post(models.Model):
         return f'{self.title}'
     
     def save(self ,*args, **kwargs):
+        if self.proxyimage != '':
+            super(Post, self).save(*args, **kwargs)
+            old_path = self.proxyimage.path
+            img = Image.open(self.proxyimage.path)
+            if img.height > 1000 or img.width > 1000:
+                new_img_size = (1000, 1000)
+                img.thumbnail(new_img_size)
+                img.save(self.proxyimage.path)
+            img.close()
+            with open(self.proxyimage.path, "rb") as image_file:
+                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+                self.image = image_data
+                self.proxyimage = None
+            os.remove(old_path)
+            
         super(Post, self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-        if img.height > 1000 or img.width > 1000:
-            new_img_size = (1000,1000)
-            img.thumbnail(new_img_size)
-            img.save(self.image.path)
+        
+        
+        
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
