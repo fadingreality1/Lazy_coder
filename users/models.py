@@ -54,5 +54,5 @@ class Profile(models.Model):
                 image_data = base64.b64encode(image_file.read()).decode('utf-8')
                 self.image = image_data
                 self.proxyimage = None
-            os.remove(old_path)
+            # os.remove(old_path)
         super(Profile, self).save(*args, **kwargs)
