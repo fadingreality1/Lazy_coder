@@ -5,3 +5,5 @@ features.txt
 track.txt
 .env
 migrations/
+Pipfile.lock
+Pipfile
