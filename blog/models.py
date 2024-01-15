@@ -38,7 +38,7 @@ class Post(models.Model):
         return f'{self.title}'
     
     def save(self ,*args, **kwargs):
-        if self.proxyimage != '':
+        if self.proxyimage:
             super(Post, self).save(*args, **kwargs)
             old_path = self.proxyimage.path
             img = Image.open(self.proxyimage.path)

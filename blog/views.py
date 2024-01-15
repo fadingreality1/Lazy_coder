@@ -8,7 +8,6 @@ from home.views import get_ip
 from home.models import VUser
 from django.core.paginator import Paginator
 from .forms import PostCreateForm
-import os
 from django.utils import timezone
 
 def home(req):
@@ -145,11 +144,7 @@ def update(req, slug):
             prev_post = Post.objects.get(slug = slug)
             if prev_post.author != req.user:
                 messages.warning(req, "Not your Post nigga.")
-                return redirect("home")
-            old_image = ''
-            if os.path.isfile(prev_post.image.path):
-                old_image = prev_post.image.path
-            
+                return redirect("home")            
             form = PostCreateForm(req.POST, req.FILES, instance=prev_post)
             if form.is_valid():
                 for i in prev_post.categories.all():
@@ -158,8 +153,6 @@ def update(req, slug):
                 choice_selected = [int(x) for x in req.POST.getlist('category')]
                 for i in choice_selected[:3]:
                     Updated_post.categories.add(Category.objects.get(id = i))
-                if os.path.exists(old_image) and req.POST.get('image') != None :
-                    os.remove(old_image)
                 messages.success(req, "Post has been updated successfully.")
                 return redirect("post_detail", slug = Updated_post.slug)
             else:
@@ -182,9 +175,7 @@ def delete(req):
         if post.author != req.user:
             messages.warning(req, "Not your Post nigga.")
             return redirect("home")
-        old_image = post.image.path
         post.delete()
-        os.remove(old_image)
         messages.success(req, "Post Deleted Successfully.")
         return redirect("home")
     except Exception as e:

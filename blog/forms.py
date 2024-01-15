@@ -16,10 +16,10 @@ class PostCreateForm(forms.ModelForm):
             required=True,
             widget=forms.TextInput(attrs={"class": "full-width", "placeholder":"Description of Post",}),
         )
-    image = forms.ImageField(
+    proxyimage = forms.ImageField(
             label="Image",
             required=True,
-            help_text="for front view"
+            help_text="for front view",
         )
     content = RichTextFormField()
     category = forms.ModelMultipleChoiceField(
@@ -30,7 +30,7 @@ class PostCreateForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ['title', 'description', 'image', 'category', 'content',]
+        fields = ['title', 'description', 'proxyimage', 'category', 'content',]
         
     def __init__(self, *args, **kwargs):
         super(PostCreateForm, self).__init__(*args, **kwargs)
