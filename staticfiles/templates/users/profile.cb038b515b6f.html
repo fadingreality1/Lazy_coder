@@ -1,0 +1,101 @@
+{% extends '../base.html' %} {% load static %} {% block middle_section %}
+<main class="row content__page">
+<article class="column large-full entry format-standard">
+<div class="media-wrap entry__media" style=margin-bottom:2em>
+<div class=entry__post-thumb style=margin-bottom:0;line-height:0>
+<img src="{% if user.profile.image %}data:image/jpeg;charset=utf-8;base64,{{user.profile.image}}{% else %}{% static 'default.png' %}{% endif %}" alt="profile picture" style=width:200px;height:200px;border-radius:50%;display:flex;align-items:center;text-align:center;margin-right:auto;margin-left:auto>
+</div>
+</div>
+<div class="content__page-header entry__header" style=margin-bottom:0;line-height:0>
+<h1 class="display-1 entry__title">{{user.first_name|title}} {{user.last_name|title}}</h1><br>
+<ul class=entry__header-meta style=margin-bottom:0>
+<li class=author>
+<a href=#0>@{{user.username}}</a>
+</li><br>
+<li>
+{{user.profile.tagline}}
+</li><br>
+{% if user.profile.github %}
+<li>
+<a href="{{user.profile.github}}" title=Github><img src="{% static 'images/icons/github.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.fb %}
+<li>
+<a href="{{user.profile.fb}}" title=facebook><img src="{% static 'images/icons/facebook.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.insta %}
+<li>
+<a href="{{user.profile.insta}}" title=instagram><img src="{% static 'images/icons/instagram.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.linkedin %}
+<li>
+<a href="{{user.profile.linkedin}}" title=linkedin><img src="{% static 'images/icons/linkedin.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.snap %}
+<li>
+<a href="{{user.profile.snap}}" title=snapchat><img src="{% static 'images/icons/snapchat.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.twitter %}
+<li>
+<a href="{{user.profile.twitter}}" title=twitter><img src="{% static 'images/icons/twitter.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.profile.website %}
+<li>
+<a href="{{user.profile.website}}" title=website><img src="{% static 'images/icons/website.svg' %}" alt="" style=height:30px></a>
+</li>
+{% endif %} {% if user.email %}
+<li>
+<a href="{{user.email}}" title=email><img src="{% static 'images/icons/email.svg' %}" alt="" style=height:35px></a>
+</li>
+{% endif %}
+</ul>
+</div>
+{% if user.profile.bio %}
+<h3 style=margin-top:1em>About me.</h3>
+<p>
+{{user.profile.bio}}
+</p>
+{% endif %}
+<div>
+<h3>Stats:</h3>
+<ul class=stats-tabs>
+<li><a href=javascript:void(0)>{{count}}<em>Posts</em></a></li>
+<li><a href=javascript:void(0)>{{likes}}<em>Likes</em></a></li>
+<li><a href=javascript:void(0)>{{views}}<em>Views</em></a></li>
+<li><a href=javascript:void(0)>{{dislikes}}<em>Dislikes</em></a></li>
+</ul>
+<h3>Categories in which i have posted:</h3>
+<ul class=disc>
+{% for cat in category %}
+<li><a href="{% url 'category_post_user' category=cat.title username=user.username %}" class=j>{{cat.title}}</a></li>
+{% endfor %}
+</ul>
+<div>
+<h3>Popular blog posts by me.</h3>
+</div>
+{% include "blog/article.html" with posts=posts %}
+<div>
+<h3>For All posts by me follow the <a href="{% url 'user_post' username=user.username %}">Link</a>.</h3>
+{% if request.user.is_authenticated and request.user == user %}
+<a href="{% url 'update_profile' %}" class="btn btn-success" title="Update account">update</a>
+<a href=javascript:isconfirmed() class="btn btn-danger" title="delete account">delete</a>
+<a href="{% url 'change_password' %}" class="btn btn-info" title="Change Password">Change Password</a>
+{% endif %}
+</div>
+<script>
+function isconfirmed(){
+              let v = window.confirm("Are you sure you want to delete your account?")
+              if(v){
+                let v = window.prompt("Enter your Username to complete deletion of profile.")
+                if(v == '{{request.user.username}}'){
+                  window.location.replace('{% url 'delete_profile' %}');
+                }
+                else{
+                  window.alert("Username didn't matched.")
+                }
+              }
+            }
+</script>
+</div></article>
+</main>
+{% endblock middle_section %}

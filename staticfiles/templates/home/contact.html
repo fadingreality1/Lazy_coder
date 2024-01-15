@@ -1,0 +1,46 @@
+{% extends '../base.html' %} {% load static %} {% block middle_section %}
+<main class="row content__page">
+<section class="column large-full entry format-standard">
+<div class=media-wrap>
+<div>
+<img src="{% static 'images/thumbs/contact/contact-1000.jpg' %}" srcset="{% static 'images/thumbs/contact/contact-2000.jpg' %} 2000w, {% static 'images/thumbs/contact/contact-1000.jpg' %} 1000w, {% static 'images/thumbs/contact/contact-500.jpg' %} 500w" sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+</div>
+</div>
+<div class=content__page-header>
+<h1 class=display-1>Get In Touch.</h1>
+</div>
+<p class="lead drop-cap">
+We love hearing from our readers! Whether you have a question, a suggestion, or simply want to say hello, we're here to listen. Feel free to reach out to us using the contact information provided below.
+</p>
+<p>
+We value your feedback and insights. If you have comments or suggestions specifically about a blog post, we encourage you to leave a comment directly on the respective article. This way, other readers can benefit from the discussion and contribute their thoughts as well.
+</p>
+<p>
+At Lazy Coder, we take your privacy seriously. Thank you for your interest in Lazy Coder. We look forward to hearing from you and continuing this coding journey together!
+</p>
+<div class=row>
+<div class="column large-six tab-full">
+<h4>Where to Find Us</h4>
+<p>
+Bundelkhand Institute of engineering and Technology<br>
+Jhansi,<br>
+284128, UP
+</p>
+</div>
+</div>
+<h3 class=h1>Say Hello</h3>
+<form name=contactForm id=contactForm method=post action="" autocomplete=off>
+{% csrf_token %}
+<fieldset>
+{% for field in form %}
+<div class=form-field>
+{{field.label}} : {{field}}
+<small>{{field.errors}}</small>
+</div>
+{% endfor %}
+<input name=submit id=submit class="btn btn--primary btn-wide btn--large full-width" value="Send Message" type=submit>
+</fieldset>
+</form>
+</section>
+</main>
+{% endblock middle_section %}
