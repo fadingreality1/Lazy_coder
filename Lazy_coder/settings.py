@@ -12,7 +12,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', '.now.sh']
 
-# CSRF_TRUSTED_ORIGINS = ['https://lazycoder-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://lazy-coder-git-deployment-fadingreality1.vercel.app/']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
