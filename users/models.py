@@ -15,12 +15,9 @@ class Profile(models.Model):
         ('F', 'Female'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # image = models.ImageField(upload_to='profile_pics/', blank=True, null= True, default=None)
     
     proxyimage = models.ImageField(upload_to='profile_pics/', blank=True, default=None)
-    
     image = models.TextField(db_column='image', blank=True, null=True)
-    
     
     phone_number = PhoneNumberField(blank=True, null=True)
     date_of_birth = models.DateField(default=timezone.now, blank=True, null=True)
