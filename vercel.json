@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "Task_Manager/wsgi.py",
+            "src": "Lazy_coder/wsgi.py",
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
@@ -13,7 +13,7 @@
             "src": "build_files.sh",
             "use": "@vercel/static-build",
             "config": {
-                "distDir": "staticfiles_build"
+                "distDir": "staticfiles"
             }
         }
     ],
@@ -24,7 +24,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "Task_Manager/wsgi.py"
+            "dest": "Lazy_coder/wsgi.py"
         }
     ]
 }
