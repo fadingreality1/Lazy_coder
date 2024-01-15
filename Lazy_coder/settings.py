@@ -15,12 +15,12 @@ ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', '.now.sh']
 CSRF_TRUSTED_ORIGINS = ['https://lazy-coder-git-deployment-fadingreality1.vercel.app/']
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     'blog',
     'users',
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,6 +105,7 @@ STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '../../tmp')
 MEDIA_URL = '../../tmp/'
