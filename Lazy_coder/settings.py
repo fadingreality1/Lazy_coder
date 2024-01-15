@@ -8,7 +8,9 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '*']
+# ALLOWED_HOSTS = ['127.0.0.1', '*']
+
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', '.now.sh']
 
 # CSRF_TRUSTED_ORIGINS = ['https://lazycoder-production.up.railway.app']
 
@@ -101,6 +103,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR, "static",
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
