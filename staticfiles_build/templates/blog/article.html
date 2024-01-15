@@ -1,0 +1,52 @@
+<div class=masonry-wrap>
+	<div class=masonry>
+	<div class=grid-sizer></div>
+	{% for post in posts %}
+	<article class="masonry__brick entry format-standard animate-this">
+	<div class=entry__thumb>
+	<a href="{% url 'post_detail' post.slug %}" class=entry__thumb-link>
+	<img src="data:image/jpeg;charset=utf-8;base64,{{post.image}}"srcset="data:image/jpeg;charset=utf-8;base64,{{post.image}}, data:image/jpeg;charset=utf-8;base64,{{post.image}} 2x" alt="" style=display:block;margin-left:auto;margin-right:auto;margin-top:0;
+	margin-bottom:0>
+	{% comment %} <img src={{post.image.url}} srcset="{{post.image.url}}, {{post.image.url}} 2x" alt="" style=display:block;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0> {% endcomment %}
+	</a>
+	</div>
+	<div class=entry__text>
+	<div class=entry__header>
+	<h2 class=entry__title>
+	<a href="{% url 'post_detail' post.slug %}">{{post.title|title}}</a>
+	</h2>
+	<div class=entry__meta>
+	<span class=entry__meta-cat>
+	{% for cat in post.categories.all %}
+	<a href="{% url 'category_post' category=cat.title %}">{{cat.title}}</a>
+	{% endfor %}
+	</span>
+	<span class=entry__meta-date>
+	<a href=#>{{post.date_posted|date:"F j, Y"}}</a>
+	</span>
+	<span class=entry__meta-cat>
+	<a href="{% url 'user_post' username=post.author.username %}">BY {{post.author.first_name|title}} {{post.author.last_name|title}}</a>
+	</span>
+	</div>
+	</div>
+	<div class=entry__excerpt>
+	<p>
+	{{post.description|truncatechars:120}}
+	</p>
+	</div>
+	<div class=entry__meta>
+	<span class=entry__meta-cat>
+	Views ({{post.viewers.count}})
+	</span>
+	<span class=entry__meta-cat>
+	Likes ({{post.likers.count}})
+	</span>
+	<span class=entry__meta-cat>
+	Dislikes ({{post.dislikers.count}})
+	</span>
+	</div>
+	</div>
+	</article>
+	{% endfor %}
+	</div>
+	</div>

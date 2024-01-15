@@ -1,0 +1,20 @@
+{% extends '../base.html' %} {% load static %} {% block middle_section %}
+<main class="row content__page">
+<section class="column large-full entry format-standard">
+<h3 class=h2 style=margin-top:0>Create Account</h3>
+<form name=contactForm id=contactForm method=post action="" autocomplete=off enctype=multipart/form-data>
+{% csrf_token %}
+<fieldset>
+{% for field in form %}
+<div class=form-field>
+<strong>{{field.label}} :</strong>
+{{field}} {{field.errors}}
+</div>
+{% endfor %}
+<input name=submit id=submit class="btn btn--primary" value="Create Account" type=submit>
+</fieldset>
+Already have an account? <a href="{% url 'signin' %}">Sign in</a>.
+</form>
+</section>
+</main>
+{% endblock middle_section %}
